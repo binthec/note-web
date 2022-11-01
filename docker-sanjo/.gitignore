@@ -1,0 +1,2 @@
+/postgres/pgdata/*
+!/postgres/.gitkeep
