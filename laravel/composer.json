@@ -32,6 +32,10 @@
         }
     },
     "autoload": {
+        "files": [
+            "app/Helper/BladeHelper.php"
+        ],
+
         "psr-4": {
             "App\\": "app/"
         },
