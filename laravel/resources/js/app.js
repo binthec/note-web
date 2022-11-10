@@ -9,6 +9,9 @@ require('admin-lte');
 
 window.Vue = require('vue');
 
+// vue 設定ファイルの読み込み
+import vue_routes from "./components/vue_routes";
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,6 +24,17 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+/**
+ * ルート設定ファイルから component を読み込む
+ */
+for (let i in vue_routes) {
+    let tag = vue_routes[i].tag;        // タグ
+    let directory = vue_routes[i].dir;  // ディレクトリ名
+    let file_name = vue_routes[i].file; // ファイル名
+
+    Vue.component(tag, require('./components/' + directory + '/' + file_name + '.vue').default);
+}
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
