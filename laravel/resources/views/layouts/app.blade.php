@@ -54,6 +54,7 @@ use Illuminate\Support\Facades\Auth;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+        @yield('content-header')
         @yield('content')
     </div>
     <!-- /.content-wrapper -->

@@ -7,10 +7,12 @@
 require('./bootstrap');
 require('admin-lte');
 
-window.Vue = require('vue');
+import Vue from "vue";
+// window.Vue = require('vue'); // もともと書いてあった
 
 // vue 設定ファイルの読み込み
 import vue_routes from "./components/vue_routes";
+import { store } from './store/store';
 
 /**
  * The following block of code may be used to automatically register your
@@ -44,4 +46,5 @@ for (let i in vue_routes) {
 
 const app = new Vue({
     el: '#app',
+    store
 });
