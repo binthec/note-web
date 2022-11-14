@@ -91,9 +91,5 @@ use Illuminate\Support\Facades\Auth;
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="assets/adminlte/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="assets/adminlte/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="assets/adminlte/js/pages/dashboard.js"></script>
 </body>
 </html>
