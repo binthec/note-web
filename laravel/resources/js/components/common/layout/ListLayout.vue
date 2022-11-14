@@ -1,35 +1,47 @@
 <template>
-    <section class="content">
-        <div class="container-fluid">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
+        <slot name="page_header"></slot>
 
-                        <div class="card-header">
-                            <slot name="card_header"></slot>
-                        </div><!-- /.card-header -->
+        <section class="content">
+            <div class="container-fluid">
 
-                        <div class="card-body p-0">
-                            <slot name="card_body"></slot>
-                        </div><!-- /.card-body -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
 
-                        <div class="card-footer clearfix">
-                            <slot name="card_footer"></slot>
-                        </div><!-- /.card-footer -->
+                            <div class="card-body p-0">
+                                <slot name="card_body"></slot>
+                            </div><!-- /.card-body -->
 
-                    </div><!-- /.card -->
-                </div><!-- /.col-md-12 -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                            <div class="card-footer clearfix">
+                                <slot name="card_footer"></slot>
+                            </div><!-- /.card-footer -->
+
+                        </div><!-- /.card -->
+                    </div><!-- /.col-md-12 -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+
+        </section><!-- /.content -->
 
         <slot name="modal"></slot>
-    </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
 </template>
 
 <script>
 export default {
-    name: "ListLayout"
+    name: "ListLayout",
+
+    props: {
+        'header_icon': {
+            default: null
+        },
+        'header_title': {
+            default: null
+        }
+    }
 }
 </script>
 

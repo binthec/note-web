@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Auth;
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="assets/adminlte/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
     </div>
 
     @if(Auth::check())
@@ -52,12 +52,7 @@ use Illuminate\Support\Facades\Auth;
         @include('parts.sidebar')
     @endif
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        @yield('content-header')
-        @yield('content')
-    </div>
-    <!-- /.content-wrapper -->
+    @yield('content')
 </div>
 <!-- ./wrapper -->
 

@@ -1,6 +1,10 @@
 <template>
     <list-layout>
-        <card-title slot="card_header" :title="'一覧'"></card-title>
+
+        <page-header slot="page_header"
+                     :header_icon="'nav-icon fas fa-book'"
+                     :header_title="'コンテンツ一覧'"
+        ></page-header>
 
         <template v-slot:card_body>
             <table class="table">
@@ -72,14 +76,15 @@
 <script>
 
 import ListLayout from "../common/layout/ListLayout";
-import CardTitle from "../common/parts/CardTitle";
+import PageHeader from "../common/parts/PageHeader";
+
 
 export default {
     name: "List",
 
     components: {
+        PageHeader,
         ListLayout,
-        CardTitle,
     }
 }
 </script>
