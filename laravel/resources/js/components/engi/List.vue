@@ -1,10 +1,11 @@
 <template>
-    <list-layout>
+    <default-layout>
 
-        <page-header slot="page_header"
+        <list-header slot="page_header"
                      :header_icon="'nav-icon fas fa-book'"
-                     :header_title="'コンテンツ一覧'"
-        ></page-header>
+                     :page_title="'コンテンツ一覧'"
+                     :create_path="'/engi/create'"
+        ></list-header>
 
         <template v-slot:card_body>
             <table class="table">
@@ -70,21 +71,20 @@
                 <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
             </ul>
         </template>
-    </list-layout>
+    </default-layout>
 </template>
 
 <script>
 
-import ListLayout from "../common/layout/ListLayout";
-import PageHeader from "../common/parts/PageHeader";
-
+import DefaultLayout from "../common/layout/DefaultLayout";
+import ListHeader from "../common/parts/ListHeader";
 
 export default {
-    name: "List",
+    name: "EngiList",
 
     components: {
-        PageHeader,
-        ListLayout,
+        DefaultLayout,
+        ListHeader,
     }
 }
 </script>

@@ -20,5 +20,7 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::prefix('engi')->group(function(){
-    Route::get('/', 'EngiController@index')->name('engi.list');
+    Route::get('/', 'EngiController@index')         ->name('engi.list');
+    Route::get('/create', 'EngiController@create')  ->name('engi.create');
+    Route::get('/edit', 'EngiController@edit')      ->name('engi.edit');
 });

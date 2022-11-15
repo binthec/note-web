@@ -32,19 +32,6 @@
 
 <script>
 export default {
-    name: "ListLayout",
-
-    props: {
-        'header_icon': {
-            default: null
-        },
-        'header_title': {
-            default: null
-        }
-    }
+    name: "DefaultLayout"
 }
 </script>
-
-<style scoped>
-
-</style>
