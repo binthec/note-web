@@ -10,7 +10,8 @@
 
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <a :href="create_path" class="btn btn-primary">新規作成</a>
+                    <button class="btn btn-primary" @click="clickSubmitEvent">登録</button>
+                    <button class="btn btn-dark" @click="clickBackEvent">キャンセル</button>
                 </div>
             </div>
 
@@ -22,21 +23,25 @@
 import PageTitle from "./PageTitle";
 
 export default {
-    name: "ListPageHeader",
+    name: "EditHeader",
 
     components: {
         PageTitle
     },
 
-    props: {
-        header_icon: {
-            default: null,
+    props: [
+        'header_icon',
+        'page_title',
+        'submit_func',
+        'go_back_func',
+    ],
+
+    methods: {
+        clickSubmitEvent(e) {
+            this.submit_func(e);
         },
-        page_title: {
-            default: null,
-        },
-        create_path: {
-            default: null,
+        clickBackEvent(e) {
+            this.go_back_func(e);
         }
     }
 }

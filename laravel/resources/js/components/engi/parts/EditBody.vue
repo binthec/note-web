@@ -1,6 +1,9 @@
 <template>
     <form class="form-horizontal">
-        <textbox></textbox>
+        <textbox
+            :label_value="'タイトル'"
+            :input_id="'title'"
+        ></textbox>
     </form>
 </template>
 
