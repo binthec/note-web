@@ -19,7 +19,7 @@
 
 <script>
     // Vuex Mapping
-    import {mapActions, mapState, mapGetters} from 'vuex';
+    import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 
     // common
     import DefaultLayout from "../common/layout/DefaultLayout";
@@ -51,9 +51,22 @@
             ...mapState('edit_engi', [
                 'uuid',
             ]),
+
+            ...mapMutations('edit_engi', [
+               'initUuid'
+            ]),
+        },
+
+        created(){
+            this.initUuid();
         },
 
         methods: {
+
+            ...mapMutations('edit_engi', [
+
+            ]),
+
             goList() {
                 location.href = this.list_path;
             },

@@ -13,7 +13,9 @@ export default {
     },
 
     mutations: {
-
+        initUuid(state, payload){
+            state.uuid = payload.uuid;
+        }
     },
 
     actions: {
