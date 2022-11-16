@@ -22,11 +22,12 @@
                         </div><!-- /.card -->
                     </div><!-- /.col-md-12 -->
                 </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
 
+            </div><!-- /.container-fluid -->
         </section><!-- /.content -->
 
         <slot name="modal"></slot>
+
     </div><!-- /.content-wrapper -->
 </template>
 

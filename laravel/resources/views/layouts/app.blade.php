@@ -18,16 +18,13 @@ use Illuminate\Support\Facades\Auth;
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
+    <!-- icon -->
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/adminlte/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -66,15 +63,6 @@ use Illuminate\Support\Facades\Auth;
 </script>
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="/plugins/moment/moment.min.js"></script>
 <script src="/plugins/daterangepicker/daterangepicker.js"></script>
