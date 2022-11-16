@@ -26,14 +26,14 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item<?php if(current_controller() == 'engi') echo ' menu-open'?>">
-                    <a href="{{ route('engi.list') }}" class="nav-link">
+                <li class="nav-item<?php if(current_controller() == 'friendsNote') echo ' menu-open'?>">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>フレンズノート</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="engi" class="nav-link">
+                <li class="nav-item<?php if(current_controller() == 'engi') echo ' menu-open'?>">
+                    <a href="{{ route('engi.list') }}" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>演技シート</p>
                     </a>

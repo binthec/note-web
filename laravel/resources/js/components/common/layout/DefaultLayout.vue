@@ -2,23 +2,20 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-        <slot name="page_header"></slot>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <slot name="page_header"></slot>
+        </section>
 
+        <!-- Main Content -->
         <section class="content">
             <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-
-                            <div class="card-body">
-                                <slot name="card_body"></slot>
-                            </div><!-- /.card-body -->
-
-                            <div class="card-footer clearfix">
-                                <slot name="card_footer"></slot>
-                            </div><!-- /.card-footer -->
-
+                            <slot name="card_body"></slot>
+                            <slot name="card_footer"></slot>
                         </div><!-- /.card -->
                     </div><!-- /.col-md-12 -->
                 </div><!-- /.row -->
@@ -32,7 +29,7 @@
 </template>
 
 <script>
-export default {
-    name: "DefaultLayout"
-}
+    export default {
+        name: "DefaultLayout"
+    }
 </script>

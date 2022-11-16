@@ -1,45 +1,44 @@
 <template>
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
 
-            <page-title
-                :header_icon="header_icon"
-                :page_title="page_title"
-            ></page-title>
+    <div class="container-fluid">
 
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <a :href="create_path" class="btn btn-primary">新規作成</a>
-                </div>
+        <page-title
+            :header_icon="header_icon"
+            :page_title="page_title"
+        ></page-title>
+
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <a :href="create_path" class="btn btn-primary">新規作成</a>
             </div>
+        </div>
 
-        </div><!-- /.container-fluid -->
-    </section>
+    </div><!-- /.container-fluid -->
+
 </template>
 
 <script>
-import PageTitle from "./PageTitle";
+    import PageTitle from "./PageTitle";
 
-export default {
-    name: "ListPageHeader",
+    export default {
+        name: "ListPageHeader",
 
-    components: {
-        PageTitle
-    },
-
-    props: {
-        header_icon: {
-            default: null,
+        components: {
+            PageTitle
         },
-        page_title: {
-            default: null,
-        },
-        create_path: {
-            default: null,
+
+        props: {
+            header_icon: {
+                default: null,
+            },
+            page_title: {
+                default: null,
+            },
+            create_path: {
+                default: null,
+            }
         }
     }
-}
 </script>
 
 <style scoped>

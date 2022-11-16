@@ -9,45 +9,52 @@
 
         <edit-body slot="card_body"></edit-body>
 
+        <edit-footer slot="card_footer"
+                     :submit_func="clickSubmit"
+                     :go_back_func="goList"
+        ></edit-footer>
+
     </default-layout>
 </template>
 
 <script>
-import DefaultLayout from "../common/layout/DefaultLayout";
-import PageHeader from "../common/parts/PageTitle";
-import EditBody from "./parts/EditBody";
-import EditHeader from "../common/parts/EditHeader";
+    import DefaultLayout from "../common/layout/DefaultLayout";
+    import PageHeader from "../common/parts/PageTitle";
+    import EditBody from "./parts/EditBody";
+    import EditHeader from "../common/parts/EditHeader";
+    import EditFooter from "./parts/EditFooter";
 
-export default {
-    name: "EngiEdit",
+    export default {
+        name: "EngiEdit",
 
-    data(){
-        return {
-            list_path: '/engi'
-        }
-    },
-
-    components: {
-        EditHeader,
-        EditBody,
-        DefaultLayout,
-        PageHeader
-    },
-
-    methods: {
-        goList(){
-            location.href = this.list_path;
+        data() {
+            return {
+                list_path: '/engi'
+            }
         },
-        clickSubmit(){
-            // if(this.engi_uuid){
-            //     this.updateEngi();
-            // }else{
-            //     this.createEngi();
-            // }
-            console.log('submit!');
+
+        components: {
+            DefaultLayout,
+            PageHeader,
+            EditHeader,
+            EditBody,
+            EditFooter
+        },
+
+        methods: {
+            goList() {
+                location.href = this.list_path;
+            },
+            clickSubmit() {
+                // if(this.engi_uuid){
+                //     this.updateEngi();
+                // }else{
+                //     this.createEngi();
+                // }
+                console.log('submit!');
+            }
         }
     }
-}
 </script>
 
 <style scoped>

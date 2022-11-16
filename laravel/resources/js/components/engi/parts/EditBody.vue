@@ -1,23 +1,26 @@
 <template>
-    <form class="form-horizontal">
-        <textbox
-            :label_value="'タイトル'"
-            :input_id="'title'"
-        ></textbox>
-    </form>
+
+    <div class="card-body">
+        <form class="form-horizontal">
+            <textbox
+                :label_value="'タイトル'"
+                :input_id="'title'"
+            ></textbox>
+        </form>
+    </div>
+
 </template>
 
 <script>
-import Textbox from "../../common/form/Textbox";
-export default {
-    name: "EditBody",
+    import Textbox from "../../common/form/Textbox";
 
-    components: {
-        Textbox
-    },
+    export default {
+        name: "EditBody",
 
-    props: {
+        components: {
+            Textbox
+        },
 
+        props: {}
     }
-}
 </script>
