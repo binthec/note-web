@@ -47,24 +47,25 @@
             EditFooter
         },
 
+        props: {
+            uuid: {
+                default: null
+            }
+        },
+
         computed: {
             ...mapState('edit_engi', [
-                'uuid',
-            ]),
 
-            ...mapMutations('edit_engi', [
-               'initUuid'
             ]),
         },
 
         created(){
-            this.initUuid();
+            this.initUuid({uuid : this.uuid});
         },
 
         methods: {
-
             ...mapMutations('edit_engi', [
-
+                'initUuid'
             ]),
 
             goList() {

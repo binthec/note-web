@@ -46,9 +46,5 @@ for (let i in vue_routes) {
 
 const app = new Vue({
     el: '#app',
-    store,
-    current_store:'set current store',
-    data:{
-        current_store:'set current store',
-    }
+    store
 });

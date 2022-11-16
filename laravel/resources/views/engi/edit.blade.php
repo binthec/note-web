@@ -2,6 +2,6 @@
 
 @section('content')
     <engi-edit
-        uuid=""
+
     ></engi-edit>
 @endsection

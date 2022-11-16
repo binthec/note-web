@@ -1,5 +1,5 @@
 export default {
-    namespace: true,
+    namespaced: true,
 
     state: {
         uuid: null,
@@ -8,17 +8,12 @@ export default {
         },
     },
 
-    getters: {
-
-    },
-
     mutations: {
         initUuid(state, payload){
             state.uuid = payload.uuid;
+        },
+        setTitle(state, payload){
+            state.engi.title = payload.title;
         }
-    },
-
-    actions: {
-
     }
 }
