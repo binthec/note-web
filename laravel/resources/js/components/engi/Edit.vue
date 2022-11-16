@@ -18,8 +18,14 @@
 </template>
 
 <script>
+    // Vuex Mapping
+    import {mapActions, mapState, mapGetters} from 'vuex';
+
+    // common
     import DefaultLayout from "../common/layout/DefaultLayout";
     import PageHeader from "../common/parts/PageTitle";
+
+    // for engi
     import EditBody from "./parts/EditBody";
     import EditHeader from "../common/parts/EditHeader";
     import EditFooter from "./parts/EditFooter";
@@ -39,6 +45,12 @@
             EditHeader,
             EditBody,
             EditFooter
+        },
+
+        computed: {
+            ...mapState('edit_engi', [
+                'uuid',
+            ]),
         },
 
         methods: {
