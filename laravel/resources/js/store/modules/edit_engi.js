@@ -15,5 +15,14 @@ export default {
         setTitle(state, payload){
             state.engi.title = payload.title;
         }
+    },
+
+    actions: {
+        createEngi(){
+            //
+        },
+        updateEngi(){
+            //
+        },
     }
 }

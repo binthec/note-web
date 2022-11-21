@@ -72,11 +72,11 @@
                 location.href = this.list_path;
             },
             clickSubmit() {
-                // if(this.engi_uuid){
-                //     this.updateEngi();
-                // }else{
-                //     this.createEngi();
-                // }
+                if(this.engi_uuid){
+                    this.updateEngi();
+                }else{
+                    this.createEngi();
+                }
                 console.log('submit!');
             }
         }
