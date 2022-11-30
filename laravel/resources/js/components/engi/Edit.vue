@@ -71,6 +71,7 @@
             goList() {
                 location.href = this.list_path;
             },
+
             clickSubmit() {
                 if(this.engi_uuid){
                     this.updateEngi();
