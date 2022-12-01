@@ -1,7 +1,7 @@
 <template>
     <div class="card-footer clearfix">
-        <button class="btn btn-dark" @click="clickSubmitEvent">キャンセル</button>
-        <button class="btn btn-primary float-right" @click="clickBackEvent">登録</button>
+        <a href="javascript:void(0);" class="btn btn-dark" @click="clickBackEvent">キャンセル</a>
+        <a href="javascript:void(0);" class="btn btn-primary float-right" @click="clickSubmitEvent">登録</a>
     </div>
 </template>
 

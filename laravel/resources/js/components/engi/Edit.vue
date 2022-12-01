@@ -1,5 +1,5 @@
 <template>
-    <default-layout>
+    <default-form-layout>
         <edit-header slot="page_header"
                      :header_icon="'nav-icon fas fa-edit'"
                      :page_title="'演技編集'"
@@ -14,7 +14,7 @@
                      :go_back_func="goList"
         ></edit-footer>
 
-    </default-layout>
+    </default-form-layout>
 </template>
 
 <script>
@@ -22,7 +22,7 @@
     import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 
     // common
-    import DefaultLayout from "../common/layout/DefaultLayout";
+    import DefaultFormLayout from "../common/layout/DefaultFormLayout";
     import PageHeader from "../common/parts/PageTitle";
 
     // for engi
@@ -40,7 +40,7 @@
         },
 
         components: {
-            DefaultLayout,
+            DefaultFormLayout,
             PageHeader,
             EditHeader,
             EditBody,
@@ -55,7 +55,8 @@
 
         computed: {
             ...mapState('edit_engi', [
-
+                'show_success_modal',
+                'show_error_modal',
             ]),
         },
 
@@ -63,19 +64,42 @@
             this.initUuid({uuid : this.uuid});
         },
 
+        watch: {
+            show_success_modal(new_bool, old_bool){
+                if(new_bool === true) this.showSuccessModal();
+            },
+            show_error_modal(new_bool, old_bool){
+                if(new_bool === true) this.showErrorModal();
+            },
+        },
+
         methods: {
             ...mapMutations('edit_engi', [
-                'initUuid'
+                'initUuid',
             ]),
+            ...mapActions('edit_engi', [
+                'createEngi',
+                'updateEngi'
+            ]),
+
+            showSuccessModal() {
+                this.$modal.show('success-modal');
+            },
+
+            showErrorModal() {
+                this.$modal.show('error-modal');
+            },
 
             goList() {
                 location.href = this.list_path;
             },
 
             clickSubmit() {
-                if(this.engi_uuid){
+                if(this.uuid){
+                    console.log('update');
                     this.updateEngi();
                 }else{
+                    console.log('create');
                     this.createEngi();
                 }
                 console.log('submit!');

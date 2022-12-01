@@ -14,8 +14,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <slot name="card_body"></slot>
-                            <slot name="card_footer"></slot>
+
+                            <form class="form-horizontal" autocomplete="off">
+                                <slot name="card_body"></slot>
+                                <slot name="card_footer"></slot>
+                            </form>
+
                         </div><!-- /.card -->
                     </div><!-- /.col-md-12 -->
                 </div><!-- /.row -->
@@ -23,13 +27,24 @@
             </div><!-- /.container-fluid -->
         </section><!-- /.content -->
 
-        <slot name="modal"></slot>
+        <div>
+            <success-modal :click-to-close="false"></success-modal>
+            <error-modal :click-to-close="false"></error-modal>
+            <slot name="modal"></slot>
+        </div>
 
     </div><!-- /.content-wrapper -->
 </template>
 
 <script>
-    export default {
-        name: "DefaultLayout"
+import SuccessModal from "../modals/SuccessModal";
+import ErrorModal from "../modals/ErrorModal";
+
+export default {
+    name: "DefaultFormLayout",
+    components: {
+        SuccessModal,
+        ErrorModal
     }
+}
 </script>

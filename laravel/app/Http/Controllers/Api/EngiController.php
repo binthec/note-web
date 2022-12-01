@@ -22,7 +22,6 @@ class EngiController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
-        parent::__construct();
     }
 
     /**
@@ -33,9 +32,10 @@ class EngiController extends Controller
      */
     public function store(EngiRequest $request): JsonResponse
     {
-
         $engi = new Engi();
         $request->engi = json_decode($request->engi);
+
+        Log::info($request->engi);
 
         DB::beginTransaction();
 

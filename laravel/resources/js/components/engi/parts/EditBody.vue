@@ -1,48 +1,46 @@
 <template>
 
     <div class="card-body">
-        <form class="form-horizontal">
-            <textbox
-                :label_value="'タイトル'"
-                :input_id="'title'"
-                :bind_value="engi.title"
-                :set-title="setTitleEvent"
-            ></textbox>
-        </form>
+        <textbox
+            :label_value="'タイトル'"
+            :input_id="'title'"
+            :bind_value="engi.title"
+            :set-title="setTitleEvent"
+        ></textbox>
     </div>
 
 </template>
 
 <script>
-    // vuex
-    import {mapState, mapMutations, mapActions} from "vuex";
+// vuex
+import {mapState, mapMutations, mapActions} from "vuex";
 
-    // common
-    import Textbox from "../../common/form/Textbox";
+// common
+import Textbox from "../../common/form/Textbox";
 
-    export default {
-        name: "EditBody",
+export default {
+    name: "EditBody",
 
-        components: {
-            Textbox
-        },
+    components: {
+        Textbox
+    },
 
-        props: {},
+    props: {},
 
-        computed: {
-            ...mapState('edit_engi', [
-                'engi'
-            ]),
-        },
+    computed: {
+        ...mapState('edit_engi', [
+            'engi'
+        ]),
+    },
 
-        methods:{
-            ...mapMutations('edit_engi', [
-                'setTitle',
-            ]),
+    methods: {
+        ...mapMutations('edit_engi', [
+            'setTitle',
+        ]),
 
-            setTitleEvent(event){
-                this.setTitle({title: event.target.value});
-            }
+        setTitleEvent(event) {
+            this.setTitle({title: event.target.value});
         }
     }
+}
 </script>

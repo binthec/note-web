@@ -80,7 +80,7 @@
 
 <script>
 
-    import DefaultLayout from "../common/layout/DefaultLayout";
+    import DefaultLayout from "../common/layout/DefaultFormLayout";
     import ListHeader from "../common/parts/ListHeader";
 
     export default {
