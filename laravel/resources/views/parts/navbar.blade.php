@@ -26,13 +26,16 @@
                 </a>
             </div>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link" style="font-size: 18px;"><i class="far fa-question-circle"></i></a>
+        <li class="nav-item d-none d-sm-inline-block" data-toggle="tooltip" title data-original-title="ヘルプ">
+            <a href="#" class="nav-link" style="font-size: 18px;">
+                <i class="far fa-question-circle text-lg"></i>
+            </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('logout') }}" class="nav-link"
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt"></i>
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+               data-toggle="tooltip" data-placement="bottom" title="ログアウト">
+                <i class="fas fa-sign-out-alt text-lg"></i>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

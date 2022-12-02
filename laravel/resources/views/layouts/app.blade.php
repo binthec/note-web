@@ -82,6 +82,9 @@
         avatar.innerText = nameHeadLetter.substring(0, 1);
         let colorFromName = iconBgColors[Number.parseInt(name.replaceAll(/[g-z\-]/ig,'')||'0', 16) % iconBgColors.length];
         avatar.style.backgroundColor = colorFromName;
+
+        // ツールチップ
+        $('[data-toggle="tooltip"]').tooltip()
     });
 </script>
 </body>
