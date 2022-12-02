@@ -6,6 +6,8 @@
             :input_id="'title'"
             :bind_value="engi.title"
             :set-title="setTitleEvent"
+            :error_message="title_error_message"
+            :additional_class="additional_class"
         ></textbox>
     </div>
 
@@ -29,8 +31,19 @@ export default {
 
     computed: {
         ...mapState('edit_engi', [
-            'engi'
+            'engi',
+            'errors',
         ]),
+
+        title_error_message(){
+            if(this.errors['engi.title'] == null) return null;
+            else return this.errors['engi.title'][0];
+        },
+
+        additional_class(){
+            if(this.title_error_message) return 'is-invalid';
+            else return '';
+        }
     },
 
     methods: {

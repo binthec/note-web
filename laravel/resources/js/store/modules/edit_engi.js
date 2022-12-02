@@ -20,6 +20,11 @@ export default {
         getFormData(state, getters, rootState, rootGetters){
             const update_data = new FormData();
             update_data.append('engi', JSON.stringify(state.engi));
+
+            // デバッグ用
+            // console.log(...update_data.entries());
+            // console.log(update_data.getAll('engi'));
+
             return update_data;
         }
     },
@@ -43,22 +48,21 @@ export default {
         createEngi({commit, state, getters}){
             axios.post(state.engi_create_url, getters.getFormData)
                 .then(response => {
-                    console.log(response);
                     if(response.status === 201){
                         commit('showSuccessModal');
-                        window.location.replace('/engi');
+                        setTimeout(() => {
+                            window.location.replace('/engi');
+                        }, 1000)
                     }
                 })
                 .catch(error => {
                     if(error.response.status === 422){
-                        state.errors = {...state.errors, ...error.response.date.errors}
+                        state.errors = {...state.errors, ...error.response.data.errors}
                     }else{
-                        console.log(error);
-
-                        // commit('showErrorModal');
-                        // setTimeout(() => {
-                        //     window.location.reload();
-                        // }, 1000);
+                        commit('showErrorModal');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
                     }
                 });
                 // .finally(() => {

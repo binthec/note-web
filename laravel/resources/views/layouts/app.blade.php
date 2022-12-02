@@ -1,8 +1,4 @@
-<?php
-
-use Illuminate\Support\Facades\Auth;
-
-?><!doctype html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -44,7 +40,7 @@ use Illuminate\Support\Facades\Auth;
         <img class="animation__shake" src="/assets/adminlte/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
     </div>
 
-    @if(Auth::check())
+    @if(Illuminate\Support\Facades\Auth::check())
         @include('parts.navbar')
         @include('parts.sidebar')
     @endif

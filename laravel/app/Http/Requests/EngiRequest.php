@@ -13,7 +13,7 @@ class EngiRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class EngiRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:100'
+            'engi.title' => 'required|max:100'
         ];
+    }
+
+    public function validationData()
+    {
+        $return_data = [];
+        $return_data['engi'] = json_decode($this->engi, true);
+
+        return $return_data;
     }
 }

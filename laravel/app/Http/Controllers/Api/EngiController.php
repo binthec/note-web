@@ -21,7 +21,7 @@ class EngiController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+//        $this->middleware('auth:api');
     }
 
     /**
@@ -35,8 +35,6 @@ class EngiController extends Controller
         $engi = new Engi();
         $request->engi = json_decode($request->engi);
 
-        Log::info($request->engi);
-
         DB::beginTransaction();
 
         try {
@@ -44,20 +42,17 @@ class EngiController extends Controller
             $engi->insertEngi($request->engi);
 
             DB::commit();
-            return response()->json(['message' => 'success', HttpStatusCode::CREATED]);
+            return response()->json(['message' => 'success'], HttpStatusCode::CREATED);
 
         } catch (ValidationException $e) {
             return response()->json([
-                'errors' => new MessageBag(json_decode($e->getMessage(), true)),
-                HttpStatusCode::VALIDATION_ERROR
-            ]);
+                'errors' => new MessageBag(json_decode($e->getMessage(), true))
+                ], HttpStatusCode::VALIDATION_ERROR
+            );
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
-            return response()->json([
-                'message' => 'success',
-                HttpStatusCode::INTERNAL_SERVER_ERROR
-            ]);
+            return response()->json(['message' => 'success'], HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
 

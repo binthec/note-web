@@ -3,6 +3,7 @@
         <label :for="input_id" class="col-sm-2 col-form-label">{{ label_value }}</label>
         <div class="col-sm-10">
             <input :type="input_type" class="form-control" :class="additional_class" :id="input_id" :value="bind_value" @change="setTitle">
+            <div class="help-block text-danger" v-if="error_message">{{ error_message }}</div>
         </div>
     </div>
 </template>
@@ -29,6 +30,12 @@ export default {
         },
         setTitle: {
             default: () => {}
+        },
+        error_message: {
+            default: null,
+        },
+        has_error: {
+            default: false,
         }
     }
 }

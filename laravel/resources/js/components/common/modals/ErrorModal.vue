@@ -1,7 +1,6 @@
 <template>
-    <modal name="error-modal" :clickToClose="click_to_close">
-        <div class="alert alert-error">保存しました</div>
-
+    <modal name="error-modal" :clickToClose="click_to_close" :pivotY="0.3" :height="50">
+        <div class="alert alert-danger">エラーが発生しました</div>
     </modal>
 </template>
 
@@ -17,5 +16,8 @@ export default {
 </script>
 
 <style scoped>
-
+.alert{
+    height: 100%;
+    min-height: auto;
+}
 </style>
