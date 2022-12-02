@@ -1,3 +1,23 @@
 .btn{
     min-width: 120px;
 }
+
+ul.navbar-nav{
+    li.nav-item{
+        float: left;
+    }
+    .header-avatar{
+        display: inline-flex;
+        width: 40px;
+        height: 40px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 14px;
+        line-height: 1;
+        justify-content: center;
+        align-items: center;
+    }
+    #navbarDropdown4{
+        float: right;
+    }
+}

@@ -1,3 +1,6 @@
+<?php
+    use Illuminate\Support\Facades\Auth;
+?>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -10,14 +13,17 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Help
-            </a>
+            <span id="header_avatar" class="header-avatar"></span>
+            <span class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ようこそ　{!! Auth::user()->name !!}　さん
+            </span>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
                 <a class="dropdown-item" href="#">FAQ</a>
                 <a class="dropdown-item" href="#">Support</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Contact</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-cog"></i> プロフィール編集
+                </a>
             </div>
         </li>
         <li class="nav-item d-none d-sm-inline-block">

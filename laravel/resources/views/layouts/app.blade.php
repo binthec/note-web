@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Friends RG') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- icon -->
@@ -69,6 +66,24 @@
 <!-- overlayScrollbars -->
 <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/assets/adminlte/js/adminlte.js"></script>
+<script src="/assets/adminlte/js/AdminLTE.js"></script>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/cudtom.js') }}" defer></script>
+
+<script>
+    $(function(){
+        // ヘッダーのアイコン
+        const iconBgColors = ['#e84d4d', '#5abc5a', '#a537db', '#f28c47', '#35ba99', '#0090e6', '#367bf5', '#f9556b', '#e6a200', '#e2ab48'];
+        const name = '{{ \Illuminate\Support\Facades\Auth::user()->name }}'
+        const avatar = document.querySelector('#header_avatar');
+        let nameHeadLetter = name;
+        nameHeadLetter = nameHeadLetter.trim();
+        avatar.innerText = nameHeadLetter.substring(0, 1);
+        let colorFromName = iconBgColors[Number.parseInt(name.replaceAll(/[g-z\-]/ig,'')||'0', 16) % iconBgColors.length];
+        avatar.style.backgroundColor = colorFromName;
+    });
+</script>
 </body>
 </html>
