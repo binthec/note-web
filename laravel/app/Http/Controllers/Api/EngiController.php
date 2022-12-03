@@ -25,6 +25,21 @@ class EngiController extends Controller
     }
 
     /**
+     * 一覧
+     *
+     * @return JsonResponse
+     */
+    public function index()
+    {
+        $list = Engi::paginate(10);
+
+        return response()->json([
+            'message' => 'success',
+            'list' => $list,
+        ], HttpStatusCode::OK);
+    }
+
+    /**
      * 登録
      *
      * @param Engi $request
@@ -47,7 +62,7 @@ class EngiController extends Controller
         } catch (ValidationException $e) {
             return response()->json([
                 'errors' => new MessageBag(json_decode($e->getMessage(), true))
-                ], HttpStatusCode::VALIDATION_ERROR
+            ], HttpStatusCode::VALIDATION_ERROR
             );
         } catch (\Exception $e) {
             DB::rollBack();
@@ -56,8 +71,44 @@ class EngiController extends Controller
         }
     }
 
-    public function update()
+    /**
+     * 編集
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function update(EngiRequest $request, string $uuid): JsonResponse
     {
-        return view('engi.edit');
+        $request->engi = json_decode($request->engi);
+
+        $engi = Engi::query()->where('uuid', $uuid)->firstOrFail();
+
+        DB::beginTransaction();
+
+        try{
+            $engi->updateEngi($request->engi);
+
+            DB::commit();
+            return response()->json(['message' => 'success'], HttpStatusCode::OK);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => new MessageBag(json_decode($e->getMessage(), true))
+            ], HttpStatusCode::VALIDATION_ERROR
+            );
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return response()->json(['message' => 'success'], HttpStatusCode::INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function show(string $uuid): JsonResponse
+    {
+        $engi = Engi::query()->where('uuid', $uuid)->firstOrFail();
+
+        return response()->json([
+            'message' => 'success',
+            'engi' => $engi
+        ], HttpStatusCode::OK);
     }
 }

@@ -64,6 +64,11 @@
             this.initUuid({uuid : this.uuid});
         },
 
+        async mounted(){
+            if(!this.uuid) return;
+            await this.getEngi();
+        },
+
         watch: {
             show_success_modal(new_bool, old_bool){
                 if(new_bool === true) this.showSuccessModal();
@@ -78,8 +83,9 @@
                 'initUuid',
             ]),
             ...mapActions('edit_engi', [
+                'getEngi',
                 'createEngi',
-                'updateEngi'
+                'updateEngi',
             ]),
 
             showSuccessModal() {
@@ -96,10 +102,8 @@
 
             clickSubmit() {
                 if(this.uuid){
-                    console.log('update');
                     this.updateEngi();
                 }else{
-                    console.log('create');
                     this.createEngi();
                 }
             }

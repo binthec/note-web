@@ -15,6 +15,7 @@ class CreateEngisTable extends Migration
     {
         Schema::create('engis', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid', 36)->unique();
             $table->string('title');
             $table->timestamps();
             $table->softDeletes();

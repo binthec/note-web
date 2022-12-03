@@ -16,18 +16,33 @@ class EngiController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * 一覧画面
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('engi.list');
     }
 
+    /**
+     * 新規作成画面
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
-        return view('engi.edit');
+        return view('engi.create');
     }
 
-    public function edit()
+    /**
+     * 編集画面
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(string $uuid)
     {
-        return view('engi.edit');
+        return view('engi.edit', ['uuid' => $uuid]);
     }
 }

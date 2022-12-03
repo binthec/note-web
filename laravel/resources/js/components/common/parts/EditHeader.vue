@@ -9,7 +9,7 @@
 
         <div class="row mb-2">
             <div class="col-sm-12">
-                <button class="btn btn-dark" @click="clickBackEvent">キャンセル</button>
+                <button class="btn btn-dark mr-3" @click="clickBackEvent">キャンセル</button>
                 <button class="btn btn-primary" @click="clickSubmitEvent">登録</button>
             </div>
         </div>

@@ -4,8 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// require('./bootstrap');
-// require('admin-lte');
+require('./bootstrap');
 
 import Vue from "vue";
 // window.Vue = require('vue'); // もともと書いてあった
@@ -16,7 +15,6 @@ import { store } from './store/store';
 
 // その他ライブラリ
 import VModal from "vue-js-modal";
-
 Vue.use(VModal);
 
 /**

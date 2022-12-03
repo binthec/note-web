@@ -19,5 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('engi')->group(function(){
+    Route::get('/', 'Api\EngiController@index');
     Route::post('/', 'Api\EngiController@store');
+    Route::get('/{uuid}', 'Api\EngiController@show'); // 単一のレコードを取得する場合
+    Route::put('/{uuid}', 'Api\EngiController@update');
 });

@@ -12,52 +12,19 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Task</th>
-                        <th>Progress</th>
-                        <th style="width: 40px">Label</th>
+                        <th>タイトル</th>
+                        <th>更新日時</th>
+                        <th style="width: 100px">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td>Update software</td>
+                    <tr v-for="(row, index) in list.data">
+                        <td>{{ row.title }}</td>
+                        <td>{{ row.updated_at }}</td>
                         <td>
-                            <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                            </div>
+                            <a href="javascript: void(0);" @click="editContent(row)"><i class="fas fa-edit text-lg mr-3 text-olive"></i></a>
+                            <a href="javascript: void(0);" @click="deleteContent(row)"><i class="fas fa-trash-alt text-lg text-danger"></i></a>
                         </td>
-                        <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>Clean database</td>
-                        <td>
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                        <td>3.</td>
-                        <td>Cron job running</td>
-                        <td>
-                            <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                        <td>4.</td>
-                        <td>Fix and squish bugs</td>
-                        <td>
-                            <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-success">90%</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -80,17 +47,43 @@
 
 <script>
 
-    import DefaultLayout from "../common/layout/DefaultFormLayout";
-    import ListHeader from "../common/parts/ListHeader";
+import DefaultLayout from "../common/layout/DefaultFormLayout";
+import ListHeader from "../common/parts/ListHeader";
+import {mapState, mapActions} from "vuex";
 
-    export default {
-        name: "EngiList",
+export default {
+    name: "EngiList",
 
-        components: {
-            DefaultLayout,
-            ListHeader,
-        }
+    components: {
+        DefaultLayout,
+        ListHeader,
+    },
+
+    computed: {
+        ...mapState('list_engi', [
+            'list',
+        ])
+    },
+
+    async mounted() {
+        await this.getList();
+    },
+
+    methods: {
+        ...mapActions('list_engi', [
+            'getList'
+        ]),
+
+        editContent(row){
+            window.location.replace('/engi/' + row.uuid + '/edit');
+        },
+
+        deleteContent(row){
+            console.log('delete');
+            console.log(row);
+        },
     }
+}
 </script>
 
 <style scoped>

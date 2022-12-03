@@ -73,6 +73,11 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
 
+<script>
+    // ツールチップ
+    $('[data-toggle="tooltip"]').tooltip()
+</script>
+
 @yield('footer_content')
 
 </body>
