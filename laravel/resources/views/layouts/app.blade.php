@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('head_content')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div id="app" class="wrapper">
@@ -71,21 +73,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
 
-<script>
-    $(function(){
-        // ヘッダーのアイコン
-        const iconBgColors = ['#e84d4d', '#5abc5a', '#a537db', '#f28c47', '#35ba99', '#0090e6', '#367bf5', '#f9556b', '#e6a200', '#e2ab48'];
-        const name = '{{ \Illuminate\Support\Facades\Auth::user()->name }}'
-        const avatar = document.querySelector('#header_avatar');
-        let nameHeadLetter = name;
-        nameHeadLetter = nameHeadLetter.trim();
-        avatar.innerText = nameHeadLetter.substring(0, 1);
-        let colorFromName = iconBgColors[Number.parseInt(name.replaceAll(/[g-z\-]/ig,'')||'0', 16) % iconBgColors.length];
-        avatar.style.backgroundColor = colorFromName;
+@yield('footer_content')
 
-        // ツールチップ
-        $('[data-toggle="tooltip"]').tooltip()
-    });
-</script>
 </body>
 </html>

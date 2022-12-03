@@ -1,7 +1,9 @@
 <?php
-    use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Auth;
+
 ?>
-<!-- Navbar -->
+    <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -14,8 +16,9 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <span id="header_avatar" class="header-avatar"></span>
-            <span class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ようこそ　{!! Auth::user()->name !!}　さん
+            <span class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                ようこそ　{{ Auth::user()->name ?? '' }}　さん
             </span>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
                 <a class="dropdown-item" href="#">FAQ</a>
@@ -45,3 +48,22 @@
     </ul>
 </nav>
 <!-- /.navbar -->
+
+@section('footer_content')
+    <script>
+        $(function () {
+            // ヘッダーのアイコン
+            const iconBgColors = ['#e84d4d', '#5abc5a', '#a537db', '#f28c47', '#35ba99', '#0090e6', '#367bf5', '#f9556b', '#e6a200', '#e2ab48'];
+            const name = '{{ Auth::user()->name ?? ''  }}'
+            const avatar = document.querySelector('#header_avatar');
+            let nameHeadLetter = name;
+            nameHeadLetter = nameHeadLetter.trim();
+            avatar.innerText = nameHeadLetter.substring(0, 1);
+            let colorFromName = iconBgColors[Number.parseInt(name.replaceAll(/[g-z\-]/ig, '') || '0', 16) % iconBgColors.length];
+            avatar.style.backgroundColor = colorFromName;
+
+            // ツールチップ
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+@endsection
