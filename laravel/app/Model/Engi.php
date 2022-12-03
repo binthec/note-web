@@ -14,7 +14,7 @@ class Engi extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $perPage = 5;
+    // protected $perPage = 100; // js 側で操作しているのでここでは設定しない
 
     /**
      * 新規作成

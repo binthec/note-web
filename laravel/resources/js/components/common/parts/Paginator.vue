@@ -1,0 +1,73 @@
+<template>
+    <div class="card-footer clearfix" v-show="hasManyPages">
+
+        <div class="text-center">
+            {{ list.current_page }} / {{ list.last_page }} ページ
+        </div>
+
+        <ul class="pagination pagination-md m-0 float-right">
+            <li class="page-item" v-show="!isFirstPage">
+                <a class="page-link" href="javascript: void(0);" @click="goPage('prev')" >Prev</a>
+            </li>
+            <li class="page-item" v-for="page_num in list.last_page" :key="page_num">
+                <a class="page-link" href="javascript: void(0);" @click="goPage(page_num)">{{ page_num }}</a>
+            </li>
+            <li class="page-item"v-show="!isLastPage">
+                <a class="page-link" href="javascript: void(0);" @click="goPage('next')">Next</a>
+            </li>
+        </ul>
+    </div>
+</template>
+
+<script>
+
+import {mapState, mapMutations, mapActions} from "vuex";
+
+export default {
+    name: "Paginator",
+
+    computed: {
+        ...mapState('list_engi', [
+            'list'
+        ]),
+
+        isFirstPage(){
+            return this.list.current_page == 1;
+        },
+
+        isLastPage(){
+            return this.list.last_page == this.list.current_page;
+        },
+
+        hasManyPages(){
+            return this.list.total > this.list.per_page;
+        },
+    },
+
+    methods: {
+        ...mapMutations('list_engi', [
+            'setCurrentPage'
+        ]),
+
+        ...mapActions('list_engi', [
+            'getList'
+        ]),
+
+        goPage(page_num){
+            let num = 1;
+            if(page_num === 'next'){
+                num = this.list.current_page +1;
+            }else if(page_num === 'prev'){
+                num = this.list.current_page -1;
+            }else{
+                num = page_num;
+            }
+            this.setCurrentPage({current_page: num});
+        },
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

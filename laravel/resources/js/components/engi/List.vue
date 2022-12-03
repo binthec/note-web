@@ -8,7 +8,7 @@
         ></list-header>
 
         <template v-slot:card_body>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <table class="table">
                     <thead>
                     <tr>
@@ -31,17 +31,7 @@
             </div>
         </template>
 
-        <template v-slot:card_footer>
-            <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
-            </div>
-        </template>
+        <Paginator slot="card_footer"></Paginator>
     </default-layout>
 </template>
 
@@ -49,6 +39,8 @@
 
 import DefaultLayout from "../common/layout/DefaultFormLayout";
 import ListHeader from "../common/parts/ListHeader";
+import Paginator from "../common/parts/Paginator";
+
 import {mapState, mapActions} from "vuex";
 
 export default {
@@ -57,12 +49,19 @@ export default {
     components: {
         DefaultLayout,
         ListHeader,
+        Paginator
     },
 
     computed: {
         ...mapState('list_engi', [
             'list',
         ])
+    },
+
+    watch: {
+        'list.current_page': function(val, oldVal){
+            this.getList();
+        },
     },
 
     async mounted() {

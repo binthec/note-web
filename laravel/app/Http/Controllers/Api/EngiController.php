@@ -6,6 +6,7 @@ use App\Common\HttpStatusCode;
 use App\Http\Requests\EngiRequest;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\MessageBag;
@@ -29,9 +30,20 @@ class EngiController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $list = Engi::paginate(10);
+
+        Log::info($request);
+
+        $query = Engi::query();
+
+        if($request->order){
+            //
+        }
+
+        $list = $query->paginate($request->per_page);
+
+        // Log::info($list);
 
         return response()->json([
             'message' => 'success',
