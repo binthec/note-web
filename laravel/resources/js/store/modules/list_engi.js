@@ -4,7 +4,7 @@ export default {
     state: {
         list: {
             'current_page': 1,
-            'per_page': 5,
+            'per_page': 20,
             'order': 'desc',
             'order_column': 'update_date',
             'last_page' : null,
