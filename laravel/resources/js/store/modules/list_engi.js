@@ -6,7 +6,7 @@ export default {
             'current_page': 1,
             'per_page': 20,
             'order': 'desc',
-            'order_column': 'update_date',
+            'order_column': 'updated_at',
             'last_page' : null,
             'total' : null,
         },

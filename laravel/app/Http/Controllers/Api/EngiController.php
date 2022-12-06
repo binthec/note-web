@@ -37,8 +37,9 @@ class EngiController extends Controller
 
         $query = Engi::query();
 
-        if($request->order){
-            //
+        // ソート順が渡された場合に並び順をクエリに加える
+        if($request->order_column && $request->order){
+            $query->orderBy($request->order_column, $request->order);
         }
 
         $list = $query->paginate($request->per_page);
