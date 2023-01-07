@@ -74,7 +74,7 @@ export default {
         ]),
 
         editContent(row){
-            window.location.replace('/engi/' + row.uuid + '/edit');
+            window.open('/engi/' + row.uuid + '/edit', '_self');
         },
 
         deleteContent(row){
