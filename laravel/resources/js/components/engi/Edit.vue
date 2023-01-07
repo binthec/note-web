@@ -54,7 +54,7 @@
         },
 
         computed: {
-            ...mapState('edit_engi', [
+            ...mapState('engi/edit', [
                 'show_success_modal',
                 'show_error_modal',
             ]),
@@ -79,10 +79,10 @@
         },
 
         methods: {
-            ...mapMutations('edit_engi', [
+            ...mapMutations('engi/edit', [
                 'initUuid',
             ]),
-            ...mapActions('edit_engi', [
+            ...mapActions('engi/edit', [
                 'getEngi',
                 'createEngi',
                 'updateEngi',

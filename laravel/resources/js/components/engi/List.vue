@@ -53,7 +53,7 @@ export default {
     },
 
     computed: {
-        ...mapState('list_engi', [
+        ...mapState('engi/list', [
             'list',
         ])
     },
@@ -69,7 +69,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('list_engi', [
+        ...mapActions('engi/list', [
             'getList'
         ]),
 

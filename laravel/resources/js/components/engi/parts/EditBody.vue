@@ -30,7 +30,7 @@ export default {
     props: {},
 
     computed: {
-        ...mapState('edit_engi', [
+        ...mapState('engi/edit', [
             'engi',
             'errors',
         ]),
@@ -47,7 +47,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('edit_engi', [
+        ...mapMutations('engi/edit', [
             'setTitle',
         ]),
 
