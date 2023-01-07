@@ -21,3 +21,14 @@ ul.navbar-nav{
         float: right;
     }
 }
+
+.card-body{
+    h4{
+        color: $blue;
+        padding-bottom: 5px;
+        border-bottom: solid 1px;
+    }
+    h4:nth-child(n+2){
+        margin-top: 60px;
+    }
+}
