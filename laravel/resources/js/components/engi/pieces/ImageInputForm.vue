@@ -7,7 +7,7 @@
             <div id="added"></div>
 
             <!-- 追加ボタン -->
-            <div class="piece add-btn text-center" @click="">
+            <div class="piece add-btn text-center" @click="addPiece">
                 <i class="fas fa-plus text-xl"></i>
             </div>
         </div>
@@ -20,7 +20,7 @@ export default {
     name: "ImageInputForm",
 
     mounted() {
-        this.addPiece();
+        // this.addPiece();
     },
 
     methods: {
@@ -34,8 +34,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "resources/sass/_variables.scss";
+
 #ground-wrapper {
-    border: solid 2px #cccccc;
+    border: solid 2px $gray-border;
     width: 100%;
     padding: 10px;
 }
@@ -46,28 +48,26 @@ export default {
         min-width: 120px;
         width: auto;
         height: 120px;
-        border: solid 2px #ccc;
+        border: solid 2px $gray-border;
         border-radius: 15px;
         margin-bottom: 10px;
+
+        &:nth-child(n+2) {
+            margin-left: 10px;
+        }
+
+        &.add-btn {
+            display: table;
+
+            i {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            &:hover {
+                background-color: $blue;
+            }
+        }
     }
-
-    .piece:nth-child(n+2) {
-        margin-left: 10px;
-    }
 }
-
-
-
-.piece.add-btn{
-    display: table;
-}
-.piece.add-btn i{
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.piece.add-btn:hover{
-    background-color: #cce5f6;
-}
-
 </style>
