@@ -40,32 +40,32 @@ export default {
     border: solid 2px $gray-border;
     width: 100%;
     padding: 10px;
-}
 
-#ground-wrapper ::v-deep {
-    .piece {
-        float: left;
-        min-width: 120px;
-        width: auto;
-        height: 120px;
-        border: solid 2px $gray-border;
-        border-radius: 15px;
-        margin-bottom: 10px;
+    ::v-deep {
+        .piece {
+            float: left;
+            min-width: 120px;
+            width: auto;
+            height: 120px;
+            border: solid 2px $gray-border;
+            border-radius: 15px;
+            margin-bottom: 10px;
 
-        &:nth-child(n+2) {
-            margin-left: 10px;
-        }
-
-        &.add-btn {
-            display: table;
-
-            i {
-                display: table-cell;
-                vertical-align: middle;
+            &:nth-child(n+2) {
+                margin-left: 10px;
             }
 
-            &:hover {
-                background-color: $blue;
+            &.add-btn {
+                display: table;
+
+                i {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+
+                &:hover {
+                    background-color: $blue;
+                }
             }
         }
     }
