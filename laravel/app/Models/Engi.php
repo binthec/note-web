@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Uuid;
 
-class Item extends Model
+class Engi extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'items';
+    protected $table = 'engis';
 
     protected $dates = ['deleted_at'];
 
@@ -24,12 +24,14 @@ class Item extends Model
      * @return void
      * @throws \Exception
      */
-    public function insertItem(object $create_data): void
+    public function insertEngi(object $create_data): void
     {
         $this->uuid = Uuid::uuid4();
         $this->user_id = Auth::user()->id;
 
         $this->title = $create_data->title;
+        $this->item_num = $create_data->item_num;
+        $this->content_data = json_encode([]);
 
         $this->updated_by = Auth::user()->id;
 
@@ -40,11 +42,14 @@ class Item extends Model
      * 編集
      *
      * @param object $update_data
-     * @return voids
+     * @return void
      */
-    public function updateItem(object $update_data): void
+    public function updateEngi(object $update_data): void
     {
         $this->title = $update_data->title;
+        $this->item_num = $update_data->item_num;
+        //$this->content_data = $update_data->content_data;
+
         $this->updated_by = Auth::user()->id;
 
         $this->update();

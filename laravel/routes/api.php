@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('items')->group(function(){
     Route::get('/', 'Api\ItemController@index');
     Route::post('/', 'Api\ItemController@store');
+    Route::get('/categories', 'Api\ItemController@getCategories');
     Route::get('/{uuid}', 'Api\ItemController@show'); // 単一のレコードを取得する場合
     Route::put('/{uuid}', 'Api\ItemController@update');
 });

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
-use App\Model\Engi;
+use App\Models\Engi;
 
 class EngiController extends Controller
 {

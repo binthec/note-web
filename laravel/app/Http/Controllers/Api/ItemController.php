@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Common\HttpStatusCode;
+use App\Common\ItemCategoryCode;
 use App\Http\Requests\ItemRequest;
-use App\Model\Item;
+use App\Models\Item;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
-use App\Model\Engi;
 
 class ItemController extends Controller
 {
@@ -129,6 +129,14 @@ class ItemController extends Controller
         return response()->json([
             'message' => 'success',
             'item' => $entity
+        ], HttpStatusCode::OK);
+    }
+
+    public function getCategories(): JsonResponse
+    {
+        return response()->json([
+            'message' => 'success',
+            'first_categories' => ItemCategoryCode::$first_categories,
         ], HttpStatusCode::OK);
     }
 }
