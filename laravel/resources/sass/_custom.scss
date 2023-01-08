@@ -33,6 +33,13 @@ ul.navbar-nav{
     }
 }
 
+/**
+ * vue-js-modal に関して
+ */
+.vm--container{
+    z-index: 99999 !important;
+}
+
 .modal-header{
     h4{
         margin-bottom: 0;

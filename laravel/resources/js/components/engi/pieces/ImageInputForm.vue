@@ -90,8 +90,4 @@ export default {
         }
     }
 }
-
-.vm--container{
-    z-index: 99999;
-}
 </style>
