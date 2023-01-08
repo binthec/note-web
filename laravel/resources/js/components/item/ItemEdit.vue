@@ -2,7 +2,7 @@
     <default-form-layout>
         <edit-header slot="page_header"
                      :header_icon="'nav-icon fas fa-edit'"
-                     :page_title="'演技編集'"
+                     :page_title="'コンテンツ編集'"
                      :submit_func="clickSubmit"
                      :go_back_func="goList"
         ></edit-header>
@@ -25,17 +25,17 @@
     import DefaultFormLayout from "../common/layout/DefaultFormLayout";
     import PageHeader from "../common/parts/PageTitle";
 
-    // for engi
-    import EditBody from "./parts/EditBody";
+    // for item
+    import EditBody from "./edit/parts/EditBody";
     import EditHeader from "../common/parts/EditHeader";
-    import EditFooter from "./parts/EditFooter";
+    import EditFooter from "./edit/parts/EditFooter";
 
     export default {
-        name: "EngiEdit",
+        name: "ItemEdit",
 
         data() {
             return {
-                list_path: '/engi'
+                list_path: '/items'
             }
         },
 
@@ -54,7 +54,7 @@
         },
 
         computed: {
-            ...mapState('engi/edit', [
+            ...mapState('item/edit', [
                 'show_success_modal',
                 'show_error_modal',
             ]),
@@ -66,7 +66,7 @@
 
         async mounted(){
             if(!this.uuid) return;
-            await this.getEngi();
+            await this.getItem();
         },
 
         watch: {
@@ -79,13 +79,13 @@
         },
 
         methods: {
-            ...mapMutations('engi/edit', [
+            ...mapMutations('item/edit', [
                 'initUuid',
             ]),
-            ...mapActions('engi/edit', [
-                'getEngi',
-                'createEngi',
-                'updateEngi',
+            ...mapActions('item/edit', [
+                'getItem',
+                'createItem',
+                'updateItem',
             ]),
 
             showSuccessModal() {
@@ -102,9 +102,9 @@
 
             clickSubmit() {
                 if(this.uuid){
-                    this.updateEngi();
+                    this.updateItem();
                 }else{
-                    this.createEngi();
+                    this.createItem();
                 }
             }
         }

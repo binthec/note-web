@@ -2,9 +2,9 @@
     <default-layout>
 
         <list-header slot="page_header"
-                     :header_icon="'nav-icon fas fa-book'"
+                     :header_icon="'nav-icon fas fa-walking'"
                      :page_title="'コンテンツ一覧'"
-                     :create_path="'/engi/create'"
+                     :create_path="'/items/create'"
         ></list-header>
 
         <template v-slot:card_body>
@@ -22,8 +22,8 @@
                         <td>{{ row.title }}</td>
                         <td>{{ row.updated_at }}</td>
                         <td>
-                            <a href="javascript: void(0);" @click="editContent(row)"><i class="fas fa-edit text-lg mr-3 text-olive"></i></a>
-                            <a href="javascript: void(0);" @click="deleteContent(row)"><i class="fas fa-trash-alt text-lg text-danger"></i></a>
+                            <a href="javascript: void(0);" @click="editEntity(row)"><i class="fas fa-edit text-lg mr-3 text-olive"></i></a>
+                            <a href="javascript: void(0);" @click="deleteEntity(row)"><i class="fas fa-trash-alt text-lg text-danger"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -31,7 +31,10 @@
             </div>
         </template>
 
-        <Paginator slot="card_footer"></Paginator>
+        <Paginator slot="card_footer"
+                   :list="list"
+                   :set-current-page="setCurrentPage"
+        ></Paginator>
     </default-layout>
 </template>
 
@@ -41,10 +44,10 @@ import DefaultLayout from "../common/layout/DefaultFormLayout";
 import ListHeader from "../common/parts/ListHeader";
 import Paginator from "../common/parts/Paginator";
 
-import {mapState, mapActions} from "vuex";
+import {mapState, mapActions, mapMutations} from "vuex";
 
 export default {
-    name: "EngiList",
+    name: "ItemList",
 
     components: {
         DefaultLayout,
@@ -53,7 +56,7 @@ export default {
     },
 
     computed: {
-        ...mapState('engi/list', [
+        ...mapState('item/list', [
             'list',
         ])
     },
@@ -69,15 +72,19 @@ export default {
     },
 
     methods: {
-        ...mapActions('engi/list', [
-            'getList'
+        ...mapMutations('item/list', [
+            'setCurrentPage'
         ]),
 
-        editContent(row){
-            window.open('/engi/' + row.uuid + '/edit', '_self');
+        ...mapActions('item/list', [
+            'getList',
+        ]),
+
+        editEntity(row){
+            window.open('/items/' + row.uuid + '/edit', '_self');
         },
 
-        deleteContent(row){
+        deleteEntity(row){
             console.log('delete');
             console.log(row);
         },

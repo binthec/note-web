@@ -19,6 +19,14 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
+// コンテンツ管理
+Route::prefix('items')->group(function(){
+    Route::get('/', 'ItemController@index')          ->name('items.list');
+    Route::get('/create', 'ItemController@create')   ->name('items.create');
+    Route::get('/{uuid}/edit', 'ItemController@edit')->name('items.edit');
+});
+
+// 演技シート
 Route::prefix('engi')->group(function(){
     Route::get('/', 'EngiController@index')          ->name('engi.list');
     Route::get('/create', 'EngiController@create')   ->name('engi.create');

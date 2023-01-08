@@ -1,19 +1,16 @@
-import {update} from "lodash/object";
-
 export default {
     namespaced: true,
 
     state: {
         uuid: null,
-        engi: {
+        item: {
             title: null,
-            item_num: null,
         },
         errors: {},
 
-        list_url: '/engi',
-        show_url: '/api/engi/',
-        create_url: '/api/engi',
+        list_url: '/items',
+        show_url: '/api/items/',
+        create_url: '/api/items',
 
         show_success_modal: false,
         show_error_modal: false,
@@ -22,11 +19,11 @@ export default {
     getters: {
         getFormData(state, getters, rootState, rootGetters) {
             const update_data = new FormData();
-            update_data.append('engi', JSON.stringify(state.engi));
+            update_data.append('item', JSON.stringify(state.item));
 
             // デバッグ用
             // console.log(...update_data.entries());
-            // console.log(update_data.getAll('engi'));
+            // console.log(update_data.getAll('contents'));
 
             return update_data;
         }
@@ -37,10 +34,7 @@ export default {
             state.uuid = payload.uuid;
         },
         setTitle(state, payload) {
-            state.engi.title = payload.value;
-        },
-        setItemNum(state, payload) {
-            state.engi.item_num = payload.value;
+            state.item.title = payload.value;
         },
         showSuccessModal(state) {
             state.show_success_modal = true;
@@ -51,19 +45,20 @@ export default {
     },
 
     actions: {
-        getEngi({commit, state, getters}) {
+        getItem({commit, state, getters}) {
             axios.get(state.show_url + state.uuid)
                 .then(response => {
-                    state.engi = response.data.engi;
+                    state.item = response.data.item;
                 })
                 .catch(error => {
-                    if (error.response.status === 404) {
-                        window.location.replace('/404');
-                    }
+                    console.log(error);
+                    // if (error.response.status === 404) {
+                    //     window.location.replace('/404');
+                    // }
                 })
         },
 
-        createEngi({commit, state, getters}) {
+        createItem({commit, state, getters}) {
             state.errors = {};
             axios.post(state.create_url, getters.getFormData)
                 .then(response => {
@@ -90,7 +85,7 @@ export default {
             ;
         },
 
-        updateEngi({commit, state, getters}) {
+        updateItem({commit, state, getters}) {
             state.errors = {};
             axios.post(state.show_url + state.uuid, getters.getFormData, {
                 headers: {'X-HTTP-Method-Override': 'PUT'}
@@ -104,14 +99,15 @@ export default {
                     }
                 })
                 .catch(error => {
-                    if (error.response.status === 422) {
-                        state.errors = {...state.errors, ...error.response.data.errors};
-                    } else {
-                        commit('showErrorModal');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    }
+                    console.log(error);
+                    // if (error.response.status === 422) {
+                    //     state.errors = {...state.errors, ...error.response.data.errors};
+                    // } else {
+                    //     commit('showErrorModal');
+                    //     setTimeout(() => {
+                    //         window.location.reload();
+                    //     }, 1000);
+                    // }
                 })
                 .finally(() => {
                     //

@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "resources/sass/_variables.scss";
+@import "../../../../../sass/variables";
 
 #ground-wrapper {
     border: solid 2px $gray-border;

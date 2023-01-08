@@ -23,6 +23,12 @@
                         <p>フレンズノート</p>
                     </a>
                 </li>
+                <li class="nav-item<?php if(current_controller() == 'items') echo ' menu-open'?>">
+                    <a href="{{ route('items.list') }}" class="nav-link">
+                        <i class="nav-icon fas fa-walking text-lg"></i>
+                        <p>アイテム管理</p>
+                    </a>
+                </li>
                 <li class="nav-item<?php if(current_controller() == 'engi') echo ' menu-open'?>">
                     <a href="{{ route('engi.list') }}" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>

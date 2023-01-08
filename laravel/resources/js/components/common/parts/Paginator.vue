@@ -4,7 +4,8 @@
             <li class="page-item" v-show="!isFirstPage">
                 <a class="page-link" href="javascript: void(0);" @click="goPage('prev')">Prev</a>
             </li>
-            <li class="page-item" v-for="page_num in list.last_page" :key="page_num" :class="{ active: isActive(page_num) }">
+            <li class="page-item" v-for="page_num in list.last_page" :key="page_num"
+                :class="{ active: isActive(page_num) }">
                 <a class="page-link" href="javascript: void(0);" @click="goPage(page_num)">{{ page_num }}</a>
             </li>
             <li class="page-item" v-show="!isLastPage">
@@ -21,11 +22,16 @@ import {mapState, mapMutations, mapActions} from "vuex";
 export default {
     name: "Paginator",
 
-    computed: {
-        ...mapState('list_engi', [
-            'list'
-        ]),
+    props: {
+        list: {
+            default: [],
+        },
+        setCurrentPage: {
+            default: () => {}
+        },
+    },
 
+    computed: {
         isFirstPage() {
             return this.list.current_page == 1;
         },
@@ -38,7 +44,7 @@ export default {
             return this.list.total > this.list.per_page;
         },
 
-        isActive(){
+        isActive() {
             return (page_num) => {
                 return this.list.current_page == page_num;
             }
@@ -46,14 +52,6 @@ export default {
     },
 
     methods: {
-        ...mapMutations('list_engi', [
-            'setCurrentPage'
-        ]),
-
-        ...mapActions('list_engi', [
-            'getList'
-        ]),
-
         goPage(page_num) {
             let num = 1;
             if (page_num === 'next') {

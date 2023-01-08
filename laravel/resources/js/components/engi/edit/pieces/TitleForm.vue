@@ -3,8 +3,8 @@
         :label_value="'タイトル'"
         :input_id="'title'"
         :bind_value="engi.title"
-        :set-title="setTitleEvent"
-        :error_message="title_error_message"
+        :set-title="setEvent"
+        :error_message="error_message"
         :additional_class="additional_class"
     ></textbox>
 </template>
@@ -12,7 +12,7 @@
 <script>
 import {mapMutations, mapState} from "vuex";
 
-import textbox from "../../common/form/Textbox";
+import textbox from "../../../common/form/Textbox";
 
 export default {
     name: "TitleForm",
@@ -27,13 +27,13 @@ export default {
             'errors',
         ]),
 
-        title_error_message(){
+        error_message(){
             if(this.errors['engi.title'] == null) return null;
             else return this.errors['engi.title'][0];
         },
 
         additional_class(){
-            if(this.title_error_message) return 'is-invalid';
+            if(this.error_message) return 'is-invalid';
             else return '';
         }
     },
@@ -43,8 +43,8 @@ export default {
             'setTitle',
         ]),
 
-        setTitleEvent(event) {
-            this.setTitle({title: event.target.value});
+        setEvent(event) {
+            this.setTitle({value: event.target.value});
         }
     }
 }

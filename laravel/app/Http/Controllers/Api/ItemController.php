@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Common\HttpStatusCode;
-use App\Http\Requests\EngiRequest;
+use App\Http\Requests\ItemRequest;
+use App\Model\Item;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 use App\Model\Engi;
 
-class EngiController extends Controller
+class ItemController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -33,9 +34,7 @@ class EngiController extends Controller
     public function index(Request $request)
     {
 
-        Log::info($request);
-
-        $query = Engi::query();
+        $query = Item::query();
 
         // ソート順が渡された場合に並び順をクエリに加える
         if($request->order_column && $request->order){
@@ -55,19 +54,19 @@ class EngiController extends Controller
     /**
      * 登録
      *
-     * @param Engi $request
+     * @param ItemRequest $request
      * @return JsonResponse
      */
-    public function store(EngiRequest $request): JsonResponse
+    public function store(ItemRequest $request): JsonResponse
     {
-        $engi = new Engi();
-        $request->engi = json_decode($request->engi);
+        $entity = new Item();
+        $request->item = json_decode($request->item);
 
         DB::beginTransaction();
 
         try {
 
-            $engi->insertEngi($request->engi);
+            $entity->insertItem($request->item);
 
             DB::commit();
             return response()->json(['message' => 'success'], HttpStatusCode::CREATED);
@@ -87,20 +86,20 @@ class EngiController extends Controller
     /**
      * 編集
      *
-     * @param EngiRequest $request
+     * @param ItemRequest $request
      * @param string $uuid
      * @return JsonResponse
      */
-    public function update(EngiRequest $request, string $uuid): JsonResponse
+    public function update(ItemRequest $request, string $uuid): JsonResponse
     {
-        $request->engi = json_decode($request->engi);
+        $request->item = json_decode($request->item);
 
-        $engi = Engi::query()->where('uuid', $uuid)->firstOrFail();
+        $entity = Item::query()->where('uuid', $uuid)->firstOrFail();
 
         DB::beginTransaction();
 
         try{
-            $engi->updateEngi($request->engi);
+            $entity->updateItem($request->item);
 
             DB::commit();
             return response()->json(['message' => 'success'], HttpStatusCode::OK);
@@ -118,18 +117,18 @@ class EngiController extends Controller
     }
 
     /**
-     *
+     * 単一のレコードを返す
      *
      * @param string $uuid
      * @return JsonResponse
      */
     public function show(string $uuid): JsonResponse
     {
-        $engi = Engi::query()->where('uuid', $uuid)->firstOrFail();
+        $entity = Item::query()->where('uuid', $uuid)->firstOrFail();
 
         return response()->json([
             'message' => 'success',
-            'engi' => $engi
+            'item' => $entity
         ], HttpStatusCode::OK);
     }
 }
