@@ -7,10 +7,22 @@
             <div id="added"></div>
 
             <!-- 追加ボタン -->
-            <div class="piece add-btn text-center" @click="addPiece">
+            <div class="piece add-btn text-center" @click="showAddModal">
                 <i class="fas fa-plus text-xl"></i>
             </div>
         </div>
+
+        <modal name="add-modal"
+               :draggable="true"
+        >
+            <div class="modal-header">
+                <h2>Modal title</h2>
+            </div>
+            <div class="modal-body">
+                <p>you're reading this text in a modal!</p>
+                <button class="btn btn-flat" @click="hideAddModal">閉じる</button>
+            </div>
+        </modal>
 
     </div>
 </template>
@@ -28,7 +40,15 @@ export default {
             const piece = document.createElement('div');
             piece.className = "piece";
             document.getElementById('added').prepend(piece);
-        }
+        },
+
+        showAddModal : function() {
+            this.$modal.show('add-modal');
+        },
+
+        hideAddModal : function () {
+            this.$modal.hide('add-modal');
+        },
     }
 }
 </script>
