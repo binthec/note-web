@@ -1,11 +1,10 @@
 <template>
     <modal name="add-modal"
-           :draggable="true"
-           :width="'800px'"
-           :height="'800px'"
+           :width="modalWidth"
+           :height="modalHeight"
     >
-        <div class="modal-header">
-            <h4>追加したい画像を選択してください</h4>
+        <div class="modal-header bg-info">
+            <h4>追加したいアイテムの選択</h4>
         </div>
         <div class="modal-body">
             <select-first-category-form></select-first-category-form>
@@ -14,14 +13,18 @@
 
             <hr>
 
-            <div class="row" v-if="items">
-                <div class="col-3" v-for="item in items">
-                    <img :src="'/storage/items' + item.file_path">
+            <div class="select-area">
+
+                <div class="row" v-if="items">
+                    <div class="col-3" v-for="item in items">
+                        <img :src="'/storage/items' + item.file_path">
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-dark" @click="hideAddModal">閉じる</button>
+            <a class="btn btn-dark" @click="hideAddModal" href="javascript: void(0);">閉じる</a>
         </div>
     </modal>
 </template>
@@ -42,23 +45,30 @@ export default {
         SelectFirstCategoryForm
     },
 
+    data() {
+        return {
+            modalWidth: window.innerWidth * 0.9,
+            modalHeight: window.innerHeight * 0.9,
+        }
+    },
+
     computed: {
         ...mapState('item/category', [
             'items'
         ]),
-        ...mapState('item/category',[
+        ...mapState('item/category', [
             'first_category',
             'second_category',
             'third_category',
         ]),
 
-        selectedFirstCategory(){
+        selectedFirstCategory() {
             return this.first_category != null;
         }
     },
 
     methods: {
-        hideAddModal : function () {
+        hideAddModal: function () {
             this.$modal.hide('add-modal');
         },
     }
@@ -67,5 +77,7 @@ export default {
 </script>
 
 <style scoped>
-
+.select-area{
+    width: 100%;
+}
 </style>
