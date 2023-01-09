@@ -132,11 +132,60 @@ class ItemController extends Controller
         ], HttpStatusCode::OK);
     }
 
-    public function getCategories(): JsonResponse
+    /**
+     * 大分類を取得
+     *
+     * @return JsonResponse
+     */
+    public function getFirstCategories(): JsonResponse
     {
         return response()->json([
             'message' => 'success',
-            'first_categories' => ItemCategoryCode::$first_categories,
+            'first_categories' => ItemCategoryCode::$first_category_labels,
+        ], HttpStatusCode::OK);
+    }
+
+    /**
+     * 大分類に紐づく中分類を取得
+     *
+     * @param int $first_cate_id
+     * @return JsonResponse
+     */
+    public function getSecondCategories(int $first_cate_id): JsonResponse
+    {
+        return response()->json([
+            'message' => 'success',
+            'second_categories' => ItemCategoryCode::$second_category_labels[$first_cate_id],
+        ], HttpStatusCode::OK);
+    }
+
+    /**
+     * 中分類に紐づく小分類を取得
+     *
+     * @param int $second_cate_id
+     * @return JsonResponse
+     */
+    public function getThirdCategories(int $second_cate_id): JsonResponse
+    {
+        return response()->json([
+            'message' => 'success',
+            'third_categories' => ItemCategoryCode::$third_category_labels[$second_cate_id],
+        ], HttpStatusCode::OK);
+    }
+
+    /**
+     * items を取得して返す
+     *
+     * @param int $cate_id
+     * @return JsonResponse
+     */
+    public function getItems(string $cate_name, int $cate_id): JsonResponse
+    {
+        $items = Item::query()->where($cate_name, $cate_id)->get();
+
+        return response()->json([
+            'message' => 'success',
+            'items' => $items,
         ], HttpStatusCode::OK);
     }
 }

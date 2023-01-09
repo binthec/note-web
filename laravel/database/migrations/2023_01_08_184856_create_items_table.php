@@ -20,10 +20,11 @@ class CreateItemsTable extends Migration
             $table->integer('user_id');
             $table->string('title');
 
-            $table->smallInteger('1st_cate')->nullable();
-            $table->smallInteger('2nd_cate')->nullable();
-            $table->smallInteger('3rd_cate')->nullable();
-            $table->integer('order')->nullable();
+            $table->smallInteger('first_cate')->nullable();
+            $table->smallInteger('second_cate')->nullable();
+            $table->smallInteger('third_cate')->nullable();
+            $table->integer('note_order')->nullable();
+            $table->text('file_path')->nullable();
 
             $table->string('updated_by', 36)->nullable();
             $table->string('deleted_by', 36)->nullable();

@@ -43,6 +43,6 @@ class EngiController extends Controller
      */
     public function edit(string $uuid)
     {
-        return view('engi.edit', ['uuid' => $uuid]);
+        return view('engi.edit', compact('uuid'));
     }
 }

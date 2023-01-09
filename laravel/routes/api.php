@@ -21,7 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('items')->group(function(){
     Route::get('/', 'Api\ItemController@index');
     Route::post('/', 'Api\ItemController@store');
-    Route::get('/categories', 'Api\ItemController@getCategories');
+    Route::get('/getFirstCategories', 'Api\ItemController@getFirstCategories');
+    Route::get('/getSecondCategories/{first_cate_id}', 'Api\ItemController@getSecondCategories');
+    Route::get('/getThirdCategories/{second_cate_id}', 'Api\ItemController@getThirdCategories');
+    Route::get('/getItems/{cate_name}/{cate_id}', 'Api\ItemController@getItems');
     Route::get('/{uuid}', 'Api\ItemController@show'); // 単一のレコードを取得する場合
     Route::put('/{uuid}', 'Api\ItemController@update');
 });

@@ -14,11 +14,6 @@ export default {
         list_url: '/items',
         show_url: '/api/items/',
         create_url: '/api/items',
-        get_cate_url: '/api/items/categories',
-
-        first_categories: [],
-        second_categories: [],
-        third_categories: [],
 
         show_success_modal: false,
         show_error_modal: false,
@@ -120,27 +115,6 @@ export default {
                 .finally(() => {
                     //
                 });
-        },
-
-        /**
-         * 分類を取得
-         *
-         * @param commit
-         * @param state
-         * @param getters
-         */
-        getCategories({commit, state, getters}){
-            axios.get(state.get_cate_url)
-                .then(response => {
-                    console.log(response);
-                    state.first_categories = response.data.first_categories;
-                })
-                .catch(error => {
-                    console.log(error);
-                    // if (error.response.status === 404) {
-                    //     window.location.replace('/404');
-                    // }
-                })
         },
     }
 }

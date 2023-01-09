@@ -12,24 +12,16 @@
             </div>
         </div>
 
-        <modal name="add-modal"
-               :draggable="true"
-        >
-            <div class="modal-header">
-                <h4>追加したい画像を選択してください</h4>
-            </div>
-            <div class="modal-body">
-                <p>you're reading this text in a modal!</p>
-                <button class="btn btn-dark" @click="hideAddModal">閉じる</button>
-            </div>
-        </modal>
-
+        <select-item-modal></select-item-modal>
     </div>
 </template>
 
 <script>
+import SelectItemModal from "./SelectItemModal";
 export default {
     name: "ImageInputForm",
+
+    components: {SelectItemModal},
 
     mounted() {
         // this.addPiece();
@@ -44,10 +36,6 @@ export default {
 
         showAddModal : function() {
             this.$modal.show('add-modal');
-        },
-
-        hideAddModal : function () {
-            this.$modal.hide('add-modal');
         },
     }
 }
