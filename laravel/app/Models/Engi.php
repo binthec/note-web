@@ -32,6 +32,7 @@ class Engi extends Model
         $this->title = $create_data->title;
         $this->item_num = $create_data->item_num;
         $this->content_data = json_encode([]);
+        $this->first_cate = $create_data->first_cate;
 
         $this->updated_by = Auth::user()->id;
 
@@ -48,6 +49,7 @@ class Engi extends Model
     {
         $this->title = $update_data->title;
         $this->item_num = $update_data->item_num;
+        $this->first_cate = $update_data->first_cate;
         //$this->content_data = $update_data->content_data;
 
         $this->updated_by = Auth::user()->id;

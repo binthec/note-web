@@ -55,8 +55,8 @@ class ItemCategoryCode
      * @var string[]
      */
     public static $first_category_labels = [
-        self::EMPTY_HAND => '手具要素',
-        self::APPARATUS => '徒手要素'
+        self::EMPTY_HAND => '徒手要素',
+        self::APPARATUS => '手具要素'
     ];
 
     /**

@@ -46,8 +46,11 @@ export default {
         getFirstCategories({commit, state, getters}) {
             axios.get(state.get_first_cate_url)
                 .then(response => {
+                    console.log('response ↓');
                     console.log(response);
                     state.first_categories = response.data.first_categories;
+                    state.first_category = Object.entries(state.first_categories)[0][0];
+                    console.log(state.first_category);
                 })
                 .catch(error => {
                     console.log(error);
@@ -69,6 +72,7 @@ export default {
                 .then(response => {
                     console.log(response);
                     state.second_categories = response.data.second_categories;
+                    state.second_category = Object.entries(state.second_categories)[0][0];
                 })
                 .catch(error => {
                     console.log(error);

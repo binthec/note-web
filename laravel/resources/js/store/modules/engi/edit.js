@@ -8,6 +8,7 @@ export default {
         engi: {
             title: null,
             item_num: null,
+            first_cate: null,
         },
         errors: {},
 
@@ -42,8 +43,14 @@ export default {
         setItemNum(state, payload) {
             state.engi.item_num = payload.value;
         },
+        setEngiFirstCategory(state, payload) {
+            state.engi.first_cate = payload.value;
+        },
         showSuccessModal(state) {
             state.show_success_modal = true;
+        },
+        hideSuccessModal(state) {
+            state.show_success_modal = false;
         },
         showErrorModal(state) {
             state.show_error_modal = true;
@@ -63,26 +70,34 @@ export default {
                 })
         },
 
-        createEngi({commit, state, getters}) {
+        createEngi({commit, state, getters}, {onlyBasicInfo}) {
+            console.log('onlyBasicInfo ↓ create の中だよ！');
+            console.log(onlyBasicInfo);
+
+
             state.errors = {};
             axios.post(state.create_url, getters.getFormData)
                 .then(response => {
                     if (response.status === 201) {
-                        commit('showSuccessModal');
-                        setTimeout(() => {
-                            window.location.replace(state.list_url);
-                        }, 1000)
+                        // 基本情報のみ変更の場合は画面遷移しない
+                        if(!onlyBasicInfo){
+                            commit('showSuccessModal');
+                            setTimeout(() => {
+                                window.location.replace(state.list_url);
+                            }, 1000)
+                        }
                     }
                 })
                 .catch(error => {
-                    if (error.response.status === 422) {
-                        state.errors = {...state.errors, ...error.response.data.errors}
-                    } else {
-                        commit('showErrorModal');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    }
+                    console.log(error);
+                    // if (error.response.status === 422) {
+                    //     state.errors = {...state.errors, ...error.response.data.errors}
+                    // } else {
+                    //     commit('showErrorModal');
+                    //     setTimeout(() => {
+                    //         window.location.reload();
+                    //     }, 1000);
+                    // }
                 });
             // .finally(() => {
             //     //
@@ -90,17 +105,23 @@ export default {
             ;
         },
 
-        updateEngi({commit, state, getters}) {
+        updateEngi({commit, state, getters}, {onlyBasicInfo}) {
+            console.log('onlyBasicInfo ↓ update の中だよ！');
+            console.log(onlyBasicInfo);
+
             state.errors = {};
             axios.post(state.show_url + state.uuid, getters.getFormData, {
                 headers: {'X-HTTP-Method-Override': 'PUT'}
             })
                 .then(response => {
                     if (response.status === 200) {
-                        commit('showSuccessModal');
-                        setTimeout(() => {
-                            window.location.replace(state.list_url);
-                        });
+                        // 基本情報のみ変更の場合は画面遷移しない
+                        if(!onlyBasicInfo){
+                            commit('showSuccessModal');
+                            setTimeout(() => {
+                                window.location.replace(state.list_url);
+                            }, 1000)
+                        }
                     }
                 })
                 .catch(error => {

@@ -60,6 +60,8 @@ class EngiController extends Controller
      */
     public function store(EngiRequest $request): JsonResponse
     {
+        Log::info($request);
+
         $engi = new Engi();
         $request->engi = json_decode($request->engi);
 

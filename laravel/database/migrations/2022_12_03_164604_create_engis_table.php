@@ -20,6 +20,7 @@ class CreateEngisTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->integer('item_num');
+            $table->smallInteger('first_cate');
             $table->json('content_data');
 
             $table->string('updated_by', 36)->nullable();

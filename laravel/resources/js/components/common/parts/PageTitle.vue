@@ -2,7 +2,7 @@
     <div class="row mb-2">
         <div class="col-sm-12">
             <h1>
-                <i v-if="header_icon" :class="header_icon"></i> {{ page_title }}
+                <i v-if="headerIcon" :class="headerIcon"></i> {{ pageTitle }}
             </h1>
         </div>
     </div>
@@ -13,10 +13,10 @@ export default {
     name: "PageTitle",
 
     props: {
-        'header_icon': {
+        headerIcon: {
             default: null,
         },
-        'page_title': {
+        pageTitle: {
             default: null,
         }
     }
