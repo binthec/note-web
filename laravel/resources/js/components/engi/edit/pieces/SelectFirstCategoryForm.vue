@@ -26,6 +26,7 @@ export default {
     watch: {
         first_category(new_value, old_value) {
             this.setEngiFirstCategory({value: new_value});
+            this.getSecondCategories();
         },
     },
 
@@ -57,7 +58,8 @@ export default {
 
         ]),
         ...mapActions('item/category', [
-            'getFirstCategories'
+            'getFirstCategories',
+            'getSecondCategories'
         ]),
 
         changeFirstCategory(value) {
