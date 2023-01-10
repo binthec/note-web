@@ -7,6 +7,9 @@
             <h4>追加したいアイテムの選択</h4>
         </div>
         <div class="modal-body">
+            <select-second-category-form></select-second-category-form>
+            <select-third-category-form></select-third-category-form>
+
             <hr>
 
             <div class="select-area">
@@ -28,12 +31,15 @@
 <script>
 // vuex
 import {mapState, mapMutations, mapActions} from "vuex";
+import SelectSecondCategoryForm from "./SelectSecondCategoryForm";
+import SelectThirdCategoryForm from "./SelectThirdCategoryForm";
 
 export default {
     name: "SelectItemModal",
 
     components: {
-        //
+        SelectThirdCategoryForm,
+        SelectSecondCategoryForm
     },
 
     data() {
@@ -46,6 +52,7 @@ export default {
     computed: {
         ...mapState('item/category', [
             'errors',
+            'items'
         ]),
     },
 

@@ -69,15 +69,19 @@ export default {
         this.getFirstCategories();
     },
 
-    async mounted(){
-        if(!this.uuid) return;
+    async mounted() {
+        if (!this.uuid) return;
         await this.getEngi();
     },
 
 
     watch: {
         show_success_modal(new_bool, old_bool) {
-            if (new_bool === true) this.showSuccessModal();
+            if (new_bool === true){
+                this.showSuccessModal();
+            }else{
+                this.hideSuccessModal();
+            }
         },
         show_error_modal(new_bool, old_bool) {
             if (new_bool === true) this.showErrorModal();
@@ -102,6 +106,10 @@ export default {
 
         showSuccessModal() {
             this.$modal.show('success-modal');
+        },
+
+        hideSuccessModal() {
+            this.$modal.hide('success-modal');
         },
 
         showErrorModal() {

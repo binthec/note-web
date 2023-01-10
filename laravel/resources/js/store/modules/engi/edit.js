@@ -79,9 +79,14 @@ export default {
             axios.post(state.create_url, getters.getFormData)
                 .then(response => {
                     if (response.status === 201) {
+                        commit('showSuccessModal');
+
                         // 基本情報のみ変更の場合は画面遷移しない
-                        if(!onlyBasicInfo){
-                            commit('showSuccessModal');
+                        if(onlyBasicInfo){
+                            setTimeout(() => {
+                                commit('hideSuccessModal');
+                            }, 1000)
+                        }else{
                             setTimeout(() => {
                                 window.location.replace(state.list_url);
                             }, 1000)
@@ -115,9 +120,13 @@ export default {
             })
                 .then(response => {
                     if (response.status === 200) {
+                        commit('showSuccessModal');
                         // 基本情報のみ変更の場合は画面遷移しない
-                        if(!onlyBasicInfo){
-                            commit('showSuccessModal');
+                        if(onlyBasicInfo){
+                            setTimeout(() => {
+                                commit('hideSuccessModal');
+                            }, 1000)
+                        }else{
                             setTimeout(() => {
                                 window.location.replace(state.list_url);
                             }, 1000)

@@ -4,7 +4,8 @@
         class="btn btn-primary float-right"
         :disabled="isDisabled"
         @click="saveBasicInfo"
-    >{{ buttonName }}</button>
+    >{{ buttonName }}
+    </button>
 </template>
 
 <script>
@@ -38,6 +39,10 @@ export default {
             'updateEngi'
         ]),
 
+        ...mapActions('item/category', [
+            'getSecondCategories'
+        ]),
+
         saveBasicInfo() {
             if (this.uuid) {
                 this.updateEngi({onlyBasicInfo: true});
@@ -45,6 +50,7 @@ export default {
                 this.createEngi({onlyBasicInfo: true});
             }
 
+            this.getSecondCategories();
             this.buttonName = '基本情報を変更';
         }
     }
