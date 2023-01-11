@@ -2,9 +2,9 @@
     <default-layout>
 
         <list-header slot="page_header"
-                     :header_icon="'nav-icon fas fa-book'"
-                     :page_title="'コンテンツ一覧'"
-                     :create_path="'/engi/create'"
+                     :header-icon="'nav-icon fas fa-book'"
+                     :page-title="'コンテンツ一覧'"
+                     :create-path="'/engi/create'"
         ></list-header>
 
         <template v-slot:card_body>

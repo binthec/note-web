@@ -3,13 +3,13 @@
     <div class="container-fluid">
 
         <page-title
-            :header_icon="header_icon"
-            :page_title="page_title"
+            :header-icon="headerIcon"
+            :page-title="pageTitle"
         ></page-title>
 
         <div class="row mb-2">
             <div class="col-sm-12">
-                <a :href="create_path" class="btn btn-primary">新規作成</a>
+                <a :href="createPath" class="btn btn-primary">新規作成</a>
             </div>
         </div>
 
@@ -28,13 +28,13 @@
         },
 
         props: {
-            header_icon: {
+            headerIcon: {
                 default: null,
             },
-            page_title: {
+            pageTitle: {
                 default: null,
             },
-            create_path: {
+            createPath: {
                 default: null,
             }
         }
