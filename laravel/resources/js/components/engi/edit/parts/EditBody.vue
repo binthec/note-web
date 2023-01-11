@@ -7,7 +7,7 @@
         <item-num-form></item-num-form>
         <!-- どのカテゴリ（大分類：手具 or 徒手）のシートか -->
         <select-first-category-form></select-first-category-form>
-        <!-- 基本情報だけ保存するボタン -->
+        <!-- 基本設定だけ保存するボタン -->
         <save-basic-info-button></save-basic-info-button>
 
         <h4>演技内容設定</h4>

@@ -3,14 +3,14 @@
         type="button"
         class="btn btn-primary float-right"
         @click="saveBasicInfo"
-    >基本情報を保存
+    >基本設定を保存
     </button>
 
     <button v-else
         type="button"
         class="btn btn-warning float-right"
         @click="changeToEditorMode"
-    >基本情報を編集
+    >基本設定を編集
     </button>
 </template>
 
@@ -29,7 +29,6 @@ export default {
     data() {
         return {
             isDisabled: false,
-            buttonName: '基本情報を保存'
         }
     },
 
@@ -60,9 +59,7 @@ export default {
             } else {
                 this.createEngi({onlyBasicInfo: true});
             }
-
             this.getSecondCategories();
-            this.buttonName = '基本情報を変更';
             this.setEditorMode({value: false});
         },
 
