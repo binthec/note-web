@@ -61,6 +61,7 @@ export default {
         if (!this.uuid) return
         await this.getEngi();
         this.setFirstCategory({value: this.engi.first_cate});
+        this.setEditorMode({value: false});
     },
 
     computed: {
@@ -91,7 +92,8 @@ export default {
 
     methods: {
         ...mapMutations('engi/edit', [
-            'initUuid'
+            'initUuid',
+            'setEditorMode'
         ]),
 
         ...mapActions('engi/edit', [

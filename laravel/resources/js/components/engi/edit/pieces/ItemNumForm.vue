@@ -6,6 +6,7 @@
         :set-title="setEvent"
         :error_message="error_message"
         :additional_class="additional_class"
+        :is-disabled="!is_editor_mode"
     ></textbox>
 </template>
 
@@ -25,6 +26,7 @@ export default {
         ...mapState('engi/edit', [
             'engi',
             'errors',
+            'is_editor_mode'
         ]),
 
         error_message(){

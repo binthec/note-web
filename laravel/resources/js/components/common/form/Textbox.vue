@@ -2,7 +2,15 @@
     <div class="form-group row">
         <label :for="input_id" class="col-sm-2 col-form-label">{{ label_value }}</label>
         <div class="col-sm-10">
-            <input :type="input_type" class="form-control" :class="additional_class" :id="input_id" :value="bind_value" @change="setTitle">
+            <input
+                class="form-control"
+                :type="input_type"
+                :class="additional_class"
+                :id="input_id"
+                :value="bind_value"
+                :disabled="isDisabled"
+                @change="setTitle"
+            >
             <div class="help-block text-danger" v-if="error_message">{{ error_message }}</div>
         </div>
     </div>
@@ -36,6 +44,9 @@ export default {
         },
         has_error: {
             default: false,
+        },
+        isDisabled: {
+            default: false
         }
     }
 }

@@ -18,6 +18,9 @@ export default {
 
         show_success_modal: false,
         show_error_modal: false,
+
+        // 基本情報部分のモード。true でテキストボックスを表示
+        is_editor_mode: true
     },
 
     getters: {
@@ -54,7 +57,10 @@ export default {
         },
         showErrorModal(state) {
             state.show_error_modal = true;
-        }
+        },
+        setEditorMode(state, payload){
+            state.is_editor_mode = payload.value;
+        },
     },
 
     actions: {

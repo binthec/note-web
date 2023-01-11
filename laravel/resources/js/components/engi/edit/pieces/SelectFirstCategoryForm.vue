@@ -5,6 +5,7 @@
         :error-message="errorMessage"
         :bind-value="first_category"
         @update:bindValue="changeFirstCategory"
+        :is-disabled="!is_editor_mode"
     ></select-category-form>
 </template>
 
@@ -36,7 +37,8 @@ export default {
             'first_category'
         ]),
         ...mapState('engi/edit', [
-            'engi'
+            'engi',
+            'is_editor_mode'
         ]),
 
         errorMessage() {
