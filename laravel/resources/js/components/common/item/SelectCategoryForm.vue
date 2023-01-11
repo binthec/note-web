@@ -2,7 +2,7 @@
     <div class="form-group row">
         <label for="first_category" class="col-sm-2 col-form-label">{{ categoryName }}</label>
         <div class="col-sm-10">
-            <select class="form-control" v-model="bindValueComputed">
+            <select class="form-control" v-model="bindValueComputed" :disabled="isDisabled">
                 <option v-for="(option, key) in categories" :value="key">{{ option }}</option>
             </select>
             <div class="help-block text-danger" v-if="errorMessage">{{ errorMessage }}</div>
@@ -29,6 +29,9 @@ export default {
         },
         errorMessage: {
             default: null,
+        },
+        isDisabled: {
+            default: false
         }
     },
 

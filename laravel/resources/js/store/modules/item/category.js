@@ -2,7 +2,7 @@ export default {
     namespaced: true,
 
     state: {
-        first_category: null,
+        first_category: 100,
         second_category: null,
         third_category: null,
 
@@ -47,7 +47,6 @@ export default {
             axios.get(state.get_first_cate_url)
                 .then(response => {
                     state.first_categories = response.data.first_categories;
-                    state.first_category = Object.entries(state.first_categories)[0][0];
                 })
                 .catch(error => {
                     console.log(error);
@@ -67,7 +66,6 @@ export default {
         getSecondCategories({commit, state, getters}) {
             axios.get(state.get_second_cate_url + '/' + state.first_category)
                 .then(response => {
-                    console.log(response);
                     state.second_categories = response.data.second_categories;
                     state.second_category = Object.entries(state.second_categories)[0][0];
                 })
@@ -89,8 +87,9 @@ export default {
         getThirdCategories({commit, state, getters}) {
             axios.get(state.get_third_cate_url + '/' + state.second_category)
                 .then(response => {
-                    console.log(response);
                     state.third_categories = response.data.third_categories;
+                    if(state.third_categories !== null)
+                        state.third_category = Object.entries(state.third_categories)[0][0];
                 })
                 .catch(error => {
                     console.log(error);

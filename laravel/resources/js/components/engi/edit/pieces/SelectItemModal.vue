@@ -15,7 +15,7 @@
             <div class="select-area">
 
                 <div class="row" v-if="items">
-                    <div class="col-3" v-for="item in items">
+                    <div class="item-box col-3" v-for="item in items">
                         <img :src="'/storage/items' + item.file_path">
                     </div>
                 </div>
@@ -68,5 +68,14 @@ export default {
 <style scoped>
 .select-area{
     width: 100%;
+}
+
+.item-box{
+    border: 4px solid #17a2b8;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 100px;
+    margin: 5px;
+    padding: 5px;
 }
 </style>

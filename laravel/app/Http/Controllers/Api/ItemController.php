@@ -162,14 +162,14 @@ class ItemController extends Controller
     /**
      * 中分類に紐づく小分類を取得
      *
-     * @param int $second_cate_id
+     * @param $second_cate_id
      * @return JsonResponse
      */
-    public function getThirdCategories(int $second_cate_id): JsonResponse
+    public function getThirdCategories($second_cate_id): JsonResponse
     {
         return response()->json([
             'message' => 'success',
-            'third_categories' => ItemCategoryCode::$third_category_labels[$second_cate_id],
+            'third_categories' => ItemCategoryCode::$third_category_labels[(int)$second_cate_id],
         ], HttpStatusCode::OK);
     }
 
@@ -181,6 +181,9 @@ class ItemController extends Controller
      */
     public function getItems(string $cate_name, int $cate_id): JsonResponse
     {
+        Log::info($cate_name);
+        Log::info($cate_id);
+
         $items = Item::query()->where($cate_name, $cate_id)->get();
 
         return response()->json([

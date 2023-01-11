@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\ItemCategoryCode;
 use Illuminate\Http\Request;
 
 class EngiController extends Controller

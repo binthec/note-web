@@ -3,8 +3,8 @@
         <edit-header slot="page_header"
                      :header-icon="'nav-icon fas fa-edit'"
                      :page-title="'演技編集'"
-                     :cancel-event="clickSubmit"
-                     :save-event="goList"
+                     :cancel-event="goList"
+                     :save-event="clickSubmit"
         ></edit-header>
 
         <edit-body slot="card_body"></edit-body>
@@ -52,8 +52,20 @@ export default {
         }
     },
 
+    created() {
+        this.initUuid({uuid: this.uuid});
+        this.getFirstCategories();
+    },
+
+    async mounted() {
+        if (!this.uuid) return
+        await this.getEngi();
+        this.setFirstCategory({value: this.engi.first_cate});
+    },
+
     computed: {
         ...mapState('engi/edit', [
+            'engi',
             'show_success_modal',
             'show_error_modal',
         ]),
@@ -64,22 +76,11 @@ export default {
         ]),
     },
 
-    created() {
-        this.initUuid({uuid: this.uuid});
-        this.getFirstCategories();
-    },
-
-    async mounted() {
-        if (!this.uuid) return;
-        await this.getEngi();
-    },
-
-
     watch: {
         show_success_modal(new_bool, old_bool) {
-            if (new_bool === true){
+            if (new_bool === true) {
                 this.showSuccessModal();
-            }else{
+            } else {
                 this.hideSuccessModal();
             }
         },
@@ -90,14 +91,17 @@ export default {
 
     methods: {
         ...mapMutations('engi/edit', [
-            'initUuid',
-            'setEngiFirstCategory'
+            'initUuid'
         ]),
 
         ...mapActions('engi/edit', [
             'getEngi',
             'createEngi',
             'updateEngi',
+        ]),
+
+        ...mapMutations('item/category', [
+            'setFirstCategory'
         ]),
 
         ...mapActions('item/category', [

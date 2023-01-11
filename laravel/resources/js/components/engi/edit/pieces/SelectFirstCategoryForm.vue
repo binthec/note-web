@@ -67,7 +67,6 @@ export default {
             console.log(value);
             this.setEngiFirstCategory({value: value});
             this.setFirstCategory({value: value});
-
         },
     }
 }

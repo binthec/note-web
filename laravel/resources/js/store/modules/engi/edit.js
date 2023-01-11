@@ -58,8 +58,8 @@ export default {
     },
 
     actions: {
-        getEngi({commit, state, getters}) {
-            axios.get(state.show_url + state.uuid)
+        async getEngi({commit, state, getters}) {
+            await axios.get(state.show_url + state.uuid)
                 .then(response => {
                     state.engi = response.data.engi;
                 })
@@ -71,10 +71,6 @@ export default {
         },
 
         createEngi({commit, state, getters}, {onlyBasicInfo}) {
-            console.log('onlyBasicInfo ↓ create の中だよ！');
-            console.log(onlyBasicInfo);
-
-
             state.errors = {};
             axios.post(state.create_url, getters.getFormData)
                 .then(response => {
@@ -111,9 +107,6 @@ export default {
         },
 
         updateEngi({commit, state, getters}, {onlyBasicInfo}) {
-            console.log('onlyBasicInfo ↓ update の中だよ！');
-            console.log(onlyBasicInfo);
-
             state.errors = {};
             axios.post(state.show_url + state.uuid, getters.getFormData, {
                 headers: {'X-HTTP-Method-Override': 'PUT'}
