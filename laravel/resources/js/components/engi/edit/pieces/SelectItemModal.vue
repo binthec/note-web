@@ -2,6 +2,7 @@
     <modal name="add-modal"
            :width="modalWidth"
            :height="modalHeight"
+           :reset="true"
     >
         <div class="modal-header bg-info">
             <h4>追加したいアイテムの選択</h4>
@@ -49,6 +50,10 @@ export default {
         }
     },
 
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+    },
+
     computed: {
         ...mapState('item/category', [
             'errors',
@@ -57,6 +62,11 @@ export default {
     },
 
     methods: {
+        handleResize(){
+            this.modalWidth = window.innerWidth * 0.9;
+            this.modalHeight = window.innerHeight * 0.9;
+        },
+
         hideAddModal: function () {
             this.$modal.hide('add-modal');
         },
