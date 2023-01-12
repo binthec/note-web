@@ -19,12 +19,6 @@ export default {
         SelectCategoryForm
     },
 
-    data() {
-        return {
-            isDisabled: true,
-        }
-    },
-
     created() {
         this.getThirdCategories();
     },
@@ -35,18 +29,10 @@ export default {
             'third_categories',
             'third_category'
         ]),
-    },
 
-    watch: {
-        third_category(new_val, old_val){
-            console.log('third_category の変更を検知したよ');
-
-            if(new_val === null){
-                this.isDisabled = true;
-            }else{
-                this.isDisabled = false;
-            }
-        },
+        isDisabled(){
+            return this.third_categories === null;
+        }
     },
 
     methods: {

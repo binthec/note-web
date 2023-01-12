@@ -59,9 +59,10 @@ export default {
 
     async mounted() {
         if (!this.uuid) return
-        await this.getEngi();
-        this.setFirstCategory({value: this.engi.first_cate});
         this.setEditorMode({value: false});
+        await this.getEngi();
+        await this.setFirstCategory({value: this.engi.first_cate});
+        this.initCategories();
     },
 
     computed: {
@@ -107,7 +108,9 @@ export default {
         ]),
 
         ...mapActions('item/category', [
-            'getFirstCategories'
+            'getFirstCategories',
+            'getSecondCategories',
+            'initCategories'
         ]),
 
         showSuccessModal() {

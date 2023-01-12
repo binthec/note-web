@@ -2,7 +2,7 @@ export default {
     namespaced: true,
 
     state: {
-        first_category: 100,
+        first_category: null,
         second_category: null,
         third_category: null,
 
@@ -37,14 +37,31 @@ export default {
 
     actions: {
         /**
+         * デフォルト表示の際にカテゴリを取ってくる
+         *
+         * @param dispatch
+         * @param commit
+         * @param state
+         * @param getters
+         * @returns {Promise<void>}
+         */
+        async initCategories({dispatch, commit, state, getters}) {
+            if(state.first_category != null){
+                await dispatch('getSecondCategories');
+                await dispatch('getThirdCategories');
+                dispatch('getItems');
+            }
+        },
+
+        /**
          * 大分類を取得
          *
          * @param commit
          * @param state
          * @param getters
          */
-        getFirstCategories({commit, state, getters}) {
-            axios.get(state.get_first_cate_url)
+        async getFirstCategories({commit, state, getters}) {
+            await axios.get(state.get_first_cate_url)
                 .then(response => {
                     state.first_categories = response.data.first_categories;
                 })
@@ -63,8 +80,8 @@ export default {
          * @param state
          * @param getters
          */
-        getSecondCategories({commit, state, getters}) {
-            axios.get(state.get_second_cate_url + '/' + state.first_category)
+        async getSecondCategories({commit, state, getters}) {
+            await axios.get(state.get_second_cate_url + '/' + state.first_category)
                 .then(response => {
                     state.second_categories = response.data.second_categories;
                     state.second_category = Object.entries(state.second_categories)[0][0];
@@ -84,11 +101,11 @@ export default {
          * @param state
          * @param getters
          */
-        getThirdCategories({commit, state, getters}) {
-            axios.get(state.get_third_cate_url + '/' + state.second_category)
+        async getThirdCategories({commit, state, getters}) {
+            await axios.get(state.get_third_cate_url + '/' + state.second_category)
                 .then(response => {
                     state.third_categories = response.data.third_categories;
-                    if(state.third_categories !== null)
+                    if (state.third_categories !== null)
                         state.third_category = Object.entries(state.third_categories)[0][0];
                 })
                 .catch(error => {
@@ -109,16 +126,15 @@ export default {
         getItems({commit, state, getters}) {
             let cate_name = '';
             let cate_id = null;
-            if(state.third_categories == null){
+            if (state.third_categories == null) {
                 cate_name = 'second_cate';
                 cate_id = state.second_category;
-            }else{
+            } else {
                 cate_name = 'third_cate';
                 cate_id = state.third_category;
             }
             axios.get(state.get_items_url + '/' + cate_name + '/' + cate_id)
                 .then(response => {
-                    console.log(response.data.items);
                     state.items = response.data.items;
                 })
                 .catch(error => {
