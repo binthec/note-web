@@ -19,6 +19,13 @@ class ItemData
                     1 => ['name' => 'ポイントフレックス', 'file_path' => '/empty_hand/111_01.svg'],
                     2 => ['name' => '床での前屈', 'file_path' => '/empty_hand/111_02.svg'],
                     3 => ['name' => 'カエル足', 'file_path' => '/empty_hand/111_03.svg'],
+                    4 => ['name' => 'うつ伏せカエル足', 'file_path' => '/empty_hand/111_04.svg'],
+                    5 => ['name' => 'カエル足で後ろそり', 'file_path' => '/empty_hand/111_05.svg'],
+                    6 => ['name' => '左右開脚', 'file_path' => '/empty_hand/111_06.svg'],
+                    7 => ['name' => '横開脚と側屈', 'file_path' => '/empty_hand/111_07.svg'],
+                    8 => ['name' => '左右開脚（中ぬき）', 'file_path' => '/empty_hand/111_08.svg'],
+                    9 => ['name' => '床での前後開脚', 'file_path' => '/empty_hand/111_09.svg'],
+                    10 => ['name' => '前後開脚から上体のそり', 'file_path' => '/empty_hand/111_10.svg'],
                 ],
                 // 小項目 third_cate：座ってする応用動作
                 ItemCategoryCode::SITTING_APPLIED_ACTION => [
