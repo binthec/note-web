@@ -1,12 +1,12 @@
 <template>
     <textbox
-        :label_value="'タイトル'"
-        :input_id="'title'"
-        :bind_value="engi.title"
+        :label-name="'タイトル'"
+        :input-id="'title'"
+        :bind-value="engi.title"
         :set-title="setEvent"
-        :error_message="error_message"
+        :error-message="errorMessage"
         :is-disabled="!is_editor_mode"
-        :additional_class="additional_class"
+        :additional-class="additionalClass"
     ></textbox>
 </template>
 
@@ -29,12 +29,12 @@ export default {
             'is_editor_mode'
         ]),
 
-        error_message(){
+        errorMessage(){
             if(this.errors['engi.title'] == null) return null;
             else return this.errors['engi.title'][0];
         },
 
-        additional_class(){
+        additionalClass(){
             if(this.error_message) return 'is-invalid';
             else return '';
         }

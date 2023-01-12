@@ -1,25 +1,37 @@
 <template>
-    <textbox
-        :label_value="'1行のアイテム数'"
-        :input_id="'item_num'"
-        :bind_value="engi.item_num"
-        :set-title="setEvent"
-        :error_message="error_message"
-        :additional_class="additional_class"
+    <SelectBox
+        :label-name="'1行のアイテム数'"
+        :select-id="'item-num'"
+        :bind-value="engi.item_num"
+        @update:bindValue="setEvent"
+        :error-message="errorMessage"
         :is-disabled="!is_editor_mode"
-    ></textbox>
+        :options="options"
+    ></SelectBox>
 </template>
 
 <script>
 
 import textbox from "../../../common/form/Textbox";
 import {mapMutations, mapState} from "vuex";
+import SelectBox from "../../../common/form/SelectBox";
 
 export default {
     name: "ItemNumForm",
 
     components: {
-        textbox
+        SelectBox,
+    },
+
+    data(){
+        return {
+            options: {
+                1: 1,
+                2: 2,
+                3: 3,
+                4: 4,
+            }
+        }
     },
 
     computed: {
@@ -29,7 +41,7 @@ export default {
             'is_editor_mode'
         ]),
 
-        error_message(){
+        errorMessage(){
             if(this.errors['engi.item_num'] == null) return null;
             else return this.errors['engi.item_num'][0];
         },
@@ -45,8 +57,8 @@ export default {
             'setItemNum',
         ]),
 
-        setEvent(event) {
-            this.setItemNum({value: event.target.value});
+        setEvent(value) {
+            this.setItemNum({value: value});
         }
     }
 }

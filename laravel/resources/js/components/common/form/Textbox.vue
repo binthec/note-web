@@ -1,17 +1,17 @@
 <template>
     <div class="form-group row">
-        <label :for="input_id" class="col-sm-2 col-form-label">{{ label_value }}</label>
+        <label :for="inputId" class="col-sm-2 col-form-label">{{ labelName }}</label>
         <div class="col-sm-10">
             <input
                 class="form-control"
-                :type="input_type"
-                :class="additional_class"
-                :id="input_id"
-                :value="bind_value"
+                :type="inputType"
+                :id="inputId"
+                :class="additionalClass"
+                :value="bindValue"
                 :disabled="isDisabled"
                 @change="setTitle"
             >
-            <div class="help-block text-danger" v-if="error_message">{{ error_message }}</div>
+            <div class="help-block text-danger" v-if="errorMessage">{{ errorMessage }}</div>
         </div>
     </div>
 </template>
@@ -21,28 +21,28 @@ export default {
     name: "Textbox",
 
     props: {
-        label_value: {
+        labelName: {
             default: null,
         },
-        input_id: {
+        inputId: {
             default: 'textbox-1',
         },
-        additional_class: {
+        additionalClass: {
             default: ''
         },
-        input_type: {
+        inputType: {
             default: 'text'
         },
-        bind_value:{
+        bindValue:{
             default: null,
         },
         setTitle: {
             default: () => {}
         },
-        error_message: {
+        errorMessage: {
             default: null,
         },
-        has_error: {
+        hasError: {
             default: false,
         },
         isDisabled: {
