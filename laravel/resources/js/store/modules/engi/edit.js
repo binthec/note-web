@@ -6,8 +6,8 @@ export default {
     state: {
         uuid: null,
         engi: {
-            title: null,
-            item_num: null,
+            title: 'タイトルを入れてください',
+            item_num: 4,
             first_cate: null,
         },
         errors: {},

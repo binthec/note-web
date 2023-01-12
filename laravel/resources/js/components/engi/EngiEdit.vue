@@ -52,16 +52,21 @@ export default {
         }
     },
 
-    created() {
+    async created() {
         this.initUuid({uuid: this.uuid});
-        this.getFirstCategories();
     },
 
     async mounted() {
-        if (!this.uuid) return
-        this.setEditorMode({value: false});
-        await this.getEngi();
-        await this.setFirstCategory({value: this.engi.first_cate});
+        // 大分類を取得
+        await this.getFirstCategories();
+
+        if (!this.uuid){ // 新規作成の場合
+            this.setFirstCategory({value: Object.entries(this.first_categories)[0][0]});
+        }else{
+            this.setEditorMode({value: false});
+            await this.getEngi();
+            this.setFirstCategory({value: this.engi.first_cate});
+        }
         this.initCategories();
     },
 
