@@ -12,7 +12,6 @@
 
 <script>
 
-import textbox from "../../../common/form/Textbox";
 import {mapMutations, mapState} from "vuex";
 import SelectBox from "../../../common/form/SelectBox";
 

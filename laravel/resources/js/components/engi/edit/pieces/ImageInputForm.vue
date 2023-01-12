@@ -7,12 +7,18 @@
             <!-- タイトルが入る -->
             <div class="title-area">{{ engi.title }}</div>
 
-            <!-- 追加された画像が入る所 -->
-            <div id="piece added"></div>
+            <div class="row">
+                <!-- 追加された画像が入る所 -->
+                <div id="piece added"></div>
 
-            <!-- 追加ボタン -->
-            <div class="piece add-btn text-center" @click="showAddModal" :style="computedPieceSize">
-                <i class="fas fa-plus text-xl"></i>
+                <!-- 追加ボタン -->
+                <div
+                    id="add-btn"
+                    class="piece add-btn text-center"
+                    :style="pieceStyle"
+                    @click="showAddModal">
+                    <i class="fas fa-plus text-xl"></i>
+                </div>
             </div>
         </div>
 
@@ -29,8 +35,8 @@ export default {
 
     data() {
         return {
-            pieceW: 100,
-            pieceH:100,
+            pieceH: 120,
+            pieceW: 120,
         }
     },
 
@@ -40,13 +46,6 @@ export default {
 
     mounted() {
         // this.addPiece();
-
-        // ウィンドウをリサイズした時の処理
-        window.addEventListener('resize', this.handleSize);
-
-        this.$nextTick(() => {
-            this.setPieceSize();
-        });
     },
 
     computed: {
@@ -54,23 +53,16 @@ export default {
             'engi'
         ]),
 
-        computedPieceSize(){
+        pieceStyle() {
+            let length = (800 / this.engi.item_num) - 10;
             return {
-                height: this.pieceH - 10 + 'px',
-                width: this.pieceW - 10 + 'px',
+                width: length + 'px',
+                height: length + 'px',
             }
-        },
+        }
     },
 
     methods: {
-        handleSize(){
-            this.setPieceSize();
-        },
-
-        setPieceSize() {
-            this.pieceW = this.pieceH = 800 / 4;
-        },
-
         addPiece() {
             const piece = document.createElement('div');
             piece.className = "piece";
@@ -95,10 +87,10 @@ export default {
 
     ::v-deep {
         .piece {
-            float: left;
-            min-width: 120px;
+            //float: left;
+            //min-width: 120px;
             //width: auto;
-            height: 120px;
+            min-height: 120px;
             border: solid 2px $gray-border;
             border-radius: 15px;
             margin-bottom: 10px;
@@ -116,12 +108,12 @@ export default {
                 }
 
                 &:hover {
-                    background-color: $blue;
+                    background-color: $bg-info;
                 }
             }
         }
 
-        .title-area{
+        .title-area {
             border-bottom: solid 2px $gray-border;
             padding: 3px 10px;
             display: inline-block;

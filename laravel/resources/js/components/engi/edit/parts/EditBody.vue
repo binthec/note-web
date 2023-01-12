@@ -18,9 +18,6 @@
 </template>
 
 <script>
-// vuex
-import {mapState, mapMutations, mapActions} from "vuex";
-
 // common
 import TitleForm from "../pieces/TitleForm";
 import ImageInputForm from "../pieces/ImageInputForm";
