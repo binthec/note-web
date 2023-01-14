@@ -17,6 +17,8 @@ export default {
         second_categories: [],
         third_categories: [],
         items: [],
+
+        selected_items: [],
     },
 
     getters: {
@@ -32,6 +34,12 @@ export default {
         },
         setThirdCategory(state, payload) {
             state.third_category = payload.value;
+        },
+        updateSelectedItems(state, payload){
+            state.selected_items = payload.value;
+        },
+        resetSelectedItems(state, payload){
+            state.selected_items = [];
         }
     },
 
@@ -136,6 +144,9 @@ export default {
             axios.get(state.get_items_url + '/' + cate_name + '/' + cate_id)
                 .then(response => {
                     state.items = response.data.items;
+
+                    console.log('items の中身');
+                    console.log(state.items);
                 })
                 .catch(error => {
                     console.log(error);

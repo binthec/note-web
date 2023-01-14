@@ -136,9 +136,9 @@ export default {
 
         clickSubmit() {
             if (this.uuid) {
-                this.updateEngi();
+                this.updateEngi({onlyBasicInfo: false});
             } else {
-                this.createEngi();
+                this.createEngi({onlyBasicInfo: false});
             }
         },
     }

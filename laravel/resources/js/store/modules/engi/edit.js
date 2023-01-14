@@ -9,6 +9,7 @@ export default {
             title: 'タイトルを入れてください',
             item_num: 4,
             first_cate: null,
+            content_data: []
         },
         errors: {},
 
@@ -61,6 +62,12 @@ export default {
         setEditorMode(state, payload){
             state.is_editor_mode = payload.value;
         },
+        addItemsToContentData(state, payload){
+            state.engi.content_data = _.toArray(state.engi.content_data); //TODO
+            payload.value.forEach(function (val, key){
+                state.engi.content_data.push(val);
+            })
+        }
     },
 
     actions: {

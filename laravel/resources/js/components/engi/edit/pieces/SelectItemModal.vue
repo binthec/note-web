@@ -17,14 +17,26 @@
 
                 <div class="row" v-if="items">
                     <div class="item-box col-3" v-for="item in items">
-                        <img :src="'/storage/items' + item.file_path">
+                        <label :for="'item-' + item.note_order">
+                            <div class="item">
+                                <input
+                                    type="checkbox"
+                                    :id="'item-' + item.note_order"
+                                    :value="item.uuid"
+                                    @change="updateCheckedItem(item.uuid)"
+                                >
+                                <!--<img :src="'/storage/items' + item.file_path">-->
+                                {{ item.title }}
+                            </div>
+                        </label>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="modal-footer">
-            <a class="btn btn-dark" @click="hideAddModal" href="javascript: void(0);">閉じる</a>
+        <div class="modal-footer clearfix">
+            <button type="button" class="btn btn-dark" @click="hideAddModal">閉じる</button>
+            <button type="button" class="btn btn-primary" @click="addItems">追加する</button>
         </div>
     </modal>
 </template>
@@ -57,12 +69,22 @@ export default {
     computed: {
         ...mapState('item/category', [
             'errors',
-            'items'
+            'items',
+            'selected_items'
         ]),
     },
 
     methods: {
-        handleResize(){
+        ...mapMutations('item/category', [
+            'updateSelectedItems',
+            'resetSelectedItems'
+        ]),
+
+        ...mapMutations('engi/edit',[
+            'addItemsToContentData',
+        ]),
+
+        handleResize() {
             this.modalWidth = window.innerWidth * 0.9;
             this.modalHeight = window.innerHeight * 0.9;
         },
@@ -70,22 +92,63 @@ export default {
         hideAddModal: function () {
             this.$modal.hide('add-modal');
         },
+
+        updateCheckedItem(itemUuid) {
+            let uuids = _.toArray(this.selected_items);
+
+            if (uuids.indexOf(itemUuid) === -1) {
+                uuids.push(itemUuid);
+            } else {
+                uuids.splice(uuids.indexOf(itemUuid), 1);
+            }
+
+            this.updateSelectedItems({value: uuids});
+        },
+
+        addItems() {
+            console.log('追加するよ！');
+            this.addItemsToContentData({value: this.selected_items});
+
+            this.hideAddModal();
+            this.resetSelectedItems();
+        }
     }
 
 }
 </script>
 
-<style scoped>
-.select-area{
+<style lang="scss" scoped>
+@import "../../../../../sass/variables";
+
+.select-area {
     width: 100%;
 }
 
-.item-box{
-    border: 4px solid #17a2b8;
-    border-radius: 10px;
-    width: 100%;
-    min-height: 100px;
-    margin: 5px;
-    padding: 5px;
+.item-box {
+    label {
+        display: inline-block;
+        width: 100%;
+        min-height: 100px;
+        border: 4px solid $bg-info;
+        border-radius: 10px;
+    }
+
+    .item {
+        padding: 5px;
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            margin: 0 3px;
+        }
+    }
 }
+
+.modal-footer {
+    display: block;
+
+    button:nth-child(2) {
+        float: right;
+    }
+}
+
 </style>
