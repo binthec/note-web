@@ -9,17 +9,22 @@
 
             <div class="row">
                 <!-- 追加された画像が入る所 -->
-                <div class="piece added" v-for="(item, key) in engi.content_data" :style="pieceStyle">
-                    <span class="item-title">{{ item.title }}</span>
+                <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data">
+                    <div class="inner" :class="innerClass">
+                        <span class="item-title">{{ item.title }}</span>
+                    </div>
                 </div>
 
                 <!-- 追加ボタン -->
                 <div
                     id="add-btn"
-                    class="piece add-btn text-center"
-                    :style="pieceStyle"
-                    @click="showAddModal">
-                    <i class="fas fa-plus text-xl"></i>
+                    class="piece add-btn"
+                    :class="additionalClass">
+                    <div class="inner text-center" :class="innerClass" @click="showAddModal">
+                        <div class="icon-box">
+                            <i class="fas fa-plus text-xl"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,6 +44,12 @@ export default {
         return {
             pieceH: 120,
             pieceW: 120,
+            innerClassLabel: {
+                1: 'height-200',
+                2: 'height-200',
+                3: 'height-240',
+                4: 'height-177',
+            }
         }
     },
 
@@ -65,6 +76,14 @@ export default {
                 width: length + 'px',
                 height: length + 'px',
             }
+        },
+
+        additionalClass() {
+            return this.engi.item_num ? 'col-' + (12 / this.engi.item_num) : 'col-3';
+        },
+
+        innerClass(){
+            return this.innerClassLabel[this.engi.item_num];
         }
     },
 
@@ -98,33 +117,44 @@ export default {
 
     ::v-deep {
         .piece {
-            //float: left;
-            //min-width: 120px;
-            //width: auto;
-            min-height: 120px;
-            border: solid 2px $gray-border;
-            border-radius: 15px;
-            margin-bottom: 10px;
+            .inner {
+                border: solid 2px $gray-border;
+                border-radius: 15px;
+                margin-bottom: 10px;
+                min-height: 120px;
 
-            &:nth-child(n+2) {
-                margin-left: 10px;
+                &.height-200{
+                    height: 200px;
+                }
+                &.height-240{
+                    height: 240px;
+                }
+                &.height-177{
+                    height: 177px;
+                }
             }
 
             &.add-btn {
-                display: table;
+                .inner {
+                    @extend .inner;
+                    .icon-box{
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
 
-                i {
-                    display: table-cell;
-                    vertical-align: middle;
-                }
+                        i {
+                            transform: translate(-50%, -50%);
+                        }
+                    }
 
-                &:hover {
-                    background-color: $bg-info;
+                    &:hover {
+                        background-color: $bg-info;
+                    }
                 }
             }
 
-            &.added{
-                .item-title{
+            &.added {
+                .item-title {
                     display: inline-block;
                     margin: 5px 0 0 8px;
                 }
