@@ -45,6 +45,7 @@ export default {
         ]),
 
         changeThirdCategory(value) {
+            this.setThirdCategory({value: value});
             this.getItems();
         },
     }
