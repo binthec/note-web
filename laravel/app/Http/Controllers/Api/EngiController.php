@@ -129,6 +129,8 @@ class EngiController extends Controller
     {
         $engi = Engi::query()->where('uuid', $uuid)->firstOrFail();
 
+        $engi->content_data = json_decode($engi->content_data);
+
         return response()->json([
             'message' => 'success',
             'engi' => $engi

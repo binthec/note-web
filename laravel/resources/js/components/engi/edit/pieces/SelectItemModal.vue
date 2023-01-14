@@ -16,14 +16,14 @@
             <div class="select-area">
 
                 <div class="row" v-if="items">
-                    <div class="item-box col-3" v-for="item in items">
-                        <label :for="'item-' + item.note_order">
+                    <div class="item-box col-3" v-for="(item, key) in items">
+                        <label :for="'item_' + item.uuid">
                             <div class="item">
                                 <input
                                     type="checkbox"
-                                    :id="'item-' + item.note_order"
-                                    :value="item.uuid"
-                                    @change="updateCheckedItem(item.uuid)"
+                                    :id="'item_' + item.uuid"
+                                    :value="key"
+                                    @change="updateCheckedItem(key)"
                                 >
                                 <!--<img :src="'/storage/items' + item.file_path">-->
                                 {{ item.title }}
@@ -93,16 +93,17 @@ export default {
             this.$modal.hide('add-modal');
         },
 
-        updateCheckedItem(itemUuid) {
-            let uuids = _.toArray(this.selected_items);
+        updateCheckedItem(key) {
+            let selected = _.toArray(this.selected_items);
+            let uuid = this.items[key]['uuid'];
 
-            if (uuids.indexOf(itemUuid) === -1) {
-                uuids.push(itemUuid);
+            if (selected.indexOf(uuid) === -1) {
+                selected.push(this.items[key]);
             } else {
-                uuids.splice(uuids.indexOf(itemUuid), 1);
+                selected.splice(selected.indexOf(this.items[key]), 1);
             }
 
-            this.updateSelectedItems({value: uuids});
+            this.updateSelectedItems({value: selected});
         },
 
         addItems() {

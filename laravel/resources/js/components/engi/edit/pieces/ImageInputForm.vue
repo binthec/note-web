@@ -9,7 +9,9 @@
 
             <div class="row">
                 <!-- 追加された画像が入る所 -->
-                <div id="piece added"></div>
+                <div class="piece added" v-for="(item, key) in engi.content_data" :style="pieceStyle">
+                    <span class="item-title">{{ item.title }}</span>
+                </div>
 
                 <!-- 追加ボタン -->
                 <div
@@ -54,7 +56,7 @@ export default {
         ]),
 
         pieceStyle() {
-            let length = (800 / this.engi.item_num) - 10;
+            let length = (800 / this.engi.item_num) - 20;
             return {
                 width: length + 'px',
                 height: length + 'px',
@@ -109,6 +111,13 @@ export default {
 
                 &:hover {
                     background-color: $bg-info;
+                }
+            }
+
+            &.added{
+                .item-title{
+                    display: inline-block;
+                    margin: 5px 0 0 8px;
                 }
             }
         }
