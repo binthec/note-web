@@ -33,7 +33,6 @@ class Engi extends Model
         $this->item_num = $create_data->item_num;
         $this->content_data = json_encode($create_data->content_data);
         $this->first_cate = $create_data->first_cate;
-        $this->content_data = $create_data->content_data;
 
         $this->updated_by = Auth::user()->id;
 

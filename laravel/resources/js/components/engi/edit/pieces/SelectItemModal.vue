@@ -23,6 +23,7 @@
                                     type="checkbox"
                                     :id="'item_' + item.uuid"
                                     :value="key"
+                                    :checked="isChecked(item.uuid)"
                                     @change="updateCheckedItem(key)"
                                 >
                                 <!--<img :src="'/storage/items' + item.file_path">-->
@@ -72,6 +73,16 @@ export default {
             'items',
             'selected_items'
         ]),
+
+        isChecked(){
+            return (uuid) => {
+                // この uuid を持ったアイテムが既に選択されているかどうか判断して返す
+                let result = this.selected_items.filter((item) => {
+                    return item.uuid === uuid;
+                });
+                return result.length === 1;
+            }
+        },
     },
 
     methods: {
@@ -94,22 +105,21 @@ export default {
         },
 
         updateCheckedItem(key) {
-            let selected = _.toArray(this.selected_items);
             let uuid = this.items[key]['uuid'];
+            let result = this.selected_items.filter((item, key) => {
+                return item.uuid === uuid;
+            });
 
-            if (selected.indexOf(uuid) === -1) {
-                selected.push(this.items[key]);
-            } else {
-                selected.splice(selected.indexOf(this.items[key]), 1);
+            if(result.length !== 1){
+                // 存在しない場合に追加する
+                this.selected_items.push(this.items[key]);
+            }else{
+                // 存在する場合は削除する
+                this.selected_items.splice(this.selected_items.indexOf(uuid), 1);
             }
-
-            this.updateSelectedItems({value: selected});
         },
 
         addItems() {
-            console.log('追加するよ！');
-            this.addItemsToContentData({value: this.selected_items});
-
             this.hideAddModal();
             this.resetSelectedItems();
         }

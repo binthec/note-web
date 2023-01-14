@@ -30,7 +30,7 @@
 
 <script>
 import SelectItemModal from "./SelectItemModal";
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
     name: "ImageInputForm",
@@ -55,6 +55,10 @@ export default {
             'engi'
         ]),
 
+        ...mapState('item/category', [
+            'selected_items'
+        ]),
+
         pieceStyle() {
             let length = (800 / this.engi.item_num) - 20;
             return {
@@ -65,6 +69,10 @@ export default {
     },
 
     methods: {
+        ...mapMutations('item/category', [
+            'updateSelectedItems'
+        ]),
+
         addPiece() {
             const piece = document.createElement('div');
             piece.className = "piece";
@@ -72,6 +80,7 @@ export default {
         },
 
         showAddModal: function () {
+            this.updateSelectedItems({value: this.engi.content_data});
             this.$modal.show('add-modal');
         },
     }

@@ -63,7 +63,6 @@ export default {
             state.is_editor_mode = payload.value;
         },
         addItemsToContentData(state, payload){
-            state.engi.content_data = _.toArray(state.engi.content_data); //TODO
             payload.value.forEach(function (val, key){
                 state.engi.content_data.push(val);
             })
