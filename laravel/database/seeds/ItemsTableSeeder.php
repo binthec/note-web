@@ -26,11 +26,15 @@ class ItemsTableSeeder extends Seeder
 
             foreach($second_cate_items as $second_cate  => $third_cate_items){
 
-                if(isset($third_cate_items[1])){
+                if(in_array($second_cate, ItemCategoryCode::$has_no_third_category)){
                     // 小項目がない場合
                     foreach($third_cate_items as $num => $item){
                         $item_result[] = [
-                            'uuid' => Uuid::uuid4(),
+                            'uuid' =>
+                                $first_cate . '-' .
+                                str_pad($second_cate, 2, 0, STR_PAD_LEFT) .
+                                '-00-' .
+                                str_pad($num, 2, 0, STR_PAD_LEFT),
                             'user_id' => 5,
                             'title' => $item['name'],
                             'first_cate' => $first_cate,
@@ -46,7 +50,11 @@ class ItemsTableSeeder extends Seeder
                     foreach($third_cate_items as $third_cate => $items){
                         foreach($items as $num => $item){
                             $item_result[] = [
-                                'uuid' => Uuid::uuid4(),
+                                'uuid' =>
+                                    $first_cate . '-' .
+                                    str_pad($second_cate, 2, 0, STR_PAD_LEFT) . '-'.
+                                    str_pad($third_cate, 2, 0, STR_PAD_LEFT) .'-' .
+                                    str_pad($num, 2, 0, STR_PAD_LEFT),
                                 'user_id' => 5,
                                 'title' => $item['name'],
                                 'first_cate' => $first_cate,

@@ -7,66 +7,75 @@ class ItemCategoryCode
     /**
      * 大分類
      */
-    const EMPTY_HAND = 100; // 徒手
-    const APPARATUS = 200;  // 手具
+    const EMPTY_HAND = 1; // 徒手
+    const APPARATUS = 2;  // 手具
 
     /**
      * 中分類
      */
     // 徒手
-    const BASIC_ACTION = 110; // 基本動作
+    const BASIC_ACTION = 1; // 基本動作
+    const STEP = 2;         // ステップ
+    const ACROBAT = 3;      // アクロ
+    const JUMP = 4;         // ジャンプ
+    const BALANCE = 5;      // バランス
+    const ROTATION = 6;     // ローテーション
 
-    const STEP = 120;         // ステップ
-    const ACROBAT = 130;      // アクロ
-    const JUMP = 140;         // ジャンプ
-    const BALANCE = 150;      // バランス
-    const ROTATION = 160;     // ローテーション
+    /**
+     * 手具
+     */
+    const ROPE = 11;   // ロープ
+    const HOOP = 12;   // フープ
+    const BALL = 13;   // ボール
+    const CLUB = 14;   // クラブ
+    const RIBBON = 15; // リボン
+
 
     /**
      * 徒手の小分類
      */
     // 徒手の基本動作
-    const SITTING_BASIC_ACTION = 111;   // 座ってする基本動作
-    const SITTING_APPLIED_ACTION = 112; // 座ってする応用動作
-    const STANDING_BASIC_ACTION = 113;  // 立ってする基本動作
+    const SITTING_BASIC_ACTION = 1;   // 座ってする基本動作
+    const SITTING_APPLIED_ACTION = 2; // 座ってする応用動作
+    const STANDING_BASIC_ACTION = 3;  // 立ってする基本動作
 
 
     /**
-     * 手具
+     * 手具の小分類
      */
-    const ROPE = 210;   // ロープ
-    const HOOP = 220;   // フープ
-    const BALL = 230;   // ボール
-    const CLUB = 240;   // クラブ
-    const RIBBON = 250; // リボン
-
     // ロープ
-    const ROPE_SWING = 211;            // ふり・回し・８の字
-    const ROPE_JUMP = 212;             // 縄跳び
-    const ROPE_ECHAPPE = 213;          // エシャッペ
-    const ROPE_BALL_THROW_CATCH = 214; // なげ・うけ
+    const ROPE_SWING = 11;            // ふり・回し・８の字
+    const ROPE_JUMP = 12;             // 縄跳び
+    const ROPE_ECHAPPE = 13;          // エシャッペ
+    const ROPE_BALL_THROW_CATCH = 14; // なげ・うけ
 
     // フープ
-    const HOOP_SWING = 221;       // ふり・回し・８の字
-    const HOOP_ROLLING = 222;     // 転がし
-    const HOOP_THROW_CATCH = 223; // なげ・うけ
+    const HOOP_SWING = 21;       // ふり・回し・８の字
+    const HOOP_ROLLING = 22;     // 転がし
+    const HOOP_THROW_CATCH = 23; // なげ・うけ
 
     // ボール
-    const BALL_SWING = 231;       // 手のひら乗せ・ふり・８の字
-    const BALL_ROLLING = 232;     // 転がし
-    const BALL_BOUND = 233;       // つき
-    const BALL_THROW_CATCH = 234; // なげ・うけ
+    const BALL_SWING = 31;       // 手のひら乗せ・ふり・８の字
+    const BALL_ROLLING = 32;     // 転がし
+    const BALL_BOUND = 33;       // つき
+    const BALL_THROW_CATCH = 34; // なげ・うけ
 
     // クラブ
-    const CLUB_SWING = 241;        // ふり・回し・小円
-    const CLUB_WINDMILL = 242;     // 風車
-    const CLUB_THROW_CATCH = 243; // なげ・うけ
+    const CLUB_SWING = 41;        // ふり・回し・小円
+    const CLUB_WINDMILL = 42;     // 風車
+    const CLUB_THROW_CATCH = 43; // なげ・うけ
 
     // リボン
-    const RIBBON_SWING = 251;  // ふり・回し・８の字
-    const RIBBON_WAVE = 252;   // 波形
-    const RIBBON_SPIRAL = 253; // らせん
-    const RIBBON_THROW = 254;  // なげ
+    const RIBBON_SWING = 51;  // ふり・回し・８の字
+    const RIBBON_WAVE = 52;   // 波形
+    const RIBBON_SPIRAL = 53; // らせん
+    const RIBBON_THROW = 54;  // なげ
+
+    /** *******
+     *
+     * ラベル
+     *
+     ********  */
 
     /**
      * 大分類
@@ -77,6 +86,8 @@ class ItemCategoryCode
         self::EMPTY_HAND => '徒手要素',
         self::APPARATUS => '手具要素'
     ];
+
+
 
     /**
      * 徒手要素
@@ -103,6 +114,19 @@ class ItemCategoryCode
         self::BALL => 'ボール',
         self::CLUB => 'クラブ',
         self::RIBBON => 'リボン',
+    ];
+
+    /**
+     * 小分類を持たない中分類
+     *
+     * @var int[]
+     */
+    public static $has_no_third_category = [
+        self::STEP,
+        self::ACROBAT,
+        self::JUMP,
+        self::BALANCE,
+        self::ROTATION
     ];
 
     /**
