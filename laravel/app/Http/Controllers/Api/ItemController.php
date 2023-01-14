@@ -37,7 +37,7 @@ class ItemController extends Controller
         $query = Item::query();
 
         // ソート順が渡された場合に並び順をクエリに加える
-        if($request->order_column && $request->order){
+        if ($request->order_column && $request->order) {
             $query->orderBy($request->order_column, $request->order);
         }
 
@@ -98,7 +98,7 @@ class ItemController extends Controller
 
         DB::beginTransaction();
 
-        try{
+        try {
             $entity->updateItem($request->item);
 
             DB::commit();
@@ -181,10 +181,10 @@ class ItemController extends Controller
      */
     public function getItems(string $cate_name, int $cate_id): JsonResponse
     {
-        Log::info($cate_name);
-        Log::info($cate_id);
-
-        $items = Item::query()->where($cate_name, $cate_id)->get();
+        $items = Item::query()
+            ->select('file_path', 'title', 'uuid')
+            ->where($cate_name, $cate_id)
+            ->get();
 
         return response()->json([
             'message' => 'success',
