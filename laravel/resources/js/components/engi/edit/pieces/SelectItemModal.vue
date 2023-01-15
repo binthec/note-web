@@ -15,7 +15,7 @@
 
             <div class="select-area">
 
-                <div class="row" v-if="items">
+                <div class="row" v-if="items.length > 0">
                     <div class="item-box col-3" v-for="(item, key) in items">
                         <label :for="'item_' + item.uuid">
                             <div class="item">

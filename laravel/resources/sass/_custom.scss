@@ -26,6 +26,7 @@ ul.navbar-nav{
 
 .card{
     min-width: $content-min-width + 40px;
+    max-width: $content-min-width + 200px;
 }
 
 .card-body{

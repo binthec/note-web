@@ -31,11 +31,13 @@ export default {
         ]),
         ...mapActions('item/category', [
             'getThirdCategories',
+            'getItems'
         ]),
 
-        changeSecondCategory(value) {
+        async changeSecondCategory(value) {
             this.setSecondCategory({value: value});
-            this.getThirdCategories();
+            await this.getThirdCategories();
+            this.getItems();
         },
     }
 }

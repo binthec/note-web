@@ -35,10 +35,10 @@ export default {
         setThirdCategory(state, payload) {
             state.third_category = payload.value;
         },
-        updateSelectedItems(state, payload){
+        updateSelectedItems(state, payload) {
             state.selected_items = payload.value;
         },
-        resetSelectedItems(state, payload){
+        resetSelectedItems(state, payload) {
             state.selected_items = [];
         }
     },
@@ -54,7 +54,7 @@ export default {
          * @returns {Promise<void>}
          */
         async initCategories({dispatch, commit, state, getters}) {
-            if(state.first_category != null){
+            if (state.first_category != null) {
                 await dispatch('getSecondCategories');
                 await dispatch('getThirdCategories');
                 dispatch('getItems');
@@ -113,8 +113,7 @@ export default {
             await axios.get(state.get_third_cate_url + '/' + state.second_category)
                 .then(response => {
                     state.third_categories = response.data.third_categories;
-                    if (state.third_categories !== null)
-                        state.third_category = Object.entries(state.third_categories)[0][0];
+                    state.third_category = (state.third_categories === null) ? null : Object.entries(state.third_categories)[0][0];
                 })
                 .catch(error => {
                     console.log(error);
