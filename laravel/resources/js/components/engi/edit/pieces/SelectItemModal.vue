@@ -36,8 +36,7 @@
             </div>
         </div>
         <div class="modal-footer clearfix">
-            <button type="button" class="btn btn-dark" @click="hideAddModal">閉じる</button>
-            <button type="button" class="btn btn-primary" @click="addItems">追加する</button>
+            <button type="button" class="btn btn-dark" @click="hideAddModal">追加する</button>
         </div>
     </modal>
 </template>
@@ -117,11 +116,6 @@ export default {
                 // 存在する場合は削除する
                 this.selected_items.splice(this.selected_items.indexOf(uuid), 1);
             }
-        },
-
-        addItems() {
-            this.hideAddModal();
-            this.resetSelectedItems();
         }
     }
 
@@ -151,14 +145,6 @@ export default {
             transform: scale(1.5);
             margin: 0 3px;
         }
-    }
-}
-
-.modal-footer {
-    display: block;
-
-    button:nth-child(2) {
-        float: right;
     }
 }
 
