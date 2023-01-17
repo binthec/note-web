@@ -99,7 +99,7 @@ export default {
         },
 
         showAddModal: function () {
-            this.updateSelectedItems({value: this.engi.content_data});
+            this.updateSelectedItems({value: this.engi.content_data}); // TODO 参照渡し
             this.$modal.show('add-modal');
         },
     }
