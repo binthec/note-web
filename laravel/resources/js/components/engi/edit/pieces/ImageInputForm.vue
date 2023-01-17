@@ -7,9 +7,9 @@
             <!-- タイトルが入る -->
             <div class="title-area">{{ engi.title }}</div>
 
-            <div class="row">
-                <!-- 追加された画像が入る所 -->
-                <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data">
+            <!-- 追加された画像が入る所 -->
+            <draggable tag="div" :list="engi.content_data" class="row" @start="onStart" @end="onEnd">
+                <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data" :key="item.uuid">
                     <div class="inner" :class="innerClass">
                         <span class="item-title">{{ item.title }}</span>
                     </div>
@@ -19,14 +19,18 @@
                 <div
                     id="add-btn"
                     class="piece add-btn"
-                    :class="additionalClass">
+                    :class="additionalClass"
+                    :key="'add-btn-key'"
+                    name="add-btn"
+                >
                     <div class="inner text-center" :class="innerClass" @click="showAddModal">
                         <div class="icon-box">
                             <i class="fas fa-plus text-xl"></i>
                         </div>
                     </div>
                 </div>
-            </div>
+            </draggable>
+
         </div>
 
         <select-item-modal></select-item-modal>
@@ -36,6 +40,7 @@
 <script>
 import SelectItemModal from "./SelectItemModal";
 import {mapMutations, mapState} from "vuex";
+import draggable from "vuedraggable";
 
 export default {
     name: "ImageInputForm",
@@ -54,11 +59,16 @@ export default {
     },
 
     components: {
-        SelectItemModal
+        SelectItemModal,
+        draggable
     },
 
     mounted() {
-        // this.addPiece();
+        document.getElementById('add-btn').addEventListener('pointerdown', this.pointerdown);
+    },
+
+    destroyed() {
+        document.getElementById('add-btn').removeEventListener('pointerdown', this.pointerdown);
     },
 
     computed: {
@@ -82,7 +92,7 @@ export default {
             return this.engi.item_num ? 'col-' + (12 / this.engi.item_num) : 'col-3';
         },
 
-        innerClass(){
+        innerClass() {
             return this.innerClassLabel[this.engi.item_num];
         }
     },
@@ -102,6 +112,24 @@ export default {
             this.updateSelectedItems({value: this.engi.content_data}); // TODO 参照渡し
             this.$modal.show('add-modal');
         },
+
+        onStart(event) {
+            document.getElementById('add-btn').style.display = "none";
+        },
+
+        onEnd(event) {
+            document.getElementById('add-btn').style.display = "block";
+        },
+
+        /**
+         * add button は動かさないので、開始イベントを抑止する
+         * https://zenn.dev/tomosuke/articles/24e492873a7b37
+         *
+         * @param event
+         */
+        pointerdown(event) {
+            event.stopImmediatePropagation();
+        }
     }
 }
 </script>
@@ -123,13 +151,15 @@ export default {
                 margin-bottom: 10px;
                 min-height: 120px;
 
-                &.height-200{
+                &.height-200 {
                     height: 200px;
                 }
-                &.height-240{
+
+                &.height-240 {
                     height: 240px;
                 }
-                &.height-177{
+
+                &.height-177 {
                     height: 177px;
                 }
             }
@@ -137,7 +167,8 @@ export default {
             &.add-btn {
                 .inner {
                     @extend .inner;
-                    .icon-box{
+
+                    .icon-box {
                         position: absolute;
                         left: 50%;
                         top: 50%;

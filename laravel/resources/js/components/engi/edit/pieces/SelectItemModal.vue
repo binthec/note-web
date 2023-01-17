@@ -73,7 +73,7 @@ export default {
             'selected_items'
         ]),
 
-        isChecked(){
+        isChecked() {
             return (uuid) => {
                 // この uuid を持ったアイテムが既に選択されているかどうか判断して返す
                 let result = this.selected_items.filter((item) => {
@@ -90,7 +90,7 @@ export default {
             'resetSelectedItems'
         ]),
 
-        ...mapMutations('engi/edit',[
+        ...mapMutations('engi/edit', [
             'addItemsToContentData',
         ]),
 
@@ -109,10 +109,10 @@ export default {
                 return item.uuid === uuid;
             });
 
-            if(this.selected_items.indexOf(uuid) === -1){
+            if (this.selected_items.indexOf(uuid) === -1) {
                 // 存在しない場合に追加する
                 this.selected_items.push(this.items[key]);
-            }else{
+            } else {
                 // 存在する場合は削除する
                 this.selected_items.splice(this.selected_items.indexOf(uuid), 1);
             }
