@@ -109,7 +109,7 @@ export default {
                 return item.uuid === uuid;
             });
 
-            if(result.length === -1){
+            if(this.selected_items.indexOf(uuid) === -1){
                 // 存在しない場合に追加する
                 this.selected_items.push(this.items[key]);
             }else{
