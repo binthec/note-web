@@ -76,10 +76,9 @@ export default {
         isChecked() {
             return (uuid) => {
                 // この uuid を持ったアイテムが既に選択されているかどうか判断して返す
-                let result = this.selected_items.filter((item) => {
+                return this.selected_items.some((item) => {
                     return item.uuid === uuid;
                 });
-                return result.length === 1;
             }
         },
     },
@@ -103,18 +102,24 @@ export default {
             this.$modal.hide('add-modal');
         },
 
+        /**
+         * チェックボックスに変更があった場合の処理
+         *
+         * @param key
+         */
         updateCheckedItem(key) {
-            let uuid = this.items[key]['uuid'];
-            let result = this.selected_items.filter((item, key) => {
+            let uuid = this.items[key]['uuid']; // uuid を取得
+            // 既に選択済みかどうか判定
+            let itemIndex = this.selected_items.findIndex(item => {
                 return item.uuid === uuid;
             });
 
-            if (this.selected_items.indexOf(uuid) === -1) {
-                // 存在しない場合に追加する
+            if(itemIndex === -1){
+                // 選択してない場合は配列に追加する
                 this.selected_items.push(this.items[key]);
             } else {
-                // 存在する場合は削除する
-                this.selected_items.splice(this.selected_items.indexOf(uuid), 1);
+                // 選択上体の場合は配列から削除する
+                this.selected_items.splice(itemIndex, 1);
             }
         }
     }
