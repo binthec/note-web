@@ -143,7 +143,6 @@ export default {
         },
 
         resetEvent(){
-            console.log('resetEvent が呼び出されたよ');
             this.deleteItems = [];
         },
 

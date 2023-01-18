@@ -31,7 +31,8 @@ export default {
             this.deleteItems.forEach(index => {
                 this.engi.content_data.splice(index, 1);
             });
-            this.resetDeleteItems;
+            // 親の削除予定のアイテム配列をリセットする
+            this.resetDeleteItems();
         }
     }
 }
