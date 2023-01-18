@@ -11,8 +11,8 @@
         <save-basic-info-button></save-basic-info-button>
 
         <h4>演技内容設定</h4>
-        <!-- 画像選択 -->
-        <image-input-form></image-input-form>
+        <!-- 演技編集シート -->
+        <customize-engi-sheet></customize-engi-sheet>
     </div>
 
 </template>
@@ -20,19 +20,19 @@
 <script>
 // common
 import TitleForm from "../pieces/TitleForm";
-import ImageInputForm from "../pieces/ImageInputForm";
 import ItemNumForm from "../pieces/ItemNumForm";
 import SaveBasicInfoButton from "../pieces/SaveBasicInfoButton";
 import SelectFirstCategoryForm from "../pieces/SelectFirstCategoryForm";
+import CustomizeEngiSheet from "../pieces/CustomizeEngiSheet";
 
 export default {
     name: "EditBody",
 
     components: {
+        CustomizeEngiSheet,
         SelectFirstCategoryForm,
         SaveBasicInfoButton,
         ItemNumForm,
-        ImageInputForm,
         TitleForm,
     }
 }

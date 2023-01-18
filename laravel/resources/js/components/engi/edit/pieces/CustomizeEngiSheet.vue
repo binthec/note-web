@@ -1,5 +1,10 @@
 <template>
     <div class="form-group">
+        <!-- メニューバー -->
+        <customize-engi-sheet-menu
+            :delete-items="deleteItems"
+            :reset-delete-items="resetEvent"
+        ></customize-engi-sheet-menu>
 
         <!-- 画像選択するところ -->
         <div id="ground-wrapper" class="clearfix">
@@ -17,8 +22,14 @@
             >
                 <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
                      :key="item.uuid">
-                    <div class="inner" :class="innerClass">
+                    <div class="inner clearfix" :class="innerClass">
                         <span class="item-title">{{ item.title }}</span>
+                        <input
+                            type="checkbox"
+                            :id="'del_' + item.uuid"
+                            :value="key"
+                            v-model="deleteItems"
+                        >
                     </div>
                 </div>
 
@@ -40,6 +51,7 @@
 
         </div>
 
+        <!-- アイテム選択のモーダル -->
         <select-item-modal></select-item-modal>
     </div>
 </template>
@@ -48,9 +60,10 @@
 import SelectItemModal from "./SelectItemModal";
 import {mapMutations, mapState} from "vuex";
 import draggable from "vuedraggable";
+import CustomizeEngiSheetMenu from "./CustomizeEngiSheetMenu";
 
 export default {
-    name: "ImageInputForm",
+    name: "CustomizeEngiSheet",
 
     data() {
         return {
@@ -63,12 +76,14 @@ export default {
                 4: 'height-177',
             },
             ddOptions: {
-                animation:300
-            }
+                animation: 300
+            },
+            deleteItems: [],
         }
     },
 
     components: {
+        CustomizeEngiSheetMenu,
         SelectItemModal,
         draggable
     },
@@ -112,12 +127,6 @@ export default {
             'updateSelectedItems'
         ]),
 
-        addPiece() {
-            const piece = document.createElement('div');
-            piece.className = "piece";
-            document.getElementById('added').prepend(piece);
-        },
-
         showAddModal: function () {
             this.updateSelectedItems({value: this.engi.content_data}); // TODO 参照渡し
             this.$modal.show('add-modal');
@@ -131,6 +140,11 @@ export default {
         onEnd(event) {
             // document.getElementById('add-btn').style.opacity = 1;
             document.getElementById('add-btn').style.display = 'block';
+        },
+
+        resetEvent(){
+            console.log('resetEvent が呼び出されたよ');
+            this.deleteItems = [];
         },
 
         /**
@@ -174,6 +188,12 @@ export default {
 
                 &.height-177 {
                     height: 177px;
+                }
+
+                input[type="checkbox"] {
+                    transform: scale(1.5);
+                    margin: 12px 12px 0 0;
+                    float: right;
                 }
             }
 
