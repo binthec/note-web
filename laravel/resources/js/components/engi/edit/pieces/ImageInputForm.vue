@@ -8,8 +8,15 @@
             <div class="title-area">{{ engi.title }}</div>
 
             <!-- 追加された画像が入る所 -->
-            <draggable tag="div" :list="engi.content_data" class="row" @start="onStart" @end="onEnd">
-                <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data" :key="item.uuid">
+            <draggable tag="div"
+                       class="row"
+                       :list="engi.content_data"
+                       :options="ddOptions"
+                       @start="onStart"
+                       @end="onEnd"
+            >
+                <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
+                     :key="item.uuid">
                     <div class="inner" :class="innerClass">
                         <span class="item-title">{{ item.title }}</span>
                     </div>
@@ -54,6 +61,9 @@ export default {
                 2: 'height-200',
                 3: 'height-240',
                 4: 'height-177',
+            },
+            ddOptions: {
+                animation:300
             }
         }
     },
@@ -114,11 +124,13 @@ export default {
         },
 
         onStart(event) {
-            document.getElementById('add-btn').style.display = "none";
+            // document.getElementById('add-btn').style.opacity = 0.4;
+            document.getElementById('add-btn').style.display = 'none';
         },
 
         onEnd(event) {
-            document.getElementById('add-btn').style.display = "block";
+            // document.getElementById('add-btn').style.opacity = 1;
+            document.getElementById('add-btn').style.display = 'block';
         },
 
         /**
@@ -150,6 +162,7 @@ export default {
                 border-radius: 15px;
                 margin-bottom: 10px;
                 min-height: 120px;
+                background-color: #ffffff;
 
                 &.height-200 {
                     height: 200px;
@@ -163,6 +176,15 @@ export default {
                     height: 177px;
                 }
             }
+
+            &.sortable-ghost {
+                .inner {
+                    @extend .inner;
+                    background-color: #dccf8f;
+                    opacity: .6;
+                }
+            }
+
 
             &.add-btn {
                 .inner {
