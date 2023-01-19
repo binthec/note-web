@@ -182,7 +182,7 @@ class ItemController extends Controller
     public function getItems(string $cate_name, int $cate_id): JsonResponse
     {
         $items = Item::query()
-            ->select('file_path', 'title', 'uuid')
+            ->select('first_cate', 'title', 'uuid')
             ->where($cate_name, $cate_id)
             ->get();
 

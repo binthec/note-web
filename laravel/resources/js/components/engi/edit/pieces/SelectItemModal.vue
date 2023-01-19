@@ -27,7 +27,7 @@
                             >
                             <span class="item-title">{{ item.title }}</span>
                             <div class="item-img">
-                                <img :src="'/assets/items' + item.file_path">
+                                <img :src="getFilePath(item.first_cate, item.uuid)">
                             </div>
                         </label>
                     </div>
@@ -59,6 +59,12 @@ export default {
         return {
             modalWidth: window.innerWidth * 0.9,
             modalHeight: window.innerHeight * 0.9,
+        }
+    },
+
+    props: {
+        getFilePath : {
+            default : () => {}
         }
     },
 
@@ -149,6 +155,7 @@ export default {
             position: absolute;
             top: 12px;
             right: 12px;
+            z-index: 999;
         }
 
         .item-img img {
@@ -159,13 +166,17 @@ export default {
             bottom: 0;
             margin: auto;
             max-height: 95%;
+            max-width: 95%;
             z-index: 1;
         }
 
         .item-title {
             display: inline-block;
-            margin: 5px 0 0 8px;
-            padding-right: 30px;
+            margin: 5px 35px 0 8px;
+            padding-right: 5px;
+            position: absolute;
+            z-index: 10;
+            background: rgba(255,255,255,0.8);
         }
     }
 }

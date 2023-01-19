@@ -87,6 +87,16 @@ class ItemCategoryCode
         self::APPARATUS => '手具要素'
     ];
 
+    /**
+     * 大分類
+     *
+     * @var string[]
+     */
+    public static $first_category_dir_labels = [
+        self::EMPTY_HAND => 'empty_hand',
+        self::APPARATUS => 'apparatus',
+    ];
+
 
 
     /**

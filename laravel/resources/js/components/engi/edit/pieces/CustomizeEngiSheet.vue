@@ -25,7 +25,7 @@
                         <input type="checkbox" :id="'del_' + item.uuid" :value="key" v-model="deleteItems">
                         <span class="item-title">{{ item.title }}</span>
                         <div class="item-img">
-                            <img :src="'/assets/items' + item.file_path">
+                            <img :src="getFilePath(item.first_cate, item.uuid)">
                         </div>
                     </div>
                 </div>
@@ -33,11 +33,13 @@
         </div>
 
         <!-- アイテム選択のモーダル -->
-        <select-item-modal></select-item-modal>
+        <select-item-modal :get-file-path="getFilePath"></select-item-modal>
     </div>
 </template>
 
 <script>
+import {FIRST_CATE_DIR_NAME} from '../../../../const/item';
+
 import SelectItemModal from "./SelectItemModal";
 import {mapMutations, mapState} from "vuex";
 import draggable from "vuedraggable";
@@ -109,6 +111,11 @@ export default {
             this.deleteItems = [];
         },
 
+        getFilePath(first_cate, uuid) {
+            return '/assets/items/' + FIRST_CATE_DIR_NAME[first_cate] + '/' + uuid + '.svg';
+        }
+
+
         /**
          * add button は動かさないので、開始イベントを抑止する
          * https://zenn.dev/tomosuke/articles/24e492873a7b37
@@ -146,6 +153,7 @@ export default {
                     position: absolute;
                     top: 12px;
                     right: 12px;
+                    z-index: 999;
                 }
 
                 .item-img img {
@@ -156,6 +164,7 @@ export default {
                     bottom: 0;
                     margin: auto;
                     max-height: 95%;
+                    max-width: 95%;
                     z-index: 1;
                 }
 
@@ -189,7 +198,7 @@ export default {
                 .item-title {
                     display: inline-block;
                     margin: 5px 0 0 8px;
-                    padding-right: 30px;
+                    padding-right: 5px;
                     position: absolute;
                     z-index: 10;
                     background: rgba(255,255,255,0.8);
