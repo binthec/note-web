@@ -34,4 +34,5 @@ Route::prefix('engi')->group(function(){
     Route::post('/', 'Api\EngiController@store');
     Route::get('/{uuid}', 'Api\EngiController@show'); // 単一のレコードを取得する場合
     Route::put('/{uuid}', 'Api\EngiController@update');
+    Route::delete('/{uuid}', 'Api\EngiController@destroy');
 });

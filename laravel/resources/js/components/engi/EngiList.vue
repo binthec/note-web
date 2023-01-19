@@ -7,29 +7,7 @@
                      :create-path="'/engi/create'"
         ></list-header>
 
-        <template v-slot:card_body>
-            <div class="card-body p-0">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>タイトル</th>
-                        <th>更新日時</th>
-                        <th style="width: 100px">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(row, index) in list.data">
-                        <td>{{ row.title }}</td>
-                        <td>{{ row.updated_at }}</td>
-                        <td>
-                            <a href="javascript: void(0);" @click="editEntity(row)"><i class="fas fa-edit text-lg mr-3 text-olive"></i></a>
-                            <a href="javascript: void(0);" @click="deleteEntity(row)"><i class="fas fa-trash-alt text-lg text-danger"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </template>
+        <list-body slot="card_body"></list-body>
 
         <Paginator slot="card_footer"
                    list="list"
@@ -45,11 +23,13 @@ import ListHeader from "../common/parts/ListHeader";
 import Paginator from "../common/parts/Paginator";
 
 import {mapState, mapActions, mapMutations} from "vuex";
+import ListBody from "./list/ListBody";
 
 export default {
     name: "EngiList",
 
     components: {
+        ListBody,
         DefaultLayout,
         ListHeader,
         Paginator
@@ -62,7 +42,7 @@ export default {
     },
 
     watch: {
-        'list.current_page': function(val, oldVal){
+        'list.current_page': function (val, oldVal) {
             this.getList();
         },
     },
@@ -79,15 +59,6 @@ export default {
         ...mapActions('engi/list', [
             'getList'
         ]),
-
-        editEntity(row){
-            window.open('/engi/' + row.uuid + '/edit', '_self');
-        },
-
-        deleteEntity(row){
-            console.log('delete');
-            console.log(row);
-        },
     }
 }
 </script>

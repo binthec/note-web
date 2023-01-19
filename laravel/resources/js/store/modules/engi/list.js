@@ -7,11 +7,12 @@ export default {
             'per_page': 20,
             'order': 'desc',
             'order_column': 'updated_at',
-            'last_page' : null,
-            'total' : null,
+            'last_page': null,
+            'total': null,
         },
 
         list_url: '/api/engi',
+        delete_url: '/api/engi/'
     },
 
     mutations: {
@@ -29,7 +30,7 @@ export default {
                     order: state.list.order,
                     order_column: state.list.order_column
                 }
-                })
+            })
                 .then(response => {
                     if (response.status === 200) {
                         state.list = response.data.list;
@@ -41,6 +42,17 @@ export default {
                 .finally(() => {
                     //
                 });
+        },
+
+        deleteEngi({dispatch, commit, state, getters}, {uuid}){
+            axios.delete(state.delete_url +  uuid)
+                .then(res => {
+                    dispatch('getList');
+                })
+                .catch(err => {
+                    console.log('エラーだね deleteEngi');
+                    console.log(err);
+                })
         }
     }
 }

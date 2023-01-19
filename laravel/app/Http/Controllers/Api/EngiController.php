@@ -38,7 +38,7 @@ class EngiController extends Controller
         $query = Engi::query();
 
         // ソート順が渡された場合に並び順をクエリに加える
-        if($request->order_column && $request->order){
+        if ($request->order_column && $request->order) {
             $query->orderBy($request->order_column, $request->order);
         }
 
@@ -99,7 +99,7 @@ class EngiController extends Controller
 
         DB::beginTransaction();
 
-        try{
+        try {
             $engi->updateEngi($request->engi);
 
             DB::commit();
@@ -133,5 +133,30 @@ class EngiController extends Controller
             'message' => 'success',
             'engi' => $engi
         ], HttpStatusCode::OK);
+    }
+
+    /**
+     * １つずつ削除
+     *
+     * @param string $uuid
+     * @return JsonResponse
+     */
+    public function destroy(string $uuid): JsonResponse
+    {
+        $engi = Engi::query()->where('uuid', $uuid)->firstOrFail();
+
+        DB::beginTransaction();
+
+        try{
+            $engi->delete();
+
+            DB::commit();
+            return response()->json(['message' => 'success'], HttpStatusCode::OK);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return response()->json(['message' => 'success'], HttpStatusCode::INTERNAL_SERVER_ERROR);
+        }
     }
 }
