@@ -22,13 +22,11 @@
                 <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
                      :key="item.uuid">
                     <div class="inner clearfix" :class="innerClass">
+                        <input type="checkbox" :id="'del_' + item.uuid" :value="key" v-model="deleteItems">
                         <span class="item-title">{{ item.title }}</span>
-                        <input
-                            type="checkbox"
-                            :id="'del_' + item.uuid"
-                            :value="key"
-                            v-model="deleteItems"
-                        >
+                        <div class="item-img">
+                            <img :src="'/assets/items' + item.file_path">
+                        </div>
                     </div>
                 </div>
             </draggable>
@@ -164,6 +162,12 @@ export default {
                     position: absolute;
                     top: 12px;
                     right: 12px;
+                }
+
+                .item-img img{
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(0,-50%);
                 }
             }
 
