@@ -1,18 +1,19 @@
 <template>
-    <div id="menu-bar">
+    <div id="menu-bar" class="clearfix">
         <button
+            id="delete-btn"
             type="button"
             class="btn btn-danger"
             @click="deleteEvent"
             :disabled="deleteItems.length < 1"
-        >選択した項目を削除</button>
+        ><i class="far fa-trash-alt"></i> 選択した項目を削除</button>
 
         <button
             id="preview-btn"
             type="button"
             class="btn btn-warning"
             @click="previewEvent"
-        >プレビュー</button>
+        ><i class="far fa-file-pdf"></i> プレビュー</button>
     </div>
 </template>
 
@@ -60,10 +61,13 @@ export default {
 #menu-bar {
     margin: 10px 0;
     width: $content-min-width;
-    text-align: right;
 }
 
 #preview-btn{
-    margin-left: 10px;
+    float: right;
+}
+
+#delete-btn{
+    float: left;
 }
 </style>
