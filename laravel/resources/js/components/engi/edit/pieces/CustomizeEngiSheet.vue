@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </draggable>
-
         </div>
 
         <!-- アイテム選択のモーダル -->
@@ -54,10 +53,10 @@ export default {
             pieceH: 120,
             pieceW: 120,
             innerClassLabel: {
-                1: 'height-200',
-                2: 'height-200',
-                3: 'height-240',
-                4: 'height-177',
+                1: 'height-1',
+                2: 'height-2',
+                3: 'height-3',
+                4: 'height-4',
             },
             ddOptions: {
                 animation: 300
@@ -142,23 +141,29 @@ export default {
                 margin-bottom: 10px;
                 min-height: 120px;
                 background-color: #ffffff;
+                position: relative;
 
-                &.height-200 {
+                &.height-1 { /* 1個のとき */
                     height: 200px;
                 }
 
-                &.height-240 {
+                &.height-2 { /* 2個のとき */
+                    height: 195px;
+                }
+
+                &.height-3 { /* 3個のとき */
                     height: 240px;
                 }
 
-                &.height-177 {
+                &.height-4 { /* 4個のとき */
                     height: 177px;
                 }
 
                 input[type="checkbox"] {
                     transform: scale(1.5);
-                    margin: 12px 12px 0 0;
-                    float: right;
+                    position: absolute;
+                    top: 12px;
+                    right: 12px;
                 }
             }
 
@@ -170,31 +175,11 @@ export default {
                 }
             }
 
-
-            &.add-btn {
-                .inner {
-                    @extend .inner;
-
-                    .icon-box {
-                        position: absolute;
-                        left: 50%;
-                        top: 50%;
-
-                        i {
-                            transform: translate(-50%, -50%);
-                        }
-                    }
-
-                    &:hover {
-                        background-color: $bg-info;
-                    }
-                }
-            }
-
             &.added {
                 .item-title {
                     display: inline-block;
                     margin: 5px 0 0 8px;
+                    padding-right: 30px;
                 }
             }
         }

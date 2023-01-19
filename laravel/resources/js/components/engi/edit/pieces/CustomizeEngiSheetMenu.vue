@@ -4,8 +4,8 @@
             id="delete-btn"
             type="button"
             class="btn btn-danger"
-            @click="deleteEvent"
             :disabled="deleteItems.length < 1"
+            @click="deleteEvent"
         ><i class="far fa-trash-alt"></i> 選択した項目を削除</button>
 
         <button
@@ -19,6 +19,7 @@
             id="add-btn"
             type="button"
             class="btn btn-warning"
+            :disabled="isDisabledAddItems"
             @click="addItemEvent"
         ><i class="fas fa-sitemap"></i> アイテム追加</button>
     </div>
@@ -26,6 +27,7 @@
 
 <script>
 import {mapState} from "vuex";
+import { ONE_SHEET_MAX_CNT } from '../../../../const/item.js';
 
 export default {
     name: "CustomizeEngiSheetMenu",
@@ -47,6 +49,14 @@ export default {
             'engi'
         ]),
 
+        /**
+         * 1シート内の最大アイテム数を超えてる場合はアイテム追加ボタンを非活性に
+         *
+         * @returns {boolean}
+         */
+        isDisabledAddItems(){
+            return this.engi.content_data.length >= ONE_SHEET_MAX_CNT[this.engi.item_num];
+        }
     },
 
     methods: {
