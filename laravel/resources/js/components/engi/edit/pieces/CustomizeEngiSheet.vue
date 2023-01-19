@@ -4,6 +4,7 @@
         <customize-engi-sheet-menu
             :delete-items="deleteItems"
             :reset-delete-items="resetEvent"
+            :add-item-event="showAddModal"
         ></customize-engi-sheet-menu>
 
         <!-- 画像選択するところ -->
@@ -17,8 +18,6 @@
                        class="row"
                        :list="engi.content_data"
                        :options="ddOptions"
-                       @start="onStart"
-                       @end="onEnd"
             >
                 <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
                      :key="item.uuid">
@@ -30,21 +29,6 @@
                             :value="key"
                             v-model="deleteItems"
                         >
-                    </div>
-                </div>
-
-                <!-- 追加ボタン -->
-                <div
-                    id="add-btn"
-                    class="piece add-btn"
-                    :class="additionalClass"
-                    :key="'add-btn-key'"
-                    name="add-btn"
-                >
-                    <div class="inner text-center" :class="innerClass" @click="showAddModal">
-                        <div class="icon-box">
-                            <i class="fas fa-plus text-xl"></i>
-                        </div>
                     </div>
                 </div>
             </draggable>
@@ -88,14 +72,6 @@ export default {
         draggable
     },
 
-    mounted() {
-        document.getElementById('add-btn').addEventListener('pointerdown', this.pointerdown);
-    },
-
-    destroyed() {
-        document.getElementById('add-btn').removeEventListener('pointerdown', this.pointerdown);
-    },
-
     computed: {
         ...mapState('engi/edit', [
             'engi'
@@ -132,16 +108,6 @@ export default {
             this.$modal.show('add-modal');
         },
 
-        onStart(event) {
-            // document.getElementById('add-btn').style.opacity = 0.4;
-            document.getElementById('add-btn').style.display = 'none';
-        },
-
-        onEnd(event) {
-            // document.getElementById('add-btn').style.opacity = 1;
-            document.getElementById('add-btn').style.display = 'block';
-        },
-
         resetEvent(){
             this.deleteItems = [];
         },
@@ -152,9 +118,9 @@ export default {
          *
          * @param event
          */
-        pointerdown(event) {
-            event.stopImmediatePropagation();
-        }
+        // pointerdown(event) {
+        //     event.stopImmediatePropagation();
+        // }
     }
 }
 </script>

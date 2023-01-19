@@ -14,6 +14,13 @@
             class="btn btn-warning"
             @click="previewEvent"
         ><i class="far fa-file-pdf"></i> プレビュー</button>
+
+        <button
+            id="add-btn"
+            type="button"
+            class="btn btn-warning"
+            @click="addItemEvent"
+        ><i class="fas fa-sitemap"></i> アイテム追加</button>
     </div>
 </template>
 
@@ -28,6 +35,9 @@ export default {
             default : []
         },
         resetDeleteItems : {
+            default: () => {}
+        },
+        addItemEvent : {
             default: () => {}
         }
     },
@@ -63,8 +73,12 @@ export default {
     width: $content-min-width;
 }
 
-#preview-btn{
+#preview-btn, #add-btn{
     float: right;
+}
+
+#preview-btn{
+    margin-left: 10px;
 }
 
 #delete-btn{
