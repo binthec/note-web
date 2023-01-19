@@ -1,6 +1,18 @@
 <template>
     <div id="menu-bar">
-        <button type="button" class="btn btn-danger" @click="deleteEvent">選択した項目を削除する</button>
+        <button
+            type="button"
+            class="btn btn-danger"
+            @click="deleteEvent"
+            :disabled="deleteItems.length < 1"
+        >選択した項目を削除</button>
+
+        <button
+            id="preview-btn"
+            type="button"
+            class="btn btn-warning"
+            @click="previewEvent"
+        >プレビュー</button>
     </div>
 </template>
 
@@ -27,6 +39,10 @@ export default {
     },
 
     methods: {
+        previewEvent(){
+            console.log('プレビューボタンが押されたよ');
+        },
+
         deleteEvent(){
             this.deleteItems.forEach(index => {
                 this.engi.content_data.splice(index, 1);
@@ -45,5 +61,9 @@ export default {
     margin: 10px 0;
     width: $content-min-width;
     text-align: right;
+}
+
+#preview-btn{
+    margin-left: 10px;
 }
 </style>
