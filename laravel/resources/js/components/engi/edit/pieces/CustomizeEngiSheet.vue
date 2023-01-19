@@ -105,7 +105,7 @@ export default {
             this.$modal.show('add-modal');
         },
 
-        resetEvent(){
+        resetEvent() {
             this.deleteItems = [];
         },
 
@@ -141,6 +141,24 @@ export default {
                 background-color: #ffffff;
                 position: relative;
 
+                input[type="checkbox"] {
+                    transform: scale(1.5);
+                    position: absolute;
+                    top: 12px;
+                    right: 12px;
+                }
+
+                .item-img img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    max-height: 95%;
+                    z-index: 1;
+                }
+
                 &.height-1 { /* 1個のとき */
                     height: 200px;
                 }
@@ -157,18 +175,6 @@ export default {
                     height: 177px;
                 }
 
-                input[type="checkbox"] {
-                    transform: scale(1.5);
-                    position: absolute;
-                    top: 12px;
-                    right: 12px;
-                }
-
-                .item-img img{
-                    position: absolute;
-                    top: 50%;
-                    transform: translate(0,-50%);
-                }
             }
 
             &.sortable-ghost {
@@ -184,6 +190,10 @@ export default {
                     display: inline-block;
                     margin: 5px 0 0 8px;
                     padding-right: 30px;
+                    position: absolute;
+                    z-index: 10;
+                    background: rgba(255,255,255,0.8);
+                    font-weight: 700;
                 }
             }
         }

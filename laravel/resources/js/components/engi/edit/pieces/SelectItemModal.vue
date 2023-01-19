@@ -1,8 +1,9 @@
 <template>
     <modal name="add-modal"
            :width="modalWidth"
-           :height="modalHeight"
+           :height="'auto'"
            :reset="true"
+           :scrollable="true"
     >
         <div class="modal-header bg-info">
             <h4>追加したいアイテムの選択</h4>
@@ -18,16 +19,15 @@
                 <div class="row" v-if="items.length > 0">
                     <div class="item-box col-3" v-for="(item, key) in items">
                         <label :for="'item_' + item.uuid">
-                            <div class="item">
-                                <input
-                                    type="checkbox"
-                                    :id="'item_' + item.uuid"
-                                    :value="key"
-                                    :checked="isChecked(item.uuid)"
-                                    @change="updateCheckedItem(key)"
-                                >
-                                <!--<img :src="'/storage/items' + item.file_path">-->
-                                {{ item.title }}
+                            <input type="checkbox"
+                                   :id="'item_' + item.uuid"
+                                   :value="key"
+                                   :checked="isChecked(item.uuid)"
+                                   @change="updateCheckedItem(key)"
+                            >
+                            <span class="item-title">{{ item.title }}</span>
+                            <div class="item-img">
+                                <img :src="'/assets/items' + item.file_path">
                             </div>
                         </label>
                     </div>
@@ -114,7 +114,7 @@ export default {
                 return item.uuid === uuid;
             });
 
-            if(itemIndex === -1){
+            if (itemIndex === -1) {
                 // 選択してない場合は配列に追加する
                 this.selected_items.push(this.items[key]);
             } else {
@@ -139,16 +139,33 @@ export default {
         display: inline-block;
         width: 100%;
         min-height: 100px;
+        height: 200px;
         border: 4px solid $bg-info;
         border-radius: 10px;
-    }
-
-    .item {
-        padding: 5px;
+        position: relative;
 
         input[type="checkbox"] {
             transform: scale(1.5);
-            margin: 0 3px;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .item-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            max-height: 95%;
+            z-index: 1;
+        }
+
+        .item-title {
+            display: inline-block;
+            margin: 5px 0 0 8px;
+            padding-right: 30px;
         }
     }
 }
