@@ -70,7 +70,10 @@ class EngiController extends Controller
             $engi->insertEngi($request->engi);
 
             DB::commit();
-            return response()->json(['message' => 'success'], HttpStatusCode::CREATED);
+            return response()->json([
+                'uuid' => $engi->uuid,
+                'message' => 'success'
+            ], HttpStatusCode::CREATED);
 
         } catch (ValidationException $e) {
             return response()->json([

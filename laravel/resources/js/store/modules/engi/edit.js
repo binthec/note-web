@@ -87,6 +87,7 @@ export default {
             axios.post(state.create_url, getters.getFormData)
                 .then(response => {
                     if (response.status === 201) {
+                        commit('initUuid', {uuid: response.data.uuid});
                         commit('showSuccessModal');
 
                         // 基本情報のみ変更の場合は画面遷移しない

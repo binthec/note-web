@@ -47,20 +47,20 @@ export default {
     },
 
     props: {
-        uuid: {
+        propsUuid: {
             default: null
         }
     },
 
     async created() {
-        this.initUuid({uuid: this.uuid});
+        this.initUuid({uuid: this.propsUuid});
     },
 
     async mounted() {
         // 大分類を取得
         await this.getFirstCategories();
 
-        if (!this.uuid){ // 新規作成の場合
+        if (!this.propsUuid){ // 新規作成の場合
             this.setFirstCategory({value: Object.entries(this.first_categories)[0][0]});
         }else{
             this.setEditorMode({value: false});
@@ -75,6 +75,7 @@ export default {
             'engi',
             'show_success_modal',
             'show_error_modal',
+            'uuid'
         ]),
 
         ...mapState('item/category', [
