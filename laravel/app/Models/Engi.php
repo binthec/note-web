@@ -15,6 +15,8 @@ class Engi extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $fillable = ['deleted_by'];
+
     // protected $perPage = 100; // js 側で操作しているのでここでは設定しない
 
     /**
@@ -55,6 +57,19 @@ class Engi extends Model
         $this->updated_by = Auth::user()->id;
 
         $this->update();
+        $this->touch();
+    }
+
+    /**
+     * 削除
+     *
+     * @return void
+     * @throws \Exception
+     */
+    public function deleteEngi(): void
+    {
+        $this->deleted_by = Auth::user()->id;
+        $this->delete();
         $this->touch();
     }
 }

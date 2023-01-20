@@ -151,7 +151,7 @@ class EngiController extends Controller
         DB::beginTransaction();
 
         try{
-            $engi->delete();
+            $engi->deleteEngi();
 
             DB::commit();
             return response()->json(['message' => 'success'], HttpStatusCode::OK);
