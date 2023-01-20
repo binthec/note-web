@@ -197,7 +197,7 @@ export default {
             &.added {
                 .item-title {
                     display: inline-block;
-                    margin: 5px 0 0 8px;
+                    margin: 5px 35px 0 8px;
                     padding-right: 5px;
                     position: absolute;
                     z-index: 10;
