@@ -156,16 +156,18 @@ export default {
                     z-index: 999;
                 }
 
-                .item-img img {
+                .item-img {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    margin: auto;
-                    max-height: 95%;
-                    max-width: 95%;
-                    z-index: 1;
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+                    padding: 40px 5px 5px 5px;
+
+                    img {
+                        margin: auto;
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
 
                 &.height-1 { /* 1個のとき */
