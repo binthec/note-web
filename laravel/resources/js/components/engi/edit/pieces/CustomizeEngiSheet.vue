@@ -22,7 +22,7 @@
                 <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
                      :key="item.uuid">
                     <div class="inner clearfix" :class="innerClass">
-                        <input type="checkbox" :id="'del_' + item.uuid" :value="key" v-model="deleteItems">
+                        <input type="checkbox" :id="'del_' + item.uuid" :value="item.uuid" v-model="deleteItems">
                         <span class="item-title">{{ item.title }}</span>
                         <div class="item-img">
                             <img :src="getFilePath(item.first_cate, item.uuid)">
