@@ -21,13 +21,17 @@
         </table>
 
         <!-- 削除確認モーダル -->
-        <list-delete-modal :delete-item-uuid="deleteItemUuid"></list-delete-modal>
+        <delete-modal
+            :delete-func="deleteEngi"
+            :delete-item-uuid="deleteItemUuid"
+            :deleteTitle="deleteTitle"
+        ></delete-modal>
     </div>
 </template>
 
 <script>
-import {mapState} from "vuex";
-import ListDeleteModal from "./pieces/ListDeleteModal";
+import {mapActions, mapState} from "vuex";
+import DeleteModal from "../../common/modals/DeleteModal";
 
 export default {
     name: "ListBody",
@@ -35,10 +39,12 @@ export default {
     data() {
         return {
             deleteItemUuid: null,
+            deleteTitle: null,
         }
     },
 
-    components: {ListDeleteModal},
+    components: {DeleteModal},
+
     computed: {
         ...mapState('engi/list', [
             'list',
@@ -46,6 +52,10 @@ export default {
     },
 
     methods: {
+        ...mapActions('engi/list', [
+            'deleteEngi',
+        ]),
+
         editEntity(row) {
             window.open('/engi/' + row.uuid + '/edit', '_self');
         },
@@ -53,6 +63,7 @@ export default {
         showDeleteModal(row) {
             this.$modal.show('delete-modal');
             this.deleteItemUuid = row.uuid;
+            this.deleteTitle = row.title;
         },
 
     }
