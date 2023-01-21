@@ -21,7 +21,10 @@ export default {
         show_error_modal: false,
 
         // 基本情報部分のモード。true でテキストボックスを表示
-        is_editor_mode: true
+        is_editor_mode: true,
+
+        // vue で form.submit する際に必要になるので取っておく
+        csrf_token : document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
     },
 
     getters: {

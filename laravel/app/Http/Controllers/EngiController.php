@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Common\ItemCategoryCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Response;
 
 class EngiController extends Controller
 {
@@ -45,5 +46,19 @@ class EngiController extends Controller
     public function edit(string $uuid)
     {
         return view('engi.edit', compact('uuid'));
+    }
+
+    /**
+     * プレビュー画面表示
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function preview(Request $request): Response
+    {
+        $pdf = \PDF::loadView('engi/output_pdf', ['engi' => json_decode($request->engi)]);
+        $pdf->setPaper('A4');
+
+        return $pdf->stream();
     }
 }

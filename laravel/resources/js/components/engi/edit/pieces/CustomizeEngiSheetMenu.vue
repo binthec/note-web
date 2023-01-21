@@ -16,6 +16,7 @@
             @click="previewEvent"
         ><i class="far fa-file-pdf"></i> プレビュー
         </button>
+        <form id="preview-form" method="post" target="_blank" style="display: none;"></form>
 
         <button
             id="add-btn"
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 import {ONE_SHEET_MAX_CNT} from '../../../../const/item.js';
 
 export default {
@@ -49,7 +50,8 @@ export default {
 
     computed: {
         ...mapState('engi/edit', [
-            'engi'
+            'engi',
+            'csrf_token'
         ]),
 
         /**
@@ -63,8 +65,21 @@ export default {
     },
 
     methods: {
+        /**
+         * 別窓で PDF viewer を開いてプレビューする
+         */
         previewEvent() {
-            console.log('プレビューボタンが押されたよ');
+            let form = document.getElementById("preview-form");
+            form.action = '/engi/preview';
+
+            // フォームにデータセット
+            form.addEventListener('formdata', (e) => {
+                let fd = e.formData;
+                fd.set('engi', JSON.stringify(this.engi));
+                fd.set('_token', this.csrf_token);
+            });
+
+            form.submit();
         },
 
         deleteEvent() {
@@ -75,7 +90,6 @@ export default {
                 // 削除予定アイテムが含まれる場合に、アイテムを削除する
                 if (index !== -1) this.engi.content_data.splice(index, 1);
             });
-
 
             // 親の削除予定のアイテム配列をリセットする
             this.resetDeleteItems();

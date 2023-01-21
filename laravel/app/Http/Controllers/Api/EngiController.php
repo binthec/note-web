@@ -145,7 +145,7 @@ class EngiController extends Controller
 
         DB::beginTransaction();
 
-        try{
+        try {
             $engi->deleteEngi();
 
             DB::commit();

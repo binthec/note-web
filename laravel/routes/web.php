@@ -31,4 +31,5 @@ Route::prefix('engi')->group(function(){
     Route::get('/', 'EngiController@index')          ->name('engi.list');
     Route::get('/create', 'EngiController@create')   ->name('engi.create');
     Route::get('/{uuid}/edit', 'EngiController@edit')->name('engi.edit');
+    Route::post('/preview', 'EngiController@preview')->name('engi.preview');
 });
