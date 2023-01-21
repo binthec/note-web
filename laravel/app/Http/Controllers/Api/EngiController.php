@@ -32,9 +32,6 @@ class EngiController extends Controller
      */
     public function index(Request $request)
     {
-
-        Log::info($request);
-
         $query = Engi::query();
 
         // ソート順が渡された場合に並び順をクエリに加える
@@ -43,8 +40,6 @@ class EngiController extends Controller
         }
 
         $list = $query->paginate($request->per_page);
-
-        // Log::info($list);
 
         return response()->json([
             'message' => 'success',

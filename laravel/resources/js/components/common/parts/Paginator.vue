@@ -1,15 +1,15 @@
 <template>
-    <div class="card-footer clearfix" v-show="hasManyPages">
-        <ul class="pagination pagination-md m-0 float-right">
-            <li class="page-item" v-show="!isFirstPage">
-                <a class="page-link" href="javascript: void(0);" @click="goPage('prev')">Prev</a>
+    <div class="card-footer" v-show="hasManyPages">
+        <ul class="pagination pagination-md m-0">
+            <li class="page-item">
+                <button class="page-link" @click="goPage('prev')" :disabled="isFirstPage">前</button>
             </li>
             <li class="page-item" v-for="page_num in list.last_page" :key="page_num"
                 :class="{ active: isActive(page_num) }">
                 <a class="page-link" href="javascript: void(0);" @click="goPage(page_num)">{{ page_num }}</a>
             </li>
-            <li class="page-item" v-show="!isLastPage">
-                <a class="page-link" href="javascript: void(0);" @click="goPage('next')">Next</a>
+            <li class="page-item">
+                <button class="page-link" @click="goPage('next')" :disabled="isLastPage">次</button>
             </li>
         </ul>
     </div>
@@ -24,7 +24,7 @@ export default {
 
     props: {
         list: {
-            default: [],
+            default: {},
         },
         setCurrentPage: {
             default: () => {}
@@ -67,6 +67,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../../../sass/variables";
 
+.pagination {
+    justify-content: center;
+
+    button:disabled{
+        color: $disabled-gray;
+    }
+}
 </style>

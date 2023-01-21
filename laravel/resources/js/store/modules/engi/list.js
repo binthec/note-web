@@ -27,8 +27,8 @@ export default {
                 params: {
                     page: state.list.current_page,
                     per_page: state.list.per_page,
-                    order: state.list.order,
-                    order_column: state.list.order_column
+                    order_column: state.list.order_column ?? 'updated_at',
+                    order: state.list.order ?? 'desc',
                 }
             })
                 .then(response => {
@@ -44,8 +44,8 @@ export default {
                 });
         },
 
-        deleteEngi({dispatch, commit, state, getters}, {uuid}){
-            axios.delete(state.delete_url +  uuid)
+        deleteEngi({dispatch, commit, state, getters}, {uuid}) {
+            axios.delete(state.delete_url + uuid)
                 .then(res => {
                     dispatch('getList');
                 })

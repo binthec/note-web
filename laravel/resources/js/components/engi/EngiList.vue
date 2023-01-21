@@ -10,8 +10,8 @@
         <list-body slot="card_body"></list-body>
 
         <Paginator slot="card_footer"
-                   list="list"
-                   set-current-page="setCurrentPage"
+                   :list="list"
+                   :set-current-page="setCurrentPage"
         ></Paginator>
     </default-layout>
 </template>
@@ -52,7 +52,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('item/list', [
+        ...mapMutations('engi/list', [
             'setCurrentPage'
         ]),
 
