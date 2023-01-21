@@ -14,7 +14,7 @@
             type="button"
             class="btn btn-warning"
             @click="previewEvent"
-        ><i class="far fa-file-pdf"></i> プレビュー
+        ><i class="fas fa-external-link-alt"></i> 印刷プレビュー
         </button>
         <form id="preview-form" method="post" target="_blank" style="display: none;"></form>
 
