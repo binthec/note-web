@@ -18,7 +18,7 @@
 
                 <div class="row" v-if="items.length > 0">
                     <div class="item-box col-3" v-for="(item, key) in items">
-                        <label :for="'item_' + item.uuid">
+                        <label :for="'item_' + item.uuid" :class="{ checked: isChecked(item.uuid) }">
                             <input type="checkbox"
                                    :id="'item_' + item.uuid"
                                    :value="key"
@@ -146,7 +146,7 @@ export default {
         width: 100%;
         min-height: 100px;
         height: 200px;
-        border: 4px solid $bg-info;
+        border: solid 2px $gray-border;
         border-radius: 10px;
         position: relative;
 
@@ -180,6 +180,10 @@ export default {
             position: absolute;
             z-index: 10;
             background: rgba(255,255,255,0.8);
+        }
+
+        &.checked{
+            border: 4px solid $bg-info;
         }
     }
 }
