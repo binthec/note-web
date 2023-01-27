@@ -47,18 +47,4 @@ class EngiController extends Controller
     {
         return view('engi.edit', compact('uuid'));
     }
-
-    /**
-     * プレビュー画面表示
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function preview(Request $request): Response
-    {
-        $pdf = \PDF::loadView('engi/output_pdf', ['engi' => json_decode($request->engi)]);
-        $pdf->setPaper('A4');
-
-        return $pdf->stream();
-    }
 }

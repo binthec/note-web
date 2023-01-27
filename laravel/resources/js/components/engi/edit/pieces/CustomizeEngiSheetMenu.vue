@@ -16,7 +16,6 @@
             @click="previewEvent"
         ><i class="fas fa-external-link-alt"></i> 印刷プレビュー
         </button>
-        <form id="preview-form" method="post" target="_blank" style="display: none;"></form>
 
         <button
             id="add-btn"
@@ -32,6 +31,10 @@
 <script>
 import {mapActions, mapState} from "vuex";
 import {ONE_SHEET_MAX_CNT} from '../../../../const/item.js';
+
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import { jsPDF } from 'jspdf';
 
 export default {
     name: "CustomizeEngiSheetMenu",
@@ -68,18 +71,26 @@ export default {
         /**
          * 別窓で PDF viewer を開いてプレビューする
          */
-        previewEvent() {
-            let form = document.getElementById("preview-form");
-            form.action = '/engi/preview';
+        async previewEvent() {
+            let node = document.getElementById('print-area');
+            node.classList.add('printing'); // プリント用にクラスを追加
 
-            // フォームにデータセット
-            form.addEventListener('formdata', (e) => {
-                let fd = e.formData;
-                fd.set('engi', JSON.stringify(this.engi));
-                fd.set('_token', this.csrf_token);
-            });
+            htmlToImage.toPng(node)
+                .then(function (dataUrl) {
+                    let img = new Image();
+                    img.src = dataUrl;
 
-            form.submit();
+                    const doc = new jsPDF();
+                    const width = doc.internal.pageSize.width;
+                    doc.addImage(img, 'PNG', 10, 10, width * 0.9, 0);
+                    // doc.save("sample.pdf"); // 保存するとき
+                    window.open(doc.output('bloburl'));
+
+                    node.classList.remove('printing'); // プリント用のクラスを削除
+                })
+                .catch(function (error) {
+                    console.error('oops, something went wrong!', error);
+                });
         },
 
         deleteEvent() {

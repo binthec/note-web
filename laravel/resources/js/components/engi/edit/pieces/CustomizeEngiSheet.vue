@@ -10,26 +10,29 @@
         <!-- 画像選択するところ -->
         <div id="ground-wrapper" class="clearfix">
 
-            <!-- タイトルが入る -->
-            <div class="title-area">{{ engi.title }}</div>
 
-            <!-- 追加された画像が入る所 -->
-            <draggable tag="div"
-                       class="row"
-                       :list="engi.content_data"
-                       :options="ddOptions"
-            >
-                <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
-                     :key="item.uuid">
-                    <div class="inner clearfix" :class="innerClass">
-                        <input type="checkbox" :id="'del_' + item.uuid" :value="item.uuid" v-model="deleteItems">
-                        <span class="item-title">{{ item.title }}</span>
-                        <div class="item-img">
-                            <img :src="getFilePath(item.first_cate, item.uuid)">
+            <div id="print-area">
+                <!-- タイトルが入る -->
+                <div class="title-area">{{ engi.title }}</div>
+
+                <!-- 追加された画像が入る所 -->
+                <draggable tag="div"
+                           class="row"
+                           :list="engi.content_data"
+                           :options="ddOptions"
+                >
+                    <div class="piece added" :class="additionalClass" v-for="(item, key) in engi.content_data"
+                         :key="item.uuid">
+                        <div class="inner clearfix" :class="innerClass">
+                            <input type="checkbox" :id="'del_' + item.uuid" :value="item.uuid" v-model="deleteItems">
+                            <span class="item-title">{{ item.title }}</span>
+                            <div class="item-img">
+                                <img :src="getFilePath(item.first_cate, item.uuid)">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </draggable>
+                </draggable>
+            </div>
         </div>
 
         <!-- アイテム選択のモーダル -->
@@ -203,7 +206,7 @@ export default {
                     padding-right: 5px;
                     position: absolute;
                     z-index: 10;
-                    background: rgba(255,255,255,0.8);
+                    background: rgba(255, 255, 255, 0.8);
                     font-weight: 700;
                 }
             }
@@ -215,6 +218,24 @@ export default {
             display: inline-block;
             margin-bottom: 20px;
             font-size: 18px;
+            width: 50%;
+        }
+
+        /**
+         * 出力用
+         */
+        #print-area.printing{
+            .inner {
+                border-color: #000;
+            }
+
+            .title-area {
+                border-bottom: solid 2px #000;
+            }
+
+            input[type="checkbox"]{
+                display: none;
+            }
         }
     }
 }
