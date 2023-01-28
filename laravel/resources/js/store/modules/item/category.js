@@ -130,7 +130,7 @@ export default {
          * @param state
          * @param getters
          */
-        getItems({commit, state, getters}) {
+        async getItems({commit, state, getters}) {
             let cate_name = '';
             let cate_id = null;
             if (state.third_categories == null) {
@@ -140,12 +140,12 @@ export default {
                 cate_name = 'third_cate';
                 cate_id = state.third_category;
             }
-            axios.get(state.get_items_url + '/' + cate_name + '/' + cate_id)
+            await axios.get(state.get_items_url + '/' + cate_name + '/' + cate_id)
                 .then(response => {
                     state.items = response.data.items;
 
-                    console.log('items の中身');
-                    console.log(state.items);
+                    // console.log('items の中身');
+                    // console.log(state.items);
                 })
                 .catch(error => {
                     console.log(error);

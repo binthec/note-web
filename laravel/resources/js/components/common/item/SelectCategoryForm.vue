@@ -1,8 +1,8 @@
 <template>
     <div class="form-group row">
-        <label for="first_category" class="col-sm-2 col-form-label">{{ categoryName }}</label>
+        <label :for="categoryInputId" class="col-sm-2 col-form-label">{{ categoryName }}</label>
         <div class="col-sm-10">
-            <select class="form-control" v-model="bindValueComputed" :disabled="isDisabled">
+            <select class="form-control" v-model="bindValueComputed" :disabled="isDisabled" :id="categoryInputId">
                 <option v-for="(option, key) in categories" :value="key">{{ option }}</option>
             </select>
             <div class="help-block text-danger" v-if="errorMessage">{{ errorMessage }}</div>
@@ -32,6 +32,9 @@ export default {
         },
         isDisabled: {
             default: false
+        },
+        categoryInputId: {
+            default: 'category'
         }
     },
 

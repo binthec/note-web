@@ -21,9 +21,8 @@
             id="add-btn"
             type="button"
             class="btn btn-warning"
-            :disabled="isDisabledAddItems"
             @click="addItemEvent"
-        ><i class="fas fa-sitemap"></i> アイテム追加
+        ><i class="fas fa-sitemap"></i> アイテム選択
         </button>
     </div>
 </template>

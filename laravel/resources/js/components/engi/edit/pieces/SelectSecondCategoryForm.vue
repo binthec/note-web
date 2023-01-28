@@ -4,6 +4,7 @@
         :categories="second_categories"
         :bind-value="second_category"
         @update:bindValue="changeSecondCategory"
+        :category-input-id="'second-cate-select'"
     ></select-category-form>
 </template>
 
@@ -37,7 +38,8 @@ export default {
         async changeSecondCategory(value) {
             this.setSecondCategory({value: value});
             await this.getThirdCategories();
-            this.getItems();
+            await this.getItems();
+            this.$emit('change-item-elm-style');
         },
     }
 }

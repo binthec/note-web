@@ -5,6 +5,7 @@
         :bind-value="third_category"
         @update:bindValue="changeThirdCategory"
         :is-disabled="isDisabled"
+        :category-input-id="'third-cate-select'"
     ></select-category-form>
 </template>
 
@@ -44,9 +45,11 @@ export default {
             'getItems'
         ]),
 
-        changeThirdCategory(value) {
+        async changeThirdCategory(value) {
+            console.log('changeThirdCategory 入りました');
             this.setThirdCategory({value: value});
-            this.getItems();
+            await this.getItems();
+            this.$emit('change-item-elm-style');
         },
     }
 }

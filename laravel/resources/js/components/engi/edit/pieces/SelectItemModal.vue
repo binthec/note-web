@@ -4,13 +4,14 @@
            :height="'auto'"
            :reset="true"
            :scrollable="true"
+           @opened="changeItemElmStyle"
     >
         <div class="modal-header bg-info">
             <h4>追加したいアイテムの選択</h4>
         </div>
         <div class="modal-body">
-            <select-second-category-form></select-second-category-form>
-            <select-third-category-form></select-third-category-form>
+            <select-second-category-form @change-item-elm-style="changeItemElmStyle"></select-second-category-form>
+            <select-third-category-form @change-item-elm-style="changeItemElmStyle"></select-third-category-form>
 
             <hr>
 
@@ -18,7 +19,9 @@
 
                 <div class="row" v-if="items.length > 0">
                     <div class="item-box col-3" v-for="(item, key) in items">
-                        <label :for="'item_' + item.uuid" :class="{ checked: isChecked(item.uuid) }">
+                        <label :for="'item_' + item.uuid" :class="{ checked: isChecked(item.uuid) }"
+                               :id="'label_' + item.uuid">
+                            <span class="cover" :id="'cover_' + item.uuid"></span>
                             <input type="checkbox"
                                    :id="'item_' + item.uuid"
                                    :value="key"
@@ -44,8 +47,13 @@
 <script>
 // vuex
 import {mapState, mapMutations, mapActions} from "vuex";
+
+// component
 import SelectSecondCategoryForm from "./SelectSecondCategoryForm";
 import SelectThirdCategoryForm from "./SelectThirdCategoryForm";
+
+// const
+import {ONE_SHEET_MAX_CNT} from "../../../../const/item";
 
 export default {
     name: "SelectItemModal",
@@ -63,8 +71,9 @@ export default {
     },
 
     props: {
-        getFilePath : {
-            default : () => {}
+        getFilePath: {
+            default: () => {
+            }
         }
     },
 
@@ -79,6 +88,10 @@ export default {
             'selected_items'
         ]),
 
+        ...mapState('engi/edit', [
+            'engi'
+        ]),
+
         isChecked() {
             return (uuid) => {
                 // この uuid を持ったアイテムが既に選択されているかどうか判断して返す
@@ -87,6 +100,10 @@ export default {
                 });
             }
         },
+
+        isCapacityFull() {
+            return this.selected_items.length >= ONE_SHEET_MAX_CNT[this.engi.item_num];
+        }
     },
 
     methods: {
@@ -120,12 +137,44 @@ export default {
                 return item.uuid === uuid;
             });
 
-            if (itemIndex === -1) {
-                // 選択してない場合は配列に追加する
+            if (itemIndex === -1) { // チェックを入れた場合
+                // 配列に追加
                 this.selected_items.push(this.items[key]);
-            } else {
-                // 選択上体の場合は配列から削除する
+            } else { // チェックを外した場合
+                // 配列から削除
                 this.selected_items.splice(itemIndex, 1);
+            }
+
+            // 選択可能数の上限を超えるかを見て、アイテムboxのスタイルを変更する
+            this.changeItemElmStyle();
+        },
+
+        changeItemElmStyle() {
+            console.log('changeItemElmStyle が呼ばれたよ');
+
+            if (this.isCapacityFull) { // もうこれ以上選択できないとき
+                this.items.forEach((item, index) => {
+                    let selected = this.selected_items.some(selected_item => {
+                        return selected_item.uuid === item.uuid;
+                    });
+                    let cover = document.getElementById('cover_' + item.uuid);
+                    let itemElm = document.getElementById('item_' + item.uuid);
+                    if (selected) {
+                        // 選択されてるものは、引き続き変更できるようにする
+                        cover.style.display = 'none';
+                        itemElm.disabled = false;
+                    }else{
+                        // 選択されてないものは、選択できないように style を変更する
+                        cover.style.display = 'block';
+                        itemElm.disabled = true;
+                    }
+                });
+            } else {
+                // まだ選択できるときは、全てのアイテムボックスを選択可能に変更
+                document.querySelectorAll(".item-box").forEach(box => {
+                    box.querySelector('.cover').style.display = 'none';
+                    box.querySelector('input').disabled = false;
+                });
             }
         }
     }
@@ -155,10 +204,10 @@ export default {
             position: absolute;
             top: 12px;
             right: 12px;
-            z-index: 999;
+            z-index: 100;
         }
 
-        .item-img{
+        .item-img {
             position: absolute;
             display: flex;
             width: 100%;
@@ -179,12 +228,23 @@ export default {
             padding-right: 5px;
             position: absolute;
             z-index: 10;
-            background: rgba(255,255,255,0.8);
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        &.checked{
-            border: 4px solid $bg-info;
+        &.checked {
+            border: 2px solid $bg-info;
         }
+    }
+
+    .cover {
+        width: 100%;
+        height: 100%;
+        background-color: #ccc;
+        opacity: 0.6;
+        position: absolute;
+        z-index: 200;
+        border-radius: 10px;
+        display: none;
     }
 }
 
