@@ -46,7 +46,6 @@ export default {
         ]),
 
         async changeThirdCategory(value) {
-            console.log('changeThirdCategory 入りました');
             this.setThirdCategory({value: value});
             await this.getItems();
             this.$emit('change-item-elm-style');

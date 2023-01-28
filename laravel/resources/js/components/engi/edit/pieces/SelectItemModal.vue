@@ -150,8 +150,6 @@ export default {
         },
 
         changeItemElmStyle() {
-            console.log('changeItemElmStyle が呼ばれたよ');
-
             if (this.isCapacityFull) { // もうこれ以上選択できないとき
                 this.items.forEach((item, index) => {
                     let selected = this.selected_items.some(selected_item => {
