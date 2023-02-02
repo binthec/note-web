@@ -75,23 +75,12 @@ export default {
 
     methods: {
         ...mapMutations('item/list', [
-            'setCurrentPage',
-            'setListOrder',
-            'setListOrderColumn',
+            'setCurrentPage'
         ]),
 
         ...mapActions('item/list', [
             'getList',
         ]),
-
-        editEntity(row){
-            window.open('/items/' + row.uuid + '/edit', '_self');
-        },
-
-        deleteEntity(row){
-            console.log('delete');
-            console.log(row);
-        },
     }
 }
 </script>

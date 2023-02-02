@@ -3,13 +3,17 @@ export default {
 
     state: {
         list: {
-            'current_page': 1,
-            'per_page': 20,
-            'order': 'desc',
-            'order_column': 'updated_at',
-            'last_page': null,
-            'total': null,
+            data: {},
+            current_page: 1,
+            per_page: 20,
+            from: null,
+            last_page : null,
+            to: null,
+            total : null,
         },
+
+        order_column: 'updated_at',
+        order_direction: 'desc',
 
         list_url: '/api/engi',
         delete_url: '/api/engi/'
@@ -18,6 +22,15 @@ export default {
     mutations: {
         setCurrentPage(state, payload) {
             state.list.current_page = payload.current_page;
+        },
+
+        setList(state, payload){
+            state.list.data = payload.data;
+            state.list.current_page = payload.current_page;
+            state.list.from = payload.from;
+            state.list.last_page = payload.last_page;
+            state.list.to = payload.to;
+            state.list.total = payload.total;
         }
     },
 
@@ -27,13 +40,13 @@ export default {
                 params: {
                     page: state.list.current_page,
                     per_page: state.list.per_page,
-                    order_column: state.list.order_column ?? 'updated_at',
-                    order: state.list.order ?? 'desc',
+                    order_column: state.order_column,
+                    order_direction: state.order_direction,
                 }
             })
                 .then(response => {
                     if (response.status === 200) {
-                        state.list = response.data.list;
+                        commit('setList', response.data.list);
                     }
                 })
                 .catch(error => {

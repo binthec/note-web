@@ -28,6 +28,14 @@ export default {
         setListOrderColumn(state, payload){
             state.order_column = payload.value;
         },
+        setList(state, payload){
+            state.list.data = payload.data;
+            state.list.current_page = payload.current_page;
+            state.list.from = payload.from;
+            state.list.last_page = payload.last_page;
+            state.list.to = payload.to;
+            state.list.total = payload.total;
+        }
     },
 
     actions: {
@@ -42,7 +50,7 @@ export default {
             })
                 .then(response => {
                     if (response.status === 200) {
-                        state.list = response.data.list;
+                        commit('setList', response.data.list);
                     }
                 })
                 .catch(error => {

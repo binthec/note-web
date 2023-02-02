@@ -22,7 +22,7 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 // コンテンツ管理
 Route::prefix('items')->group(function(){
     Route::get('/', 'ItemController@index')        ->name('items.list');
-    Route::get('/download', 'ItemController@index')->name('items.download');
+    Route::get('/download', 'ItemController@download')->name('items.download');
 });
 
 // 演技シート

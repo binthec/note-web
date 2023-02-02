@@ -2,14 +2,14 @@
     <div class="card-footer" v-show="hasManyPages">
         <ul class="pagination pagination-md m-0">
             <li class="page-item">
-                <button class="page-link" @click="goPage('prev')" :disabled="isFirstPage">前</button>
+                <button type="button" class="page-link" @click="goPage('prev')" :disabled="isFirstPage">前</button>
             </li>
             <li class="page-item" v-for="page_num in list.last_page" :key="page_num"
                 :class="{ active: isActive(page_num) }">
                 <a class="page-link" href="javascript: void(0);" @click="goPage(page_num)">{{ page_num }}</a>
             </li>
             <li class="page-item">
-                <button class="page-link" @click="goPage('next')" :disabled="isLastPage">次</button>
+                <button type="button" class="page-link" @click="goPage('next')" :disabled="isLastPage">次</button>
             </li>
         </ul>
     </div>
