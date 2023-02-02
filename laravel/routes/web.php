@@ -21,9 +21,8 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 // コンテンツ管理
 Route::prefix('items')->group(function(){
-    Route::get('/', 'ItemController@index')          ->name('items.list');
-    Route::get('/create', 'ItemController@create')   ->name('items.create');
-    Route::get('/{uuid}/edit', 'ItemController@edit')->name('items.edit');
+    Route::get('/', 'ItemController@index')        ->name('items.list');
+    Route::get('/download', 'ItemController@index')->name('items.download');
 });
 
 // 演技シート

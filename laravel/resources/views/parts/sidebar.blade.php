@@ -17,22 +17,55 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="list-header">作る</li>
+                <li class="nav-item">
+                    <a href="{{ route('engi.list') }}" class="nav-link<?php if(current_controller() == 'engi') echo ' active'?>">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>演技シート</p>
+                    </a>
+                </li>
+
+                <li class="list-header">管理する</li>
+                <li class="nav-item">
+                    <a href="{{ route('items.list') }}" class="nav-link<?php if(currentRouteName() === 'items.list') echo ' active'?>">
+                        <i class="nav-icon fas fa-walking text-lg"></i>
+                        <p>一覧</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('items.download') }}" class="nav-link<?php if(currentRouteName() === 'items.download') echo ' active'?>">
+                        <i class="nav-icon fas fa-file-download text-lg"></i>
+                        <p>ダウンロード</p>
+                    </a>
+                </li>
+
+
+                <li class="nav-header">EXAMPLES</li>
                 <li class="nav-item<?php if(current_controller() == 'friendsNote') echo ' menu-open'?>">
                     <a href="" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
-                        <p>フレンズノート</p>
+                        <p>フレンズノート　<i class="fas fa-angle-left right"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/pages/layout/top-nav.html" class="nav-link<?php if(currentRouteName() === 'friendsNode.list') echo ' active'?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>めにゅー１</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/pages/layout/top-nav-sidebar.html" class="nav-link<?php if(currentRouteName() === 'friendsNode.edit') echo ' active'?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>めにゅー２</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item<?php if(current_controller() == 'items') echo ' menu-open'?>">
-                    <a href="{{ route('items.list') }}" class="nav-link">
-                        <i class="nav-icon fas fa-walking text-lg"></i>
-                        <p>アイテム管理</p>
-                    </a>
-                </li>
-                <li class="nav-item<?php if(current_controller() == 'engi') echo ' menu-open'?>">
-                    <a href="{{ route('engi.list') }}" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>演技シート</p>
+
+                <li class="nav-item">
+                    <a href="/pages/calendar.html" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>Calendar</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -90,13 +123,6 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-header">EXAMPLES</li>
-                <li class="nav-item">
-                    <a href="/pages/calendar.html" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
-                        <p>Calendar</p>
-                    </a>
                 </li>
             </ul>
         </nav>

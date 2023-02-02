@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <item-edit></item-edit>
+    <item-download></item-download>
 @endsection

@@ -2,8 +2,8 @@
     <default-layout>
 
         <list-header slot="page_header"
-                     :header-icon="'nav-icon fas fa-walking'"
-                     :page-title="'アイテム一覧'"
+                     :header-icon="'nav-icon fas fa-file-download'"
+                     :page-title="'アイテムダウンロード'"
         ></list-header>
 
         <template v-slot:card_body>
@@ -12,21 +12,15 @@
                     <thead>
                     <tr>
                         <th>uuid</th>
-                        <th>徒手or手具</th>
-                        <th>中分類</th>
-                        <th>小分類</th>
-                        <th>連番</th>
                         <th>タイトル</th>
+                        <th>更新日時</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="(row, index) in list.data">
                         <td>{{ row.uuid }}</td>
-                        <td>{{ row.first_cate }}</td>
-                        <td>{{ row.second_cate }}</td>
-                        <td>{{ row.third_cate }}</td>
-                        <td>{{ row.note_order }}</td>
                         <td>{{ row.title }}</td>
+                        <td>{{ row.updated_at }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -75,9 +69,7 @@ export default {
 
     methods: {
         ...mapMutations('item/list', [
-            'setCurrentPage',
-            'setListOrder',
-            'setListOrderColumn',
+            'setCurrentPage'
         ]),
 
         ...mapActions('item/list', [

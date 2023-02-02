@@ -3,17 +3,13 @@ export default {
 
     state: {
         list: {
-            data: {},
-            current_page: 1,
-            per_page: 20,
-            from: null,
-            last_page : null,
-            to: null,
-            total : null,
+            'current_page': 1,
+            'per_page': 20,
+            'order': 'desc',
+            'order_column': 'updated_at',
+            'last_page' : null,
+            'total' : null,
         },
-
-        order_column: 'id',
-        order_direction: 'asc',
 
         list_url: '/api/items',
     },
@@ -21,13 +17,7 @@ export default {
     mutations: {
         setCurrentPage(state, payload) {
             state.list.current_page = payload.current_page;
-        },
-        setListOrder(state, payload){
-            state.order_direction = payload.value;
-        },
-        setListOrderColumn(state, payload){
-            state.order_column = payload.value;
-        },
+        }
     },
 
     actions: {
@@ -36,8 +26,8 @@ export default {
                 params: {
                     page: state.list.current_page,
                     per_page: state.list.per_page,
-                    order_column: state.order_column,
-                    order_direction: state.order_direction,
+                    order_column: state.list.order_column ?? 'updated_at',
+                    order: state.list.order ?? 'desc',
                 }
             })
                 .then(response => {

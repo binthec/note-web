@@ -1,12 +1,12 @@
 import list from "./item/list";
-import edit from "./item/edit";
+import download from "./item/download";
 import category from "./item/category";
 
 const item = {
     namespaced: true,
     modules: {
         list,
-        edit,
+        download,
         category
     }
 }

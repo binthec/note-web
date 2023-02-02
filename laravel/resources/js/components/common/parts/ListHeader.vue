@@ -7,7 +7,7 @@
             :page-title="pageTitle"
         ></page-title>
 
-        <div class="row mb-2">
+        <div class="row mb-2" v-if="createPath">
             <div class="col-sm-12">
                 <a :href="createPath" class="btn btn-primary">新規作成</a>
             </div>

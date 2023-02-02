@@ -27,22 +27,13 @@ class ItemController extends Controller
     }
 
     /**
-     * 新規作成画面
+     * ダウンロード
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function download()
     {
-        return view('item.create');
+        return view('item.download');
     }
 
-    /**
-     * 編集画面
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit(string $uuid)
-    {
-        return view('item.edit', ['uuid' => $uuid]);
-    }
 }
