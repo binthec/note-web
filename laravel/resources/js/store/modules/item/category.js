@@ -12,7 +12,14 @@ export default {
         get_second_cate_url: '/api/items/getSecondCategories',
         get_third_cate_url: '/api/items/getThirdCategories',
         get_items_url: '/api/items/getItems',
+        get_category_labels: '/api/items/getCategoryLabels',
 
+        // 各カテゴリ名のラベル
+        first_cate_labels: [],
+        second_cate_labels: [],
+        third_cate_labels: [],
+
+        // アイテムの中身
         first_categories: [],
         second_categories: [],
         third_categories: [],
@@ -40,6 +47,11 @@ export default {
         },
         resetSelectedItems(state, payload) {
             state.selected_items = [];
+        },
+        setCategoryLabels(state, payload){
+            state.first_cate_labels  = payload.first_cate_labels;
+            state.second_cate_labels = payload.second_cate_labels;
+            state.third_cate_labels  = payload.third_cate_labels;
         }
     },
 
@@ -154,5 +166,18 @@ export default {
                     // }
                 })
         },
+
+        getCategoryLabels({commit, state}){
+            axios.get(state.get_category_labels)
+                .then(response => {
+                    commit('setCategoryLabels', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    // if (error.response.status === 404) {
+                    //     window.location.replace('/404');
+                    // }
+                })
+        }
     }
 }

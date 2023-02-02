@@ -191,4 +191,19 @@ class ItemController extends Controller
             'items' => $items,
         ], HttpStatusCode::OK);
     }
+
+    /**
+     * カテゴリラベルを全部返す
+     *
+     * @return JsonResponse
+     */
+    public function getCategoryLabels(): JsonResponse
+    {
+        return response()->json([
+            'message' => 'success',
+            'first_cate_labels' => ItemCategoryCode::$first_category_labels,
+            'second_cate_labels' => ItemCategoryCode::$second_category_labels,
+            'third_cate_labels' => ItemCategoryCode::$third_category_labels,
+        ], HttpStatusCode::OK);
+    }
 }

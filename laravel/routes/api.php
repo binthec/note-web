@@ -25,6 +25,7 @@ Route::prefix('items')->group(function(){
     Route::get('/getSecondCategories/{first_cate_id}', 'Api\ItemController@getSecondCategories');
     Route::get('/getThirdCategories/{second_cate_id}', 'Api\ItemController@getThirdCategories');
     Route::get('/getItems/{cate_name}/{cate_id}', 'Api\ItemController@getItems');
+    Route::get('/getCategoryLabels', 'Api\ItemController@getCategoryLabels');
     Route::get('/{uuid}', 'Api\ItemController@show'); // 単一のレコードを取得する場合
     Route::put('/{uuid}', 'Api\ItemController@update');
 });

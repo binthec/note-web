@@ -12,7 +12,7 @@
                     <thead>
                     <tr>
                         <th>uuid</th>
-                        <th>徒手or手具</th>
+                        <th>徒手/手具</th>
                         <th>中分類</th>
                         <th>小分類</th>
                         <th>連番</th>
@@ -22,9 +22,9 @@
                     <tbody>
                     <tr v-for="(row, index) in list.data">
                         <td>{{ row.uuid }}</td>
-                        <td>{{ row.first_cate }}</td>
-                        <td>{{ row.second_cate }}</td>
-                        <td>{{ row.third_cate }}</td>
+                        <td>{{ first_cate_labels[row.first_cate] }}</td>
+                        <td>{{ second_cate_labels[row.first_cate][row.second_cate] }}</td>
+                        <td>{{ row.third_cate ? third_cate_labels[row.second_cate][row.third_cate] : '-' }}</td>
                         <td>{{ row.note_order }}</td>
                         <td>{{ row.title }}</td>
                     </tr>
@@ -60,6 +60,12 @@ export default {
     computed: {
         ...mapState('item/list', [
             'list',
+        ]),
+
+        ...mapState('item/category', [
+            'first_cate_labels',
+            'second_cate_labels',
+            'third_cate_labels'
         ])
     },
 
@@ -70,6 +76,7 @@ export default {
     },
 
     async mounted() {
+        this.getCategoryLabels();
         await this.getList();
     },
 
@@ -80,6 +87,10 @@ export default {
 
         ...mapActions('item/list', [
             'getList',
+        ]),
+
+        ...mapActions('item/category', [
+           'getCategoryLabels'
         ]),
     }
 }
