@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "admin-lte": "^3.2.0",
+        "downloadjs": "^1.4.7",
         "html-to-image": "^1.11.4",
         "jspdf": "^2.5.1",
         "vue-js-modal": "^2.0.1",
