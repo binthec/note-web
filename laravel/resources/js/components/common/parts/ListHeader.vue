@@ -1,7 +1,6 @@
 <template>
 
     <div class="container-fluid">
-
         <page-title
             :header-icon="headerIcon"
             :page-title="pageTitle"
@@ -18,27 +17,27 @@
 </template>
 
 <script>
-    import PageTitle from "./PageTitle";
+import PageTitle from "./PageTitle";
 
-    export default {
-        name: "ListPageHeader",
+export default {
+    name: "ListPageHeader",
 
-        components: {
-            PageTitle
+    components: {
+        PageTitle
+    },
+
+    props: {
+        headerIcon: {
+            default: null,
         },
-
-        props: {
-            headerIcon: {
-                default: null,
-            },
-            pageTitle: {
-                default: null,
-            },
-            createPath: {
-                default: null,
-            }
+        pageTitle: {
+            default: null,
+        },
+        createPath: {
+            default: null,
         }
     }
+}
 </script>
 
 <style scoped>

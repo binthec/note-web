@@ -5,6 +5,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <slot name="page_header"></slot>
+            <slot name="search_area"></slot>
         </section>
 
         <!-- Main Content -->

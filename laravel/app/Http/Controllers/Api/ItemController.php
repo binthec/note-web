@@ -41,9 +41,11 @@ class ItemController extends Controller
             $query->orderBy($request->order_column, $request->order_direction);
         }
 
-        $list = $query->paginate($request->per_page);
+        if(!empty($request->search_text)){
+            $query->where('title', 'LIKE', '%' . $request->search_text . '%');
+        }
 
-        // Log::info($list);
+        $list = $query->paginate($request->per_page);
 
         return response()->json([
             'message' => 'success',

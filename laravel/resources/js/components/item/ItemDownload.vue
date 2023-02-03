@@ -5,6 +5,8 @@
                      :page-title="'アイテムダウンロード'"
         ></list-header>
 
+        <download-search slot="search_area"></download-search>
+
         <download-body slot="card_body"></download-body>
 
         <Paginator slot="card_footer"
@@ -23,11 +25,13 @@ import DownloadBody from "./download/DownloadBody";
 
 // store
 import {mapState, mapActions, mapMutations} from "vuex";
+import DownloadSearch from "./download/DownloadSearch";
 
 export default {
     name: "ItemDownload",
 
     components: {
+        DownloadSearch,
         DownloadBody,
         DefaultLayout,
         ListHeader,
