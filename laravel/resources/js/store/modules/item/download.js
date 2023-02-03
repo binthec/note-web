@@ -7,9 +7,9 @@ export default {
             current_page: 1,
             per_page: 20,
             from: null,
-            last_page : null,
+            last_page: null,
             to: null,
-            total : null,
+            total: null,
         },
 
         order_column: 'id',
@@ -22,20 +22,23 @@ export default {
         setCurrentPage(state, payload) {
             state.list.current_page = payload.current_page;
         },
-        setListOrder(state, payload){
+        setListOrder(state, payload) {
             state.order_direction = payload.value;
         },
-        setListOrderColumn(state, payload){
+        setListOrderColumn(state, payload) {
             state.order_column = payload.value;
         },
-        setList(state, payload){
+        setList(state, payload) {
             state.list.data = payload.data;
             state.list.current_page = payload.current_page;
             state.list.from = payload.from;
             state.list.last_page = payload.last_page;
             state.list.to = payload.to;
             state.list.total = payload.total;
-        }
+        },
+        setListPerPage(state, payload) {
+            state.list.per_page = payload.value;
+        },
     },
 
     actions: {

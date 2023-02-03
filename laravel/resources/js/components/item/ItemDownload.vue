@@ -7,23 +7,15 @@
         ></list-header>
 
         <template v-slot:card_body>
-            <div class="card-body p-0">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>uuid</th>
-                        <th>タイトル</th>
-                        <th>更新日時</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(row, index) in list.data">
-                        <td>{{ row.uuid }}</td>
-                        <td>{{ row.title }}</td>
-                        <td>{{ row.updated_at }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="card-body row">
+                <div class="col-4" v-for="(item, index) in list.data">
+                    <div class="piece">
+                        <span class="item-title">{{ item.title }}</span>
+                        <div class="item-img">
+                            <img :src="getFilePath(item.first_cate, item.uuid)">
+                        </div>
+                    </div>
+                </div>
             </div>
         </template>
 
@@ -35,15 +27,19 @@
 </template>
 
 <script>
-
-import DefaultLayout from "../common/layout/DefaultFormLayout";
+// component
+import DefaultLayout from "../common/layout/DefaultLayout";
 import ListHeader from "../common/parts/ListHeader";
 import Paginator from "../common/parts/Paginator";
 
+// store
 import {mapState, mapActions, mapMutations} from "vuex";
 
+// script
+import {getImageSvgPath} from "../../script/item"
+
 export default {
-    name: "ItemList",
+    name: "ItemDownload",
 
     components: {
         DefaultLayout,
@@ -52,42 +48,72 @@ export default {
     },
 
     computed: {
-        ...mapState('item/list', [
+        ...mapState('item/download', [
             'list',
         ])
     },
 
     watch: {
-        'list.current_page': function(val, oldVal){
+        'list.current_page': function (val, oldVal) {
             this.getList();
         },
     },
 
     async mounted() {
+        this.setListPerPage({value: 30});
         await this.getList();
     },
 
     methods: {
-        ...mapMutations('item/list', [
-            'setCurrentPage'
+        ...mapMutations('item/download', [
+            'setCurrentPage',
+            'setListPerPage'
         ]),
 
-        ...mapActions('item/list', [
+        ...mapActions('item/download', [
             'getList',
         ]),
 
-        editEntity(row){
-            window.open('/items/' + row.uuid + '/edit', '_self');
-        },
-
-        deleteEntity(row){
-            console.log('delete');
-            console.log(row);
+        getFilePath(first_cate, uuid) {
+            return getImageSvgPath(first_cate, uuid);
         },
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../../sass/variables";
 
+.piece {
+    border: solid 2px $gray-border;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    min-height: 180px;
+    background-color: #ffffff;
+    position: relative;
+
+    .item-title {
+        display: inline-block;
+        margin: 5px 35px 0 8px;
+        padding-right: 5px;
+        position: absolute;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.8);
+        font-weight: 700;
+    }
+
+    .item-img {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 40px 5px 5px 5px;
+
+        img {
+            margin: auto;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
 </style>
