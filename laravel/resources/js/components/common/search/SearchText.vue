@@ -25,9 +25,8 @@ export default {
             default: null
         },
         searchTextClass: {
-            type: Object,
-            default: () => {
-            }
+            type: String,
+            default: null
         },
         maxLength: {
             type: Number,

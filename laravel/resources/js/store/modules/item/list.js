@@ -2,6 +2,10 @@ export default {
     namespaced: true,
 
     state: {
+        params: {
+            search_text: null,
+        },
+
         list: {
             data: {},
             current_page: 1,
@@ -46,6 +50,7 @@ export default {
                     per_page: state.list.per_page,
                     order_column: state.order_column,
                     order_direction: state.order_direction,
+                    search_text: state.params.search_text
                 }
             })
                 .then(response => {

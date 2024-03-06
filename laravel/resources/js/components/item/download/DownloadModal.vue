@@ -1,7 +1,8 @@
 <template>
     <modal name="download-item-modal"
-           :width="'70%'"
+           :width="'50%'"
            :height="'auto'"
+           :scrollable="true"
     >
         <div class="modal-header bg-info">
             <h4 class="item-title">{{ item.title }}</h4>
@@ -74,7 +75,7 @@ export default {
     background-color: #eee;
 
     .wrapper {
-        padding: 20px 20px 60px;
+        padding: 20px;
         margin: auto;
 
         .item-img {

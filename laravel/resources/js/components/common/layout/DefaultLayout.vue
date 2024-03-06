@@ -4,8 +4,10 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <slot name="page_header"></slot>
-            <slot name="search_area"></slot>
+            <div class="container-fluid">
+                <slot name="page_header"></slot>
+                <slot name="search_area"></slot>
+            </div>
         </section>
 
         <!-- Main Content -->

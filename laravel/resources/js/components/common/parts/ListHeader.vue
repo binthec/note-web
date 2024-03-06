@@ -1,6 +1,5 @@
 <template>
-
-    <div class="container-fluid">
+    <div>
         <page-title
             :header-icon="headerIcon"
             :page-title="pageTitle"
@@ -11,9 +10,7 @@
                 <a :href="createPath" class="btn btn-primary">新規作成</a>
             </div>
         </div>
-
-    </div><!-- /.container-fluid -->
-
+    </div>
 </template>
 
 <script>

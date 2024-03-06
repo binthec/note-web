@@ -6,6 +6,11 @@
                      :page-title="'アイテム一覧'"
         ></list-header>
 
+        <item-search slot="search_area"
+                     :get-list="getList"
+                     :params="params"
+        ></item-search>
+
         <template v-slot:card_body>
             <div class="card-body p-0">
                 <table class="table">
@@ -41,17 +46,20 @@
 </template>
 
 <script>
+// store
+import {mapState, mapActions, mapMutations} from "vuex";
 
+// component
 import DefaultLayout from "../common/layout/DefaultFormLayout";
 import ListHeader from "../common/parts/ListHeader";
 import Paginator from "../common/parts/Paginator";
-
-import {mapState, mapActions, mapMutations} from "vuex";
+import ItemSearch from "./parts/ItemSearch";
 
 export default {
     name: "ItemList",
 
     components: {
+        ItemSearch,
         DefaultLayout,
         ListHeader,
         Paginator
@@ -60,6 +68,7 @@ export default {
     computed: {
         ...mapState('item/list', [
             'list',
+            'params'
         ]),
 
         ...mapState('item/category', [

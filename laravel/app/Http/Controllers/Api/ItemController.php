@@ -33,7 +33,6 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-
         $query = Item::query();
 
         // ソート順が渡された場合に並び順をクエリに加える

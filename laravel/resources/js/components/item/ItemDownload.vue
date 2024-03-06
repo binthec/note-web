@@ -1,11 +1,14 @@
-<template>
+<template>　
     <default-layout>
         <list-header slot="page_header"
                      :header-icon="'nav-icon fas fa-file-download'"
                      :page-title="'アイテムダウンロード'"
         ></list-header>
 
-        <download-search slot="search_area"></download-search>
+        <item-search slot="search_area"
+                     :get-list="getList"
+                     :params="params"
+        ></item-search>
 
         <download-body slot="card_body"></download-body>
 
@@ -17,21 +20,21 @@
 </template>
 
 <script>
+// store
+import {mapState, mapActions, mapMutations} from "vuex";
+
 // component
 import DefaultLayout from "../common/layout/DefaultLayout";
 import ListHeader from "../common/parts/ListHeader";
 import Paginator from "../common/parts/Paginator";
 import DownloadBody from "./download/DownloadBody";
-
-// store
-import {mapState, mapActions, mapMutations} from "vuex";
-import DownloadSearch from "./download/DownloadSearch";
+import ItemSearch from "./parts/ItemSearch";
 
 export default {
     name: "ItemDownload",
 
     components: {
-        DownloadSearch,
+        ItemSearch,
         DownloadBody,
         DefaultLayout,
         ListHeader,
@@ -41,6 +44,7 @@ export default {
     computed: {
         ...mapState('item/download', [
             'list',
+            'params'
         ])
     },
 
