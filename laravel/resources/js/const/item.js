@@ -9,3 +9,5 @@ export const ONE_SHEET_MAX_CNT = {
     3: 12,
     4: 20
 }
+
+export const SAMPLE_IMG = '/assets/items/sample.png'
