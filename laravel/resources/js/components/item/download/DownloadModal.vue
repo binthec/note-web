@@ -10,7 +10,7 @@
         <div class="modal-body">
             <div class="wrapper">
                 <div class="item-img text-center" id="download-img">
-                    <img :src="getFilePath(item.first_cate, item.uuid)" @error="noImage">
+                    <img :src="getImageSvgPath(item.first_cate, item.uuid)" @error="noImage">
                 </div>
             </div>
             <span>ダウンロード：</span>
@@ -24,14 +24,15 @@
 </template>
 
 <script>
-import {getImageSvgPath} from "../../../script/item";
 import * as htmlToImage from 'html-to-image';
 import {toPng, toJpeg, toBlob, toPixelData, toSvg} from 'html-to-image';
 import * as download from "downloadjs";
-import {SAMPLE_IMG} from "../../../const/item";
+import {itemImg} from "../../../mixins/item";
 
 export default {
     name: "DownloadModal",
+
+    mixins: [itemImg],
 
     props: {
         item: {
@@ -42,10 +43,6 @@ export default {
     methods: {
         hideModal() {
             this.$modal.hide('download-item-modal');
-        },
-
-        getFilePath(first_cate, uuid) {
-            return getImageSvgPath(first_cate, uuid);
         },
 
         downloadPng(uuid) {
@@ -61,11 +58,7 @@ export default {
         },
 
         downloadSvg() {
-            download(this.getFilePath(this.item.first_cate, this.item.uuid));
-        },
-
-        noImage(e){
-            e.target.src = SAMPLE_IMG;
+            download(this.getImageSvgPath(this.item.first_cate, this.item.uuid));
         }
     }
 }

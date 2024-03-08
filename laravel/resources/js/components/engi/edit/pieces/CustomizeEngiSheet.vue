@@ -27,7 +27,7 @@
                             <input type="checkbox" :id="'del_' + item.uuid" :value="item.uuid" v-model="deleteItems">
                             <span class="item-title">{{ item.title }}</span>
                             <div class="item-img">
-                                <img :src="getFilePath(item.first_cate, item.uuid)" @error="noImage">
+                                <img :src="getImageSvgPath(item.first_cate, item.uuid)" @error="noImage">
                             </div>
                         </div>
                     </div>
@@ -36,20 +36,21 @@
         </div>
 
         <!-- アイテム選択のモーダル -->
-        <select-item-modal :get-file-path="getFilePath"></select-item-modal>
+        <select-item-modal></select-item-modal>
     </div>
 </template>
 
 <script>
-import {FIRST_CATE_DIR_NAME, SAMPLE_IMG} from '../../../../const/item';
-
 import SelectItemModal from "./SelectItemModal";
 import {mapMutations, mapState} from "vuex";
 import draggable from "vuedraggable";
 import CustomizeEngiSheetMenu from "./CustomizeEngiSheetMenu";
+import {itemImg} from "../../../../mixins/item";
 
 export default {
     name: "CustomizeEngiSheet",
+
+    mixins: [itemImg],
 
     data() {
         return {
@@ -113,15 +114,6 @@ export default {
         resetEvent() {
             this.deleteItems = [];
         },
-
-        getFilePath(first_cate, uuid) {
-            return '/assets/items/' + FIRST_CATE_DIR_NAME[first_cate] + '/' + uuid + '.svg';
-        },
-
-        noImage(e){
-            e.target.src = SAMPLE_IMG;
-        }
-
 
         /**
          * add button は動かさないので、開始イベントを抑止する

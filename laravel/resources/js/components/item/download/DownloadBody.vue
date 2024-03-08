@@ -4,7 +4,7 @@
             <div class="piece">
                 <span class="item-title">{{ item.title }}</span>
                 <div class="item-img">
-                    <img :src="getFilePath(item.first_cate, item.uuid)" @error="noImage">
+                    <img :src="getImageSvgPath(item.first_cate, item.uuid)" @error="noImage">
                 </div>
             </div>
         </div>
@@ -13,12 +13,13 @@
 </template>
 
 <script>
-import {getImageSvgPath} from "../../../script/item";
 import {mapState} from "vuex";
 import DownloadModal from "./DownloadModal";
-import {SAMPLE_IMG} from "../../../const/item";
+import {itemImg} from "../../../mixins/item";
 
 export default {
+    mixins: [itemImg],
+
     name: "DownloadBody",
 
     components: {DownloadModal},
@@ -36,18 +37,6 @@ export default {
     },
 
     methods: {
-        getFilePath(first_cate, uuid) {
-            return getImageSvgPath(first_cate, uuid);
-        },
-
-        /**
-         * 画像がない時にデフォルト画像を表示する
-         * @returns {string}
-         */
-        noImage(e){
-            e.target.src = SAMPLE_IMG;
-        },
-
         showModal(item) {
             console.log('clicked!');
             this.$modal.show('download-item-modal');

@@ -30,7 +30,7 @@
                             >
                             <span class="item-title">{{ item.title }}</span>
                             <div class="item-img">
-                                <img :src="getFilePath(item.first_cate, item.uuid)" @error="noImage">
+                                <img :src="getImageSvgPath(item.first_cate, item.uuid)" @error="noImage">
                             </div>
                         </label>
                     </div>
@@ -53,10 +53,15 @@ import SelectSecondCategoryForm from "./SelectSecondCategoryForm";
 import SelectThirdCategoryForm from "./SelectThirdCategoryForm";
 
 // const
-import {ONE_SHEET_MAX_CNT, SAMPLE_IMG} from "../../../../const/item";
+import {ONE_SHEET_MAX_CNT} from "../../../../const/item";
+
+// mixins
+import {itemImg} from "../../../../mixins/item";
 
 export default {
     name: "SelectItemModal",
+
+    mixins: [itemImg],
 
     components: {
         SelectThirdCategoryForm,
@@ -67,13 +72,6 @@ export default {
         return {
             modalWidth: window.innerWidth * 0.9,
             modalHeight: window.innerHeight * 0.9,
-        }
-    },
-
-    props: {
-        getFilePath: {
-            default: () => {
-            }
         }
     },
 
@@ -174,10 +172,6 @@ export default {
                     box.querySelector('input').disabled = false;
                 });
             }
-        },
-
-        noImage(e){
-            e.target.src = SAMPLE_IMG;
         }
     }
 
