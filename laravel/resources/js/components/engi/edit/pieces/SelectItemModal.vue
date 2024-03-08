@@ -30,7 +30,7 @@
                             >
                             <span class="item-title">{{ item.title }}</span>
                             <div class="item-img">
-                                <img :src="getFilePath(item.first_cate, item.uuid)">
+                                <img :src="getFilePath(item.first_cate, item.uuid)" @error="noImage">
                             </div>
                         </label>
                     </div>
@@ -53,7 +53,7 @@ import SelectSecondCategoryForm from "./SelectSecondCategoryForm";
 import SelectThirdCategoryForm from "./SelectThirdCategoryForm";
 
 // const
-import {ONE_SHEET_MAX_CNT} from "../../../../const/item";
+import {ONE_SHEET_MAX_CNT, SAMPLE_IMG} from "../../../../const/item";
 
 export default {
     name: "SelectItemModal",
@@ -174,6 +174,10 @@ export default {
                     box.querySelector('input').disabled = false;
                 });
             }
+        },
+
+        noImage(e){
+            e.target.src = SAMPLE_IMG;
         }
     }
 

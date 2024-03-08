@@ -10,7 +10,7 @@
         <div class="modal-body">
             <div class="wrapper">
                 <div class="item-img text-center" id="download-img">
-                    <img :src="getFilePath(item.first_cate, item.uuid)">
+                    <img :src="getFilePath(item.first_cate, item.uuid)" @error="noImage">
                 </div>
             </div>
             <span>ダウンロード：</span>
@@ -28,6 +28,7 @@ import {getImageSvgPath} from "../../../script/item";
 import * as htmlToImage from 'html-to-image';
 import {toPng, toJpeg, toBlob, toPixelData, toSvg} from 'html-to-image';
 import * as download from "downloadjs";
+import {SAMPLE_IMG} from "../../../const/item";
 
 export default {
     name: "DownloadModal",
@@ -61,6 +62,10 @@ export default {
 
         downloadSvg() {
             download(this.getFilePath(this.item.first_cate, this.item.uuid));
+        },
+
+        noImage(e){
+            e.target.src = SAMPLE_IMG;
         }
     }
 }
