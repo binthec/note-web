@@ -55,8 +55,13 @@ import ListHeader from "../common/parts/ListHeader";
 import Paginator from "../common/parts/Paginator";
 import ItemSearch from "./parts/ItemSearch";
 
+// mixins
+import {layout} from "../../mixins/layout";
+
 export default {
     name: "ItemList",
+
+    mixins: [layout],
 
     components: {
         ItemSearch,
@@ -85,8 +90,9 @@ export default {
     },
 
     async mounted() {
-        this.getCategoryLabels();
+        await this.getCategoryLabels();
         await this.getList();
+        this.hideLoadingAnimation(); // is_loading を false に
     },
 
     methods: {

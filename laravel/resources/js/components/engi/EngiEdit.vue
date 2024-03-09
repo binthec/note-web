@@ -20,6 +20,9 @@
 // Vuex Mapping
 import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 
+// mixins
+import {layout} from "../../mixins/layout";
+
 // common
 import DefaultFormLayout from "../common/layout/DefaultFormLayout";
 import PageHeader from "../common/parts/PageTitle";
@@ -31,6 +34,8 @@ import CardFooter from "../common/card/CardFooter";
 
 export default {
     name: "EngiEdit",
+
+    mixins: [layout],
 
     data() {
         return {
@@ -68,6 +73,8 @@ export default {
             this.setFirstCategory({value: this.engi.first_cate});
         }
         this.initCategories();
+
+        this.hideLoadingAnimation();
     },
 
     computed: {

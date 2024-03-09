@@ -25,8 +25,13 @@ import Paginator from "../common/parts/Paginator";
 import {mapState, mapActions, mapMutations} from "vuex";
 import ListBody from "./list/ListBody";
 
+// mixins
+import {layout} from "../../mixins/layout";
+
 export default {
     name: "EngiList",
+
+    mixins: [layout],
 
     components: {
         ListBody,
@@ -49,6 +54,7 @@ export default {
 
     async mounted() {
         await this.getList();
+        this.hideLoadingAnimation();
     },
 
     methods: {

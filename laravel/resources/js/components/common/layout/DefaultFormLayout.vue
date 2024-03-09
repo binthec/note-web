@@ -16,14 +16,22 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
 
-                            <form class="form-horizontal" autocomplete="off">
+                        <div class="card">
+                            <!-- loader -->
+                            <vue-loading
+                                v-show="is_loading"
+                                type="spiningDubbles"
+                                color="#76ABAE"
+                            ></vue-loading>
+
+                            <!-- main content -->
+                            <form class="form-horizontal" autocomplete="off" v-show="!is_loading">
                                 <slot name="card_body"></slot>
                                 <slot name="card_footer"></slot>
                             </form>
-
                         </div><!-- /.card -->
+
                     </div><!-- /.col-md-12 -->
                 </div><!-- /.row -->
 
@@ -40,14 +48,10 @@
 </template>
 
 <script>
-import SuccessModal from "../modals/SuccessModal";
-import ErrorModal from "../modals/ErrorModal";
+import {layout} from "../../../mixins/layout";
 
 export default {
     name: "DefaultFormLayout",
-    components: {
-        SuccessModal,
-        ErrorModal
-    }
+    mixins: [layout],
 }
 </script>

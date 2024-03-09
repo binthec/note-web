@@ -167,8 +167,8 @@ export default {
                 })
         },
 
-        getCategoryLabels({commit, state}){
-            axios.get(state.get_category_labels)
+        async getCategoryLabels({commit, state}){
+            await axios.get(state.get_category_labels)
                 .then(response => {
                     commit('setCategoryLabels', response.data);
                 })
