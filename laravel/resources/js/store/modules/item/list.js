@@ -43,8 +43,8 @@ export default {
     },
 
     actions: {
-        getList({commit, state, getters}) {
-            axios.get(state.list_url, {
+        async getList({commit, state, getters}) {
+            await axios.get(state.list_url, {
                 params: {
                     page: state.list.current_page,
                     per_page: state.list.per_page,

@@ -90,9 +90,9 @@ export default {
     },
 
     async mounted() {
-        await this.getCategoryLabels();
-        await this.getList();
-        this.hideLoadingAnimation(); // is_loading を false に
+        Promise.all([this.getCategoryLabels(), this.getList()])
+            .then(() => this.hideLoadingAnimation())
+            .catch((err) => { console.log(err) });
     },
 
     methods: {
