@@ -32,7 +32,7 @@ class ItemsTableSeeder extends Seeder
                         $uuid = $this->getUuid($first_cate, $second_cate, 00, $num);
                         $item_result[] = [
                             'uuid' => $uuid,
-                            'user_id' => 5,
+                            'user_id' => 1,
                             'title' => $item['name'],
                             'first_cate' => $first_cate,
                             'second_cate' => $second_cate,
@@ -49,7 +49,7 @@ class ItemsTableSeeder extends Seeder
                             $uuid = $this->getUuid($first_cate, $second_cate, $third_cate, $num);
                             $item_result[] = [
                                 'uuid' => $uuid,
-                                'user_id' => 5,
+                                'user_id' => 1,
                                 'title' => $item['name'],
                                 'first_cate' => $first_cate,
                                 'second_cate' => $second_cate,
