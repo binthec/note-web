@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: docker-sanjo
+      dockerfile: docker-sanjo/Dockerfile
+    container_name: php-sanjo
+    volumes:
+      - ../laravel:/var/www/html
+    ports:
+      - "9000:9000"
+  postgres:
+    image: postgres
+    container_name: postgres-sanjo
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: sanjo
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - '25432:5432'
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx-sanjo
+    ports:
+      - "28080:80"
+    volumes:
+      - ../laravel:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - postgres
+
+

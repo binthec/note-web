@@ -1,2 +1,2 @@
-/postgres/pgdata/*
+/postgres/pgdata/base
 !/postgres/.gitkeep
